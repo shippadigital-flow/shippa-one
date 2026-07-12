@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -88,6 +89,7 @@
     "vitest": "^1.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/jest-dom": "^6.0.0",
-    "vite-plugin-checker": "^1.0.0"
+    "vite-plugin-checker": "^1.0.0",
+    "rollup-plugin-visualizer": "^5.8.0"
   }
 }
