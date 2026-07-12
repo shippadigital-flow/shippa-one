@@ -1,0 +1,39 @@
+/*
+  Design tokens for spacing and border radii.
+  These variables are the canonical source of truth for spacing and radii in the repo.
+
+  Usage:
+    - Prefer CSS variables (var(--space-16)) in component styles or inline styles.
+    - When migrating Tailwind classes to tokens, map these values in tailwind.config.js under theme.extend.spacing and theme.extend.borderRadius.
+
+  Notes:
+    - These tokens are additive only for now. Do not change values without team approval.
+    - This file is intentionally passive — components are not changed in this commit.
+*/
+:root {
+  /* Spacing scale (Design System v1.0) */
+  --space-4: 0.25rem;   /* 4 */
+  --space-8: 0.5rem;    /* 8 */
+  --space-12: 0.75rem;  /* 12 */
+  --space-16: 1rem;     /* 16 */
+  --space-20: 1.25rem;  /* 20 */
+  --space-24: 1.5rem;   /* 24 */
+  --space-32: 2rem;     /* 32 */
+  --space-40: 2.5rem;   /* 40 */
+  --space-48: 3rem;     /* 48 */
+  --space-64: 4rem;     /* 64 */
+  --space-80: 5rem;     /* 80 */
+  --space-96: 6rem;     /* 96 */
+  --space-128: 8rem;    /* 128 */
+
+  /* Border radius */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.75rem;  /* 12px */
+  --radius-lg: 1rem;     /* 16px */
+  --radius-xl: 1.25rem;  /* 20px */
+  --radius-card: 1.5rem; /* 24px */
+
+  /* Elevation shadow examples (kept minimal per design rules) */
+  --shadow-soft: 0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06);
+  --shadow-elevated: 0 6px 18px rgba(16,24,40,0.06);
+}
