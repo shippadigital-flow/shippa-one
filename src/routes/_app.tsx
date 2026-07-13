@@ -308,8 +308,16 @@ function TopBar({
       </button>
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="relative w-full max-w-md">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search
+            aria-hidden
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          />
+          <label htmlFor="app-search" className="sr-only">
+            Buscar no portal
+          </label>
           <input
+            id="app-search"
+            type="search"
             placeholder="Buscar…"
             className="h-9 w-full rounded-lg border border-border/70 bg-surface pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-ring/40 sm:pr-16"
           />
@@ -320,9 +328,15 @@ function TopBar({
       </div>
       <div className="flex items-center gap-2">
         {/* Demo plan toggle */}
-        <div className="hidden items-center rounded-lg border border-border/60 bg-surface p-0.5 sm:inline-flex">
+        <div
+          role="group"
+          aria-label="Alternar plano de demonstração"
+          className="hidden items-center rounded-lg border border-border/60 bg-surface p-0.5 sm:inline-flex"
+        >
           <button
+            type="button"
             onClick={() => setPlan("start")}
+            aria-pressed={plan === "start"}
             className={
               "rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
               (plan === "start"
@@ -333,7 +347,9 @@ function TopBar({
             Start
           </button>
           <button
+            type="button"
             onClick={() => setPlan("pro")}
+            aria-pressed={plan === "pro"}
             className={
               "inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
               (plan === "pro"
@@ -341,12 +357,19 @@ function TopBar({
                 : "text-muted-foreground hover:text-foreground")
             }
           >
-            <Sparkles className="h-3 w-3" /> Pro
+            <Sparkles className="h-3 w-3" aria-hidden /> Pro
           </button>
         </div>
-        <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface text-muted-foreground transition hover:text-foreground">
-          <Bell className="h-4 w-4" />
-          <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary" />
+        <button
+          type="button"
+          aria-label="Notificações"
+          className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface text-muted-foreground transition hover:text-foreground"
+        >
+          <Bell className="h-4 w-4" aria-hidden />
+          <span
+            aria-hidden
+            className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary"
+          />
         </button>
       </div>
     </header>
