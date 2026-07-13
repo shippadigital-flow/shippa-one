@@ -200,38 +200,37 @@ function Sidebar({
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        <SidebarSection items={primaryNav} pathname={pathname} plan={plan} label="Geral" collapsed={collapsed} />
+        <SidebarSection
+          items={primaryNav}
+          pathname={pathname}
+          label="Geral"
+          collapsed={collapsed}
+          isLocked={(p) => isLocked(p, plan)}
+        />
         <div className="my-4 h-px bg-sidebar-border" />
-        <SidebarSection items={proNav} pathname={pathname} plan={plan} label="Crescimento" collapsed={collapsed} />
+        <SidebarSection
+          items={proNav}
+          pathname={pathname}
+          label="Crescimento"
+          collapsed={collapsed}
+          isLocked={(p) => isLocked(p, plan)}
+        />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection
           label="Ecossistema Shippa"
           collapsed={collapsed}
           items={[]}
           pathname={pathname}
-          plan={plan}
-          extra={
-            <li>
-              <a
-                href="https://ia.shippadigital.com.br/"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Shippa Flow"
-                className="group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
-              >
-                <Workflow className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-                {!collapsed && (
-                  <>
-                    <span className="flex-1 truncate">Shippa Flow</span>
-                    <ExternalLink className="h-3.5 w-3.5 text-muted-foreground/70" />
-                  </>
-                )}
-              </a>
-            </li>
-          }
+          extra={<SidebarExternalLink item={ecosystemLink} collapsed={collapsed} />}
         />
         <div className="my-4 h-px bg-sidebar-border" />
-        <SidebarSection items={secondaryNav} pathname={pathname} plan={plan} label="Conta" collapsed={collapsed} />
+        <SidebarSection
+          items={secondaryNav}
+          pathname={pathname}
+          label="Conta"
+          collapsed={collapsed}
+          isLocked={(p) => isLocked(p, plan)}
+        />
       </nav>
 
       {plan === "start" && !collapsed && (
