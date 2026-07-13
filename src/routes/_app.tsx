@@ -417,33 +417,33 @@ function MobileDrawer({
           </button>
         </div>
         <nav className="flex-1 overflow-y-auto px-3 py-3">
-          <SidebarSection items={primaryNav} pathname={pathname} plan={plan} label="Geral" collapsed={false} />
+          <SidebarSection
+            items={primaryNav}
+            pathname={pathname}
+            label="Geral"
+            isLocked={(p) => isLocked(p, plan)}
+          />
           <div className="my-4 h-px bg-sidebar-border" />
-          <SidebarSection items={proNav} pathname={pathname} plan={plan} label="Crescimento" collapsed={false} />
+          <SidebarSection
+            items={proNav}
+            pathname={pathname}
+            label="Crescimento"
+            isLocked={(p) => isLocked(p, plan)}
+          />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection
             label="Ecossistema Shippa"
-            collapsed={false}
             items={[]}
             pathname={pathname}
-            plan={plan}
-            extra={
-              <li>
-                <a
-                  href="https://ia.shippadigital.com.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
-                >
-                  <Workflow className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-                  <span className="flex-1 truncate">Shippa Flow</span>
-                  <ExternalLink className="h-3.5 w-3.5 text-muted-foreground/70" />
-                </a>
-              </li>
-            }
+            extra={<SidebarExternalLink item={ecosystemLink} />}
           />
           <div className="my-4 h-px bg-sidebar-border" />
-          <SidebarSection items={secondaryNav} pathname={pathname} plan={plan} label="Conta" collapsed={false} />
+          <SidebarSection
+            items={secondaryNav}
+            pathname={pathname}
+            label="Conta"
+            isLocked={(p) => isLocked(p, plan)}
+          />
         </nav>
         <div className="border-t border-sidebar-border p-3">
           <div className="flex items-center gap-3 rounded-xl px-2 py-2">
