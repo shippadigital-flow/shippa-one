@@ -1,6 +1,6 @@
 # Shippa One — Database Schema
 
-Version: 1.0
+Version: 1.1
 
 Status: Approved
 
@@ -71,7 +71,7 @@ companies
 
 ├── users
 
-├── websites
+├── projects
 
 ├── integrations
 
@@ -114,26 +114,36 @@ users
 
 ---
 
-# websites
+# projects
 
-Campos
+Represents a deployable project owned by a Company. Replaces the previous concept of a single "website".
+
+Tipos suportados
+
+- website
+- landing_page
+- blog
+- portal
+- ecommerce  # future
+- custom
+
+Campos obrigatórios por projeto
 
 - id
 - company_id
 - name
+- type           # enum: website | landing_page | blog | portal | ecommerce | custom
 - domain
 - subdomain
 - status
-- ssl_enabled
-- hosting_provider
-- backup_enabled
 - language
+- visibility     # enum: public | private | unlisted
 - created_at
 - updated_at
 
 Relacionamentos
 
-websites
+projects
 
 ├── articles
 
@@ -147,6 +157,8 @@ websites
 
 ├── leads
 
+├── integrations (project-specific integrations, optional)
+
 ---
 
 # articles
@@ -154,7 +166,7 @@ websites
 Campos
 
 - id
-- website_id
+- project_id
 - author_id
 - category_id
 - title
@@ -169,7 +181,7 @@ Campos
 
 Índices
 
-- website_id
+- project_id
 - slug
 - status
 - published_at
@@ -181,7 +193,7 @@ Campos
 Campos
 
 - id
-- website_id
+- project_id
 - name
 - slug
 - description
@@ -202,7 +214,7 @@ Tabela Pivot
 # tags
 
 - id
-- website_id
+- project_id
 - name
 - slug
 
@@ -211,7 +223,7 @@ Tabela Pivot
 # media
 
 - id
-- website_id
+- project_id
 - type
 - file_name
 - storage_path
@@ -219,13 +231,16 @@ Tabela Pivot
 - size
 - alt_text
 - created_at
+- updated_at
 
 ---
 
 # analytics
 
+Notas: o modelo abaixo é para agregados/relatórios. Se o produto ingerir eventos brutos, defina `analytics_events` separadamente.
+
 - id
-- website_id
+- project_id
 - date
 - visitors
 - sessions
@@ -242,7 +257,7 @@ Tabela Pivot
 # seo_reports
 
 - id
-- website_id
+- project_id
 - score
 - meta_title
 - meta_description
@@ -259,7 +274,7 @@ Tabela Pivot
 # leads
 
 - id
-- website_id
+- project_id
 - name
 - email
 - phone
@@ -284,7 +299,7 @@ Tabela Pivot
 - created_at
 - updated_at
 
-> Observação: Tokens sensíveis devem ser armazenados criptografados.
+> Observação: Tokens sensíveis devem ser armazenados criptografados. Para integrações específicas ao nível de projeto, associar `project_id` opcionalmente.
 
 ---
 
@@ -334,6 +349,7 @@ Tabela Pivot
 
 - id
 - user_id
+- company_id   # recommended for simpler RLS enforcement
 - ip
 - device
 - browser
@@ -346,7 +362,7 @@ Tabela Pivot
 # Índices Obrigatórios
 
 - company_id
-- website_id
+- project_id (substitui website_id)
 - status
 - slug
 - created_at
@@ -366,7 +382,7 @@ Users
 
 ↓
 
-Website
+Projects
 
 ↓
 
