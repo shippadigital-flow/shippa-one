@@ -20,7 +20,6 @@ import {
   Search,
   Bell,
   Command,
-  Lock,
   Sparkles,
   Plug,
   Lightbulb,
@@ -29,14 +28,18 @@ import {
   Crown,
   PanelLeftClose,
   PanelLeftOpen,
-  ExternalLink,
 } from "lucide-react";
 import { Menu, X } from "lucide-react";
-import type { ComponentType, SVGProps } from "react";
 import { useEffect, useState } from "react";
 import { usePlan, isLocked, type Plan } from "@/hooks/use-plan";
 import { useAuth, getStoredUser, type AuthUser } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
+import {
+  SidebarSection,
+  SidebarExternalLink,
+  type NavItem,
+  type ExternalLinkItem,
+} from "@/features/layout/sidebar-nav";
 
 export const Route = createFileRoute("/_app")({
   beforeLoad: () => {
@@ -46,12 +49,6 @@ export const Route = createFileRoute("/_app")({
   },
   component: AppLayout,
 });
-
-type NavItem = {
-  label: string;
-  to: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
-};
 
 const primaryNav: NavItem[] = [
   { label: "Visão Geral", to: "/", icon: LayoutDashboard },
@@ -74,6 +71,12 @@ const secondaryNav: NavItem[] = [
   { label: "Configurações", to: "/configuracoes", icon: Settings },
   { label: "Suporte", to: "/suporte", icon: LifeBuoy },
 ];
+
+const ecosystemLink: ExternalLinkItem = {
+  label: "Shippa Flow",
+  href: "https://ia.shippadigital.com.br/",
+  icon: Workflow,
+};
 
 const SIDEBAR_KEY = "shippa-sidebar-collapsed";
 
@@ -197,38 +200,37 @@ function Sidebar({
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        <SidebarSection items={primaryNav} pathname={pathname} plan={plan} label="Geral" collapsed={collapsed} />
+        <SidebarSection
+          items={primaryNav}
+          pathname={pathname}
+          label="Geral"
+          collapsed={collapsed}
+          isLocked={(p) => isLocked(p, plan)}
+        />
         <div className="my-4 h-px bg-sidebar-border" />
-        <SidebarSection items={proNav} pathname={pathname} plan={plan} label="Crescimento" collapsed={collapsed} />
+        <SidebarSection
+          items={proNav}
+          pathname={pathname}
+          label="Crescimento"
+          collapsed={collapsed}
+          isLocked={(p) => isLocked(p, plan)}
+        />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection
           label="Ecossistema Shippa"
           collapsed={collapsed}
           items={[]}
           pathname={pathname}
-          plan={plan}
-          extra={
-            <li>
-              <a
-                href="https://ia.shippadigital.com.br/"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Shippa Flow"
-                className="group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
-              >
-                <Workflow className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-                {!collapsed && (
-                  <>
-                    <span className="flex-1 truncate">Shippa Flow</span>
-                    <ExternalLink className="h-3.5 w-3.5 text-muted-foreground/70" />
-                  </>
-                )}
-              </a>
-            </li>
-          }
+          extra={<SidebarExternalLink item={ecosystemLink} collapsed={collapsed} />}
         />
         <div className="my-4 h-px bg-sidebar-border" />
-        <SidebarSection items={secondaryNav} pathname={pathname} plan={plan} label="Conta" collapsed={collapsed} />
+        <SidebarSection
+          items={secondaryNav}
+          pathname={pathname}
+          label="Conta"
+          collapsed={collapsed}
+          isLocked={(p) => isLocked(p, plan)}
+        />
       </nav>
 
       {plan === "start" && !collapsed && (
@@ -283,72 +285,6 @@ function Sidebar({
   );
 }
 
-function SidebarSection({
-  items,
-  pathname,
-  plan,
-  label,
-  collapsed,
-  extra,
-}: {
-  items: NavItem[];
-  pathname: string;
-  plan: Plan;
-  label: string;
-  collapsed: boolean;
-  extra?: React.ReactNode;
-}) {
-  return (
-    <div>
-      {!collapsed && (
-        <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground/70">
-          {label}
-        </p>
-      )}
-      <ul className="flex flex-col gap-0.5">
-        {items.map((item) => {
-          const active =
-            item.to === "/"
-              ? pathname === "/"
-              : pathname === item.to || pathname.startsWith(item.to + "/");
-          const locked = isLocked(item.to, plan);
-          return (
-            <li key={item.to}>
-              <Link
-                to={item.to}
-                title={collapsed ? item.label : undefined}
-                className={
-                  "group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition " +
-                  (active
-                    ? "bg-sidebar-accent text-sidebar-foreground"
-                    : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground")
-                }
-              >
-                {active && (
-                  <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-gradient-primary" />
-                )}
-                <item.icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-                {!collapsed && (
-                  <>
-                    <span className="flex-1 truncate">{item.label}</span>
-                    {locked && (
-                      <Sparkles
-                        className="h-3.5 w-3.5 text-primary-glow/70 transition group-hover:text-primary-glow"
-                        strokeWidth={2}
-                      />
-                    )}
-                  </>
-                )}
-              </Link>
-            </li>
-          );
-        })}
-        {extra}
-      </ul>
-    </div>
-  );
-}
-
 function TopBar({
   plan,
   setPlan,
@@ -372,8 +308,16 @@ function TopBar({
       </button>
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="relative w-full max-w-md">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search
+            aria-hidden
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+          />
+          <label htmlFor="app-search" className="sr-only">
+            Buscar no portal
+          </label>
           <input
+            id="app-search"
+            type="search"
             placeholder="Buscar…"
             className="h-9 w-full rounded-lg border border-border/70 bg-surface pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-ring/40 sm:pr-16"
           />
@@ -384,9 +328,15 @@ function TopBar({
       </div>
       <div className="flex items-center gap-2">
         {/* Demo plan toggle */}
-        <div className="hidden items-center rounded-lg border border-border/60 bg-surface p-0.5 sm:inline-flex">
+        <div
+          role="group"
+          aria-label="Alternar plano de demonstração"
+          className="hidden items-center rounded-lg border border-border/60 bg-surface p-0.5 sm:inline-flex"
+        >
           <button
+            type="button"
             onClick={() => setPlan("start")}
+            aria-pressed={plan === "start"}
             className={
               "rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
               (plan === "start"
@@ -397,7 +347,9 @@ function TopBar({
             Start
           </button>
           <button
+            type="button"
             onClick={() => setPlan("pro")}
+            aria-pressed={plan === "pro"}
             className={
               "inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
               (plan === "pro"
@@ -405,12 +357,19 @@ function TopBar({
                 : "text-muted-foreground hover:text-foreground")
             }
           >
-            <Sparkles className="h-3 w-3" /> Pro
+            <Sparkles className="h-3 w-3" aria-hidden /> Pro
           </button>
         </div>
-        <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface text-muted-foreground transition hover:text-foreground">
-          <Bell className="h-4 w-4" />
-          <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary" />
+        <button
+          type="button"
+          aria-label="Notificações"
+          className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface text-muted-foreground transition hover:text-foreground"
+        >
+          <Bell className="h-4 w-4" aria-hidden />
+          <span
+            aria-hidden
+            className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary"
+          />
         </button>
       </div>
     </header>
@@ -481,33 +440,33 @@ function MobileDrawer({
           </button>
         </div>
         <nav className="flex-1 overflow-y-auto px-3 py-3">
-          <SidebarSection items={primaryNav} pathname={pathname} plan={plan} label="Geral" collapsed={false} />
+          <SidebarSection
+            items={primaryNav}
+            pathname={pathname}
+            label="Geral"
+            isLocked={(p) => isLocked(p, plan)}
+          />
           <div className="my-4 h-px bg-sidebar-border" />
-          <SidebarSection items={proNav} pathname={pathname} plan={plan} label="Crescimento" collapsed={false} />
+          <SidebarSection
+            items={proNav}
+            pathname={pathname}
+            label="Crescimento"
+            isLocked={(p) => isLocked(p, plan)}
+          />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection
             label="Ecossistema Shippa"
-            collapsed={false}
             items={[]}
             pathname={pathname}
-            plan={plan}
-            extra={
-              <li>
-                <a
-                  href="https://ia.shippadigital.com.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
-                >
-                  <Workflow className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-                  <span className="flex-1 truncate">Shippa Flow</span>
-                  <ExternalLink className="h-3.5 w-3.5 text-muted-foreground/70" />
-                </a>
-              </li>
-            }
+            extra={<SidebarExternalLink item={ecosystemLink} />}
           />
           <div className="my-4 h-px bg-sidebar-border" />
-          <SidebarSection items={secondaryNav} pathname={pathname} plan={plan} label="Conta" collapsed={false} />
+          <SidebarSection
+            items={secondaryNav}
+            pathname={pathname}
+            label="Conta"
+            isLocked={(p) => isLocked(p, plan)}
+          />
         </nav>
         <div className="border-t border-sidebar-border p-3">
           <div className="flex items-center gap-3 rounded-xl px-2 py-2">
