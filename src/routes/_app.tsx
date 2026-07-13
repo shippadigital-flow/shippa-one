@@ -20,7 +20,6 @@ import {
   Search,
   Bell,
   Command,
-  Lock,
   Sparkles,
   Plug,
   Lightbulb,
@@ -29,14 +28,18 @@ import {
   Crown,
   PanelLeftClose,
   PanelLeftOpen,
-  ExternalLink,
 } from "lucide-react";
 import { Menu, X } from "lucide-react";
-import type { ComponentType, SVGProps } from "react";
 import { useEffect, useState } from "react";
 import { usePlan, isLocked, type Plan } from "@/hooks/use-plan";
 import { useAuth, getStoredUser, type AuthUser } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
+import {
+  SidebarSection,
+  SidebarExternalLink,
+  type NavItem,
+  type ExternalLinkItem,
+} from "@/features/layout/sidebar-nav";
 
 export const Route = createFileRoute("/_app")({
   beforeLoad: () => {
@@ -46,12 +49,6 @@ export const Route = createFileRoute("/_app")({
   },
   component: AppLayout,
 });
-
-type NavItem = {
-  label: string;
-  to: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
-};
 
 const primaryNav: NavItem[] = [
   { label: "Visão Geral", to: "/", icon: LayoutDashboard },
@@ -74,6 +71,12 @@ const secondaryNav: NavItem[] = [
   { label: "Configurações", to: "/configuracoes", icon: Settings },
   { label: "Suporte", to: "/suporte", icon: LifeBuoy },
 ];
+
+const ecosystemLink: ExternalLinkItem = {
+  label: "Shippa Flow",
+  href: "https://ia.shippadigital.com.br/",
+  icon: Workflow,
+};
 
 const SIDEBAR_KEY = "shippa-sidebar-collapsed";
 
