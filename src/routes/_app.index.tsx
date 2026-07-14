@@ -3,7 +3,6 @@ import {
   FileText,
   Sparkles,
   Globe,
-  CheckCircle2,
   ArrowRight,
   BarChart3,
   Search,
@@ -488,6 +487,4 @@ function LatestArticles() {
   );
 }
 
-// Ensure success icon import used
-void CheckCircle2;
 
