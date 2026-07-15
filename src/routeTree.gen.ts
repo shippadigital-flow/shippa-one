@@ -36,7 +36,9 @@ import { Route as AppConfiguracoesRouteImport } from './routes/_app.configuracoe
 import { Route as AppBlogRouteImport } from './routes/_app.blog'
 import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
 import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
+import { Route as AppBlogIndexRouteImport } from './routes/_app.blog.index'
 import { Route as AdminClientesIdRouteImport } from './routes/admin.clientes.$id'
+import { Route as AppBlogEditorRouteImport } from './routes/_app.blog.editor'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -172,10 +174,20 @@ const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AppRoute,
 } as any)
+const AppBlogIndexRoute = AppBlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppBlogRoute,
+} as any)
 const AdminClientesIdRoute = AdminClientesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => AdminClientesRoute,
+} as any)
+const AppBlogEditorRoute = AppBlogEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => AppBlogRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -184,7 +196,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/analytics': typeof AppAnalyticsRoute
   '/biblioteca': typeof AppBibliotecaRoute
-  '/blog': typeof AppBlogRoute
+  '/blog': typeof AppBlogRouteWithChildren
   '/configuracoes': typeof AppConfiguracoesRoute
   '/conversoes': typeof AppConversoesRoute
   '/insights': typeof AppInsightsRoute
@@ -205,13 +217,14 @@ export interface FileRoutesByFullPath {
   '/admin/suporte': typeof AdminSuporteRoute
   '/admin/uso': typeof AdminUsoRoute
   '/admin/': typeof AdminIndexRoute
+  '/blog/editor': typeof AppBlogEditorRoute
   '/admin/clientes/$id': typeof AdminClientesIdRoute
+  '/blog/': typeof AppBlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/analytics': typeof AppAnalyticsRoute
   '/biblioteca': typeof AppBibliotecaRoute
-  '/blog': typeof AppBlogRoute
   '/configuracoes': typeof AppConfiguracoesRoute
   '/conversoes': typeof AppConversoesRoute
   '/insights': typeof AppInsightsRoute
@@ -233,7 +246,9 @@ export interface FileRoutesByTo {
   '/admin/uso': typeof AdminUsoRoute
   '/': typeof AppIndexRoute
   '/admin': typeof AdminIndexRoute
+  '/blog/editor': typeof AppBlogEditorRoute
   '/admin/clientes/$id': typeof AdminClientesIdRoute
+  '/blog': typeof AppBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -242,7 +257,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_app/analytics': typeof AppAnalyticsRoute
   '/_app/biblioteca': typeof AppBibliotecaRoute
-  '/_app/blog': typeof AppBlogRoute
+  '/_app/blog': typeof AppBlogRouteWithChildren
   '/_app/configuracoes': typeof AppConfiguracoesRoute
   '/_app/conversoes': typeof AppConversoesRoute
   '/_app/insights': typeof AppInsightsRoute
@@ -264,7 +279,9 @@ export interface FileRoutesById {
   '/admin/uso': typeof AdminUsoRoute
   '/_app/': typeof AppIndexRoute
   '/admin/': typeof AdminIndexRoute
+  '/_app/blog/editor': typeof AppBlogEditorRoute
   '/admin/clientes/$id': typeof AdminClientesIdRoute
+  '/_app/blog/': typeof AppBlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -295,13 +312,14 @@ export interface FileRouteTypes {
     | '/admin/suporte'
     | '/admin/uso'
     | '/admin/'
+    | '/blog/editor'
     | '/admin/clientes/$id'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
     | '/analytics'
     | '/biblioteca'
-    | '/blog'
     | '/configuracoes'
     | '/conversoes'
     | '/insights'
@@ -323,7 +341,9 @@ export interface FileRouteTypes {
     | '/admin/uso'
     | '/'
     | '/admin'
+    | '/blog/editor'
     | '/admin/clientes/$id'
+    | '/blog'
   id:
     | '__root__'
     | '/_app'
@@ -353,7 +373,9 @@ export interface FileRouteTypes {
     | '/admin/uso'
     | '/_app/'
     | '/admin/'
+    | '/_app/blog/editor'
     | '/admin/clientes/$id'
+    | '/_app/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -553,6 +575,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAnalyticsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/blog/': {
+      id: '/_app/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof AppBlogIndexRouteImport
+      parentRoute: typeof AppBlogRoute
+    }
     '/admin/clientes/$id': {
       id: '/admin/clientes/$id'
       path: '/$id'
@@ -560,13 +589,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminClientesIdRouteImport
       parentRoute: typeof AdminClientesRoute
     }
+    '/_app/blog/editor': {
+      id: '/_app/blog/editor'
+      path: '/editor'
+      fullPath: '/blog/editor'
+      preLoaderRoute: typeof AppBlogEditorRouteImport
+      parentRoute: typeof AppBlogRoute
+    }
   }
 }
+
+interface AppBlogRouteChildren {
+  AppBlogEditorRoute: typeof AppBlogEditorRoute
+  AppBlogIndexRoute: typeof AppBlogIndexRoute
+}
+
+const AppBlogRouteChildren: AppBlogRouteChildren = {
+  AppBlogEditorRoute: AppBlogEditorRoute,
+  AppBlogIndexRoute: AppBlogIndexRoute,
+}
+
+const AppBlogRouteWithChildren =
+  AppBlogRoute._addFileChildren(AppBlogRouteChildren)
 
 interface AppRouteChildren {
   AppAnalyticsRoute: typeof AppAnalyticsRoute
   AppBibliotecaRoute: typeof AppBibliotecaRoute
-  AppBlogRoute: typeof AppBlogRoute
+  AppBlogRoute: typeof AppBlogRouteWithChildren
   AppConfiguracoesRoute: typeof AppConfiguracoesRoute
   AppConversoesRoute: typeof AppConversoesRoute
   AppInsightsRoute: typeof AppInsightsRoute
@@ -582,7 +631,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAnalyticsRoute: AppAnalyticsRoute,
   AppBibliotecaRoute: AppBibliotecaRoute,
-  AppBlogRoute: AppBlogRoute,
+  AppBlogRoute: AppBlogRouteWithChildren,
   AppConfiguracoesRoute: AppConfiguracoesRoute,
   AppConversoesRoute: AppConversoesRoute,
   AppInsightsRoute: AppInsightsRoute,
