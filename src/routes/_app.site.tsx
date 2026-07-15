@@ -139,7 +139,7 @@ function InfoCard({
       <header className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <div className={"flex h-10 w-10 shrink-0 items-center justify-center rounded-lg " + s.bg}>
-            <Icon className={"h-4.5 w-4.5 " + s.text} aria-hidden />
+            <Icon className={"h-4 w-4 " + s.text} aria-hidden />
           </div>
           <div className="min-w-0">
             <h2 className="text-base font-semibold tracking-tight text-foreground">{title}</h2>
@@ -457,7 +457,7 @@ function TechnicalDetails() {
       >
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-muted-foreground">
-            <Cpu className="h-4.5 w-4.5" aria-hidden />
+            <Cpu className="h-4 w-4" aria-hidden />
           </div>
           <div>
             <h2 className="text-base font-semibold tracking-tight text-foreground">
