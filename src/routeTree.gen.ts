@@ -38,6 +38,7 @@ import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
 import { Route as AppAnalyticsRouteImport } from './routes/_app.analytics'
 import { Route as AppBlogIndexRouteImport } from './routes/_app.blog.index'
 import { Route as AdminClientesIdRouteImport } from './routes/admin.clientes.$id'
+import { Route as AppBlogEditorRouteImport } from './routes/_app.blog.editor'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -183,6 +184,11 @@ const AdminClientesIdRoute = AdminClientesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AdminClientesRoute,
 } as any)
+const AppBlogEditorRoute = AppBlogEditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
+  getParentRoute: () => AppBlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
@@ -211,6 +217,7 @@ export interface FileRoutesByFullPath {
   '/admin/suporte': typeof AdminSuporteRoute
   '/admin/uso': typeof AdminUsoRoute
   '/admin/': typeof AdminIndexRoute
+  '/blog/editor': typeof AppBlogEditorRoute
   '/admin/clientes/$id': typeof AdminClientesIdRoute
   '/blog/': typeof AppBlogIndexRoute
 }
@@ -239,6 +246,7 @@ export interface FileRoutesByTo {
   '/admin/uso': typeof AdminUsoRoute
   '/': typeof AppIndexRoute
   '/admin': typeof AdminIndexRoute
+  '/blog/editor': typeof AppBlogEditorRoute
   '/admin/clientes/$id': typeof AdminClientesIdRoute
   '/blog': typeof AppBlogIndexRoute
 }
@@ -271,6 +279,7 @@ export interface FileRoutesById {
   '/admin/uso': typeof AdminUsoRoute
   '/_app/': typeof AppIndexRoute
   '/admin/': typeof AdminIndexRoute
+  '/_app/blog/editor': typeof AppBlogEditorRoute
   '/admin/clientes/$id': typeof AdminClientesIdRoute
   '/_app/blog/': typeof AppBlogIndexRoute
 }
@@ -303,6 +312,7 @@ export interface FileRouteTypes {
     | '/admin/suporte'
     | '/admin/uso'
     | '/admin/'
+    | '/blog/editor'
     | '/admin/clientes/$id'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -331,6 +341,7 @@ export interface FileRouteTypes {
     | '/admin/uso'
     | '/'
     | '/admin'
+    | '/blog/editor'
     | '/admin/clientes/$id'
     | '/blog'
   id:
@@ -362,6 +373,7 @@ export interface FileRouteTypes {
     | '/admin/uso'
     | '/_app/'
     | '/admin/'
+    | '/_app/blog/editor'
     | '/admin/clientes/$id'
     | '/_app/blog/'
   fileRoutesById: FileRoutesById
@@ -577,14 +589,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminClientesIdRouteImport
       parentRoute: typeof AdminClientesRoute
     }
+    '/_app/blog/editor': {
+      id: '/_app/blog/editor'
+      path: '/editor'
+      fullPath: '/blog/editor'
+      preLoaderRoute: typeof AppBlogEditorRouteImport
+      parentRoute: typeof AppBlogRoute
+    }
   }
 }
 
 interface AppBlogRouteChildren {
+  AppBlogEditorRoute: typeof AppBlogEditorRoute
   AppBlogIndexRoute: typeof AppBlogIndexRoute
 }
 
 const AppBlogRouteChildren: AppBlogRouteChildren = {
+  AppBlogEditorRoute: AppBlogEditorRoute,
   AppBlogIndexRoute: AppBlogIndexRoute,
 }
 

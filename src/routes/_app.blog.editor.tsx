@@ -32,8 +32,6 @@ import {
   Tag as TagIcon,
   ChevronDown,
 } from "lucide-react";
-import { z } from "zod";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import {
   CATEGORIES,
   findArticle,
@@ -41,12 +39,10 @@ import {
   seoTone,
 } from "@/features/blog/mock-data";
 
-const searchSchema = z.object({
-  id: fallback(z.string(), "").default(""),
-});
-
 export const Route = createFileRoute("/_app/blog/editor")({
-  validateSearch: zodValidator(searchSchema),
+  validateSearch: (s: Record<string, unknown>) => ({
+    id: typeof s.id === "string" ? s.id : "",
+  }),
   component: BlogEditorPage,
 });
 
