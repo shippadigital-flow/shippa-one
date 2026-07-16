@@ -67,7 +67,7 @@ type Article = {
 const articles: Article[] = [
   { id: "a1", title: "O que é SEO e por que ele importa para o seu site", excerpt: "Entenda o básico do SEO e como aparecer no Google sem depender de anúncios.", category: "seo", readingTime: 6, difficulty: "Iniciante", type: "Artigo" },
   { id: "a2", title: "Palavras-chave: como escolher as certas para o seu nicho", excerpt: "Um método simples para descobrir o que seu público realmente busca.", category: "seo", readingTime: 9, difficulty: "Intermediário", type: "Guia" },
-  { id: "a3", title: "Configure o Google Search Console em 5 minutos", excerpt: "Passo a passo com prints para conectar seu site e ver suas primeiras métricas.", category: "google", readingTime: 5, difficulty: "Iniciante", type: "Tutorial" as unknown as "Artigo" },
+  { id: "a3", title: "Configure o Google Search Console em 5 minutos", excerpt: "Passo a passo com prints para conectar seu site e ver suas primeiras métricas.", category: "google", readingTime: 5, difficulty: "Iniciante", type: "Guia" },
   { id: "a4", title: "Google Meu Negócio: o guia completo para prestadores de serviço", excerpt: "Otimize sua ficha e conquiste os primeiros clientes locais.", category: "google", readingTime: 12, difficulty: "Intermediário", type: "Guia" },
   { id: "a5", title: "Como escrever um artigo de blog que gera leads", excerpt: "Estrutura testada em mais de 200 artigos publicados no Shippa One.", category: "blog", readingTime: 8, difficulty: "Intermediário", type: "Artigo" },
   { id: "a6", title: "Checklist do artigo perfeito (SEO + leitura)", excerpt: "20 itens para revisar antes de publicar qualquer texto no seu blog.", category: "blog", readingTime: 4, difficulty: "Iniciante", type: "Download" },
