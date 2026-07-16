@@ -10,8 +10,6 @@ import {
   LayoutDashboard,
   Globe,
   FileText,
-  Inbox,
-  BarChart3,
   Images,
   Workflow,
   Settings,
@@ -21,11 +19,8 @@ import {
   Bell,
   Command,
   Sparkles,
-  Plug,
-  Lightbulb,
-  FileBarChart,
-  Target,
   Crown,
+  Rocket,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
@@ -58,12 +53,7 @@ const primaryNav: NavItem[] = [
 ];
 
 const proNav: NavItem[] = [
-  { label: "Leads", to: "/leads", icon: Inbox },
-  { label: "Analytics", to: "/analytics", icon: BarChart3 },
-  { label: "Conversões", to: "/conversoes", icon: Target },
-  { label: "Insights", to: "/insights", icon: Lightbulb },
-  { label: "Relatórios", to: "/relatorios", icon: FileBarChart },
-  { label: "Integrações", to: "/integracoes", icon: Plug },
+  { label: "Central de Crescimento", to: "/crescimento", icon: Rocket },
 ];
 
 const secondaryNav: NavItem[] = [

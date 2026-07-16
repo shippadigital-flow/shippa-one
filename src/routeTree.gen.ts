@@ -31,6 +31,7 @@ import { Route as AppPlanosRouteImport } from './routes/_app.planos'
 import { Route as AppLeadsRouteImport } from './routes/_app.leads'
 import { Route as AppIntegracoesRouteImport } from './routes/_app.integracoes'
 import { Route as AppInsightsRouteImport } from './routes/_app.insights'
+import { Route as AppCrescimentoRouteImport } from './routes/_app.crescimento'
 import { Route as AppConversoesRouteImport } from './routes/_app.conversoes'
 import { Route as AppConfiguracoesRouteImport } from './routes/_app.configuracoes'
 import { Route as AppBlogRouteImport } from './routes/_app.blog'
@@ -149,6 +150,11 @@ const AppInsightsRoute = AppInsightsRouteImport.update({
   path: '/insights',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCrescimentoRoute = AppCrescimentoRouteImport.update({
+  id: '/crescimento',
+  path: '/crescimento',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppConversoesRoute = AppConversoesRouteImport.update({
   id: '/conversoes',
   path: '/conversoes',
@@ -199,6 +205,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof AppBlogRouteWithChildren
   '/configuracoes': typeof AppConfiguracoesRoute
   '/conversoes': typeof AppConversoesRoute
+  '/crescimento': typeof AppCrescimentoRoute
   '/insights': typeof AppInsightsRoute
   '/integracoes': typeof AppIntegracoesRoute
   '/leads': typeof AppLeadsRoute
@@ -227,6 +234,7 @@ export interface FileRoutesByTo {
   '/biblioteca': typeof AppBibliotecaRoute
   '/configuracoes': typeof AppConfiguracoesRoute
   '/conversoes': typeof AppConversoesRoute
+  '/crescimento': typeof AppCrescimentoRoute
   '/insights': typeof AppInsightsRoute
   '/integracoes': typeof AppIntegracoesRoute
   '/leads': typeof AppLeadsRoute
@@ -260,6 +268,7 @@ export interface FileRoutesById {
   '/_app/blog': typeof AppBlogRouteWithChildren
   '/_app/configuracoes': typeof AppConfiguracoesRoute
   '/_app/conversoes': typeof AppConversoesRoute
+  '/_app/crescimento': typeof AppCrescimentoRoute
   '/_app/insights': typeof AppInsightsRoute
   '/_app/integracoes': typeof AppIntegracoesRoute
   '/_app/leads': typeof AppLeadsRoute
@@ -294,6 +303,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/configuracoes'
     | '/conversoes'
+    | '/crescimento'
     | '/insights'
     | '/integracoes'
     | '/leads'
@@ -322,6 +332,7 @@ export interface FileRouteTypes {
     | '/biblioteca'
     | '/configuracoes'
     | '/conversoes'
+    | '/crescimento'
     | '/insights'
     | '/integracoes'
     | '/leads'
@@ -354,6 +365,7 @@ export interface FileRouteTypes {
     | '/_app/blog'
     | '/_app/configuracoes'
     | '/_app/conversoes'
+    | '/_app/crescimento'
     | '/_app/insights'
     | '/_app/integracoes'
     | '/_app/leads'
@@ -540,6 +552,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInsightsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/crescimento': {
+      id: '/_app/crescimento'
+      path: '/crescimento'
+      fullPath: '/crescimento'
+      preLoaderRoute: typeof AppCrescimentoRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/conversoes': {
       id: '/_app/conversoes'
       path: '/conversoes'
@@ -618,6 +637,7 @@ interface AppRouteChildren {
   AppBlogRoute: typeof AppBlogRouteWithChildren
   AppConfiguracoesRoute: typeof AppConfiguracoesRoute
   AppConversoesRoute: typeof AppConversoesRoute
+  AppCrescimentoRoute: typeof AppCrescimentoRoute
   AppInsightsRoute: typeof AppInsightsRoute
   AppIntegracoesRoute: typeof AppIntegracoesRoute
   AppLeadsRoute: typeof AppLeadsRoute
@@ -634,6 +654,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppBlogRoute: AppBlogRouteWithChildren,
   AppConfiguracoesRoute: AppConfiguracoesRoute,
   AppConversoesRoute: AppConversoesRoute,
+  AppCrescimentoRoute: AppCrescimentoRoute,
   AppInsightsRoute: AppInsightsRoute,
   AppIntegracoesRoute: AppIntegracoesRoute,
   AppLeadsRoute: AppLeadsRoute,
