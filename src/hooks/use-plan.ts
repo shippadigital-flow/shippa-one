@@ -11,6 +11,7 @@ const startModules = new Set([
   "/blog",
   "/biblioteca",
   "/crescimento",
+  "/seo",
   "/configuracoes",
   "/suporte",
   "/planos",

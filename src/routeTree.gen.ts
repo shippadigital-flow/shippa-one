@@ -26,6 +26,7 @@ import { Route as AdminClientesRouteImport } from './routes/admin.clientes'
 import { Route as AdminAssinaturasRouteImport } from './routes/admin.assinaturas'
 import { Route as AppSuporteRouteImport } from './routes/_app.suporte'
 import { Route as AppSiteRouteImport } from './routes/_app.site'
+import { Route as AppSeoRouteImport } from './routes/_app.seo'
 import { Route as AppRelatoriosRouteImport } from './routes/_app.relatorios'
 import { Route as AppPlanosRouteImport } from './routes/_app.planos'
 import { Route as AppLeadsRouteImport } from './routes/_app.leads'
@@ -125,6 +126,11 @@ const AppSiteRoute = AppSiteRouteImport.update({
   path: '/site',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSeoRoute = AppSeoRouteImport.update({
+  id: '/seo',
+  path: '/seo',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppRelatoriosRoute = AppRelatoriosRouteImport.update({
   id: '/relatorios',
   path: '/relatorios',
@@ -211,6 +217,7 @@ export interface FileRoutesByFullPath {
   '/leads': typeof AppLeadsRoute
   '/planos': typeof AppPlanosRoute
   '/relatorios': typeof AppRelatoriosRoute
+  '/seo': typeof AppSeoRoute
   '/site': typeof AppSiteRoute
   '/suporte': typeof AppSuporteRoute
   '/admin/assinaturas': typeof AdminAssinaturasRoute
@@ -240,6 +247,7 @@ export interface FileRoutesByTo {
   '/leads': typeof AppLeadsRoute
   '/planos': typeof AppPlanosRoute
   '/relatorios': typeof AppRelatoriosRoute
+  '/seo': typeof AppSeoRoute
   '/site': typeof AppSiteRoute
   '/suporte': typeof AppSuporteRoute
   '/admin/assinaturas': typeof AdminAssinaturasRoute
@@ -274,6 +282,7 @@ export interface FileRoutesById {
   '/_app/leads': typeof AppLeadsRoute
   '/_app/planos': typeof AppPlanosRoute
   '/_app/relatorios': typeof AppRelatoriosRoute
+  '/_app/seo': typeof AppSeoRoute
   '/_app/site': typeof AppSiteRoute
   '/_app/suporte': typeof AppSuporteRoute
   '/admin/assinaturas': typeof AdminAssinaturasRoute
@@ -309,6 +318,7 @@ export interface FileRouteTypes {
     | '/leads'
     | '/planos'
     | '/relatorios'
+    | '/seo'
     | '/site'
     | '/suporte'
     | '/admin/assinaturas'
@@ -338,6 +348,7 @@ export interface FileRouteTypes {
     | '/leads'
     | '/planos'
     | '/relatorios'
+    | '/seo'
     | '/site'
     | '/suporte'
     | '/admin/assinaturas'
@@ -371,6 +382,7 @@ export interface FileRouteTypes {
     | '/_app/leads'
     | '/_app/planos'
     | '/_app/relatorios'
+    | '/_app/seo'
     | '/_app/site'
     | '/_app/suporte'
     | '/admin/assinaturas'
@@ -517,6 +529,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSiteRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/seo': {
+      id: '/_app/seo'
+      path: '/seo'
+      fullPath: '/seo'
+      preLoaderRoute: typeof AppSeoRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/relatorios': {
       id: '/_app/relatorios'
       path: '/relatorios'
@@ -643,6 +662,7 @@ interface AppRouteChildren {
   AppLeadsRoute: typeof AppLeadsRoute
   AppPlanosRoute: typeof AppPlanosRoute
   AppRelatoriosRoute: typeof AppRelatoriosRoute
+  AppSeoRoute: typeof AppSeoRoute
   AppSiteRoute: typeof AppSiteRoute
   AppSuporteRoute: typeof AppSuporteRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -660,6 +680,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppLeadsRoute: AppLeadsRoute,
   AppPlanosRoute: AppPlanosRoute,
   AppRelatoriosRoute: AppRelatoriosRoute,
+  AppSeoRoute: AppSeoRoute,
   AppSiteRoute: AppSiteRoute,
   AppSuporteRoute: AppSuporteRoute,
   AppIndexRoute: AppIndexRoute,
