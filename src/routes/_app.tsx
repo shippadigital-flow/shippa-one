@@ -21,6 +21,7 @@ import {
   Sparkles,
   Crown,
   Rocket,
+  Gauge,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
@@ -49,6 +50,7 @@ const primaryNav: NavItem[] = [
   { label: "Visão Geral", to: "/", icon: LayoutDashboard },
   { label: "Meu Site", to: "/site", icon: Globe },
   { label: "Blog", to: "/blog", icon: FileText },
+  { label: "SEO", to: "/seo", icon: Gauge },
   { label: "Biblioteca", to: "/biblioteca", icon: Images },
 ];
 
