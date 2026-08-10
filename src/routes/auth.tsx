@@ -1,21 +1,38 @@
-import { createFileRoute, useNavigate, Link, redirect } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, redirect } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import {
-  Sparkles,
   ArrowRight,
-  Mail,
-  Lock,
+  ArrowLeft,
   Eye,
   EyeOff,
-  CheckCircle2,
   ShieldCheck,
   Loader2,
+  CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 import { useAuth, getStoredUser } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
+import { EcosystemStage } from "@/features/auth/ecosystem-stage";
 
 export const Route = createFileRoute("/auth")({
+  head: () => ({
+    meta: [
+      { title: "Entrar no Shippa One — Sua presença digital, sob controle" },
+      {
+        name: "description",
+        content:
+          "Acesse o Shippa One para acompanhar site, conteúdo, SEO e métricas da presença digital do seu negócio em um só lugar.",
+      },
+      { property: "og:title", content: "Entrar no Shippa One" },
+      {
+        property: "og:description",
+        content: "Site, conteúdo, SEO e métricas da sua presença digital em um só lugar.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   beforeLoad: () => {
     if (typeof window !== "undefined" && getStoredUser()) {
       throw redirect({ to: "/" });
@@ -24,189 +41,137 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
-type Mode = "signin" | "signup";
-
 const signInSchema = z.object({
   email: z.string().trim().email({ message: "Digite um e-mail válido" }).max(255),
   password: z.string().min(6, { message: "Sua senha deve ter ao menos 6 caracteres" }).max(120),
 });
 
-const signUpSchema = signInSchema.extend({
-  name: z
-    .string()
-    .trim()
-    .min(2, { message: "Como podemos te chamar?" })
-    .max(80, { message: "Nome muito longo" }),
-});
-
 function AuthPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground lg:grid lg:grid-cols-[1.05fr_1fr]">
-      <BrandingPanel />
-      <AuthPanel />
+    <div className="min-h-dvh bg-background text-foreground lg:grid lg:grid-cols-[1.5fr_1fr] xl:grid-cols-[1.6fr_1fr]">
+      <ExperiencePanel />
+      <LoginPanel />
     </div>
   );
 }
 
-/* ------------------------------ BRANDING ------------------------------ */
+/* ------------------------------- LEFT SIDE ------------------------------- */
 
-function BrandingPanel() {
+function ExperiencePanel() {
   return (
     <aside className="relative hidden overflow-hidden bg-sidebar lg:flex lg:flex-col lg:justify-between lg:p-12">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-glow opacity-90" />
-      <div className="pointer-events-none absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-40 -right-24 h-[480px] w-[480px] rounded-full bg-primary/15 blur-[120px]" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04]" style={gridPattern} />
+      <div className="absolute inset-0">
+        <EcosystemStage />
+      </div>
 
-      <header className="relative flex items-center gap-2.5">
+      <header className="auth-enter relative flex items-center gap-2.5">
         <ShippaMark className="h-9 w-9" />
         <div className="flex flex-col leading-tight">
-          <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">
-            Shippa
-          </span>
-          <span className="text-[11px] font-medium text-muted-foreground">
-            One
-          </span>
+          <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">Shippa</span>
+          <span className="text-[11px] font-medium text-muted-foreground">One</span>
         </div>
       </header>
 
-      <div className="relative max-w-lg animate-fade-in">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-glow">
-          <Sparkles className="h-3 w-3" /> Plataforma de crescimento
-        </span>
-        <h1 className="mt-6 text-4xl font-semibold leading-[1.1] tracking-tight text-sidebar-foreground xl:text-5xl">
-          Seu negócio digital,
+      <div className="relative max-w-xl">
+        <h1
+          className="auth-enter text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-sidebar-foreground xl:text-5xl"
+          style={{ animationDelay: "900ms" }}
+        >
+          Tudo o que acontece com seu site.
           <br />
-          <span className="text-gradient">com clareza e escala.</span>
+          <span className="text-gradient">Em um só lugar.</span>
         </h1>
-        <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground">
-          Site, blog, leads, analytics e automações — reunidos em um produto
-          calmo, elegante e feito para quem constrói todo dia.
+        <p
+          className="auth-enter mt-6 max-w-lg text-[15px] leading-relaxed text-muted-foreground"
+          style={{ animationDelay: "1050ms" }}
+        >
+          O Shippa One reúne site, conteúdo, SEO, métricas e presença digital em uma
+          experiência simples, inteligente e feita para você entender o que realmente importa.
         </p>
-
-        <ul className="mt-8 space-y-3">
-          {[
-            "Site profissional publicado em minutos",
-            "Insights semanais gerados por IA",
-            "Leads e conversas em uma inbox única",
-          ].map((f) => (
-            <li key={f} className="flex items-center gap-2.5 text-sm text-sidebar-foreground">
-              <CheckCircle2 className="h-4 w-4 text-primary-glow" />
-              {f}
-            </li>
-          ))}
-        </ul>
+        <p
+          className="auth-enter mt-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-glow"
+          style={{ animationDelay: "1200ms" }}
+        >
+          <span className="h-px w-10 bg-primary/50" aria-hidden="true" />
+          Sua presença digital, sob controle.
+        </p>
       </div>
-
-      <figure className="relative max-w-lg rounded-2xl border border-sidebar-border bg-sidebar-accent/40 p-6 backdrop-blur-md">
-        <p className="text-[15px] leading-relaxed text-sidebar-foreground">
-          "Depois do Shippa One paramos de perder oportunidades. Cada visitante
-          do site vira uma conversa organizada e nossa produtividade dobrou."
-        </p>
-        <figcaption className="mt-4 flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-primary text-xs font-semibold text-primary-foreground">
-            MR
-          </div>
-          <div>
-            <p className="text-sm font-medium text-sidebar-foreground">
-              Mariana Ribeiro
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Fundadora · Ribeiro & Costa Advocacia
-            </p>
-          </div>
-        </figcaption>
-      </figure>
     </aside>
   );
 }
 
-/* ------------------------------ AUTH CARD ------------------------------ */
+/* ------------------------------- RIGHT SIDE ------------------------------ */
 
-function AuthPanel() {
-  const [mode, setMode] = useState<Mode>("signin");
+function LoginPanel() {
+  const [view, setView] = useState<"signin" | "forgot">("signin");
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center px-6 py-10 sm:px-10 lg:min-h-0">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-glow opacity-40 lg:hidden" />
+    <section className="auth-light relative flex min-h-dvh items-center justify-center px-6 py-12 sm:px-10 lg:min-h-0">
+      <MobileBackdrop />
 
-      <div className="relative w-full max-w-md animate-fade-in">
-        <div className="mb-8 flex items-center gap-2.5 lg:hidden">
-          <ShippaMark className="h-9 w-9" />
-          <span className="text-sm font-semibold tracking-tight text-foreground">
-            Shippa One
-          </span>
+      <div className="relative w-full max-w-[400px]">
+        <div className="auth-enter mb-10 flex items-center gap-2.5">
+          <ShippaMark className="h-8 w-8" />
+          <span className="text-sm font-semibold tracking-tight text-foreground">Shippa One</span>
         </div>
 
-        <ModeTabs mode={mode} setMode={setMode} />
+        {view === "signin" ? (
+          <SignInView onForgot={() => setView("forgot")} />
+        ) : (
+          <ForgotView onBack={() => setView("signin")} />
+        )}
 
-        <header className="mt-8">
-          <h2 className="text-3xl font-semibold tracking-tight text-foreground">
-            {mode === "signin" ? "Bem-vindo de volta" : "Crie sua conta"}
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {mode === "signin"
-              ? "Entre na sua conta Shippa One para continuar de onde parou."
-              : "Comece grátis com o Shippa One Start em menos de 1 minuto."}
-          </p>
-        </header>
-
-        <div className="mt-8">
-          <AuthForm mode={mode} />
-        </div>
-
-        <p className="mt-8 flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-          <ShieldCheck className="h-3.5 w-3.5" />
-          Ambiente seguro, criptografado ponta a ponta.
+        <p className="auth-enter mt-10 flex items-center justify-center gap-1.5 text-xs text-muted-foreground" style={{ animationDelay: "700ms" }}>
+          <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+          Acesso seguro e protegido.
         </p>
       </div>
     </section>
   );
 }
 
-function ModeTabs({ mode, setMode }: { mode: Mode; setMode: (m: Mode) => void }) {
+/** Compact abstract backdrop for mobile, where the full stage is hidden. */
+function MobileBackdrop() {
   return (
-    <div className="inline-flex items-center rounded-lg border border-border/60 bg-surface p-0.5" role="tablist">
-      {(["signin", "signup"] as const).map((m) => (
-        <button
-          key={m}
-          role="tab"
-          aria-selected={mode === m}
-          onClick={() => setMode(m)}
-          className={
-            "rounded-md px-4 py-1.5 text-xs font-medium transition " +
-            (mode === m
-              ? "bg-accent text-foreground"
-              : "text-muted-foreground hover:text-foreground")
-          }
-        >
-          {m === "signin" ? "Entrar" : "Criar conta"}
-        </button>
-      ))}
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-56 overflow-hidden lg:hidden" aria-hidden="true">
+      <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      <svg viewBox="0 0 400 200" className="h-full w-full opacity-40">
+        {[70, 110, 150].map((r, i) => (
+          <circle
+            key={r}
+            cx="200"
+            cy="40"
+            r={r}
+            fill="none"
+            stroke="var(--color-primary)"
+            strokeOpacity={0.22 - i * 0.05}
+          />
+        ))}
+        <circle cx="200" cy="40" r="6" fill="var(--color-primary)" className="auth-breathe" />
+        <circle cx="200" cy="40" r="110" fill="none" stroke="var(--color-primary)" strokeOpacity="0.5" className="auth-dash" />
+      </svg>
     </div>
   );
 }
 
-function AuthForm({ mode }: { mode: Mode }) {
+function SignInView({ onForgot }: { onForgot: () => void }) {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
+    setStatus("idle");
 
     const formData = new FormData(e.currentTarget);
-    const payload = {
+    const result = signInSchema.safeParse({
       email: String(formData.get("email") ?? ""),
       password: String(formData.get("password") ?? ""),
-      ...(mode === "signup" ? { name: String(formData.get("name") ?? "") } : {}),
-    };
+    });
 
-    const schema = mode === "signup" ? signUpSchema : signInSchema;
-    const result = schema.safeParse(payload);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       for (const issue of result.error.issues) {
@@ -214,105 +179,193 @@ function AuthForm({ mode }: { mode: Mode }) {
         if (!fieldErrors[key]) fieldErrors[key] = issue.message;
       }
       setErrors(fieldErrors);
+      setStatus("error");
       return;
     }
 
-    setSubmitting(true);
-    // Simulated latency for a premium feel — swap for real auth later.
+    setStatus("loading");
     await new Promise((r) => setTimeout(r, 650));
-    const name = "name" in result.data ? (result.data.name as string) : undefined;
-    signIn(result.data.email, name);
+    setStatus("success");
+    signIn(result.data.email);
+    await new Promise((r) => setTimeout(r, 350));
     navigate({ to: "/" });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-      <SocialButton />
+    <>
+      <header className="auth-enter" style={{ animationDelay: "120ms" }}>
+        <h2 className="text-[28px] font-semibold tracking-tight text-foreground">
+          Bem-vinda ao Shippa One
+        </h2>
+        <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+          Entre para acompanhar e gerenciar a presença digital do seu negócio.
+        </p>
+      </header>
 
-      <Divider>ou continue com e-mail</Divider>
+      <form
+        onSubmit={handleSubmit}
+        className="auth-enter mt-8 flex flex-col gap-4"
+        style={{ animationDelay: "260ms" }}
+        noValidate
+      >
+        <SocialButton />
+        <Divider>ou</Divider>
 
-      {mode === "signup" && (
         <Field
-          id="name"
-          name="name"
-          label="Como podemos te chamar?"
-          placeholder="Seu nome"
-          autoComplete="name"
-          error={errors.name}
+          id="email"
+          name="email"
+          type="email"
+          label="E-mail"
+          placeholder="seu@email.com"
+          autoComplete="email"
+          error={errors.email}
         />
-      )}
 
-      <Field
-        id="email"
-        name="email"
-        type="email"
-        label="E-mail"
-        placeholder="voce@empresa.com.br"
-        icon={Mail}
-        autoComplete="email"
-        error={errors.email}
-      />
-
-      <Field
-        id="password"
-        name="password"
-        type={showPassword ? "text" : "password"}
-        label="Senha"
-        placeholder="••••••••"
-        icon={Lock}
-        autoComplete={mode === "signup" ? "new-password" : "current-password"}
-        error={errors.password}
-        trailing={
-          <button
-            type="button"
-            onClick={() => setShowPassword((v) => !v)}
-            aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
-            className="rounded-md p-1 text-muted-foreground transition hover:text-foreground"
-          >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </button>
-        }
-        hint={
-          mode === "signin" ? (
-            <Link
-              to="/auth"
-              className="text-xs font-medium text-primary-glow transition hover:text-foreground"
+        <Field
+          id="password"
+          name="password"
+          type={showPassword ? "text" : "password"}
+          label="Senha"
+          placeholder="Digite sua senha"
+          autoComplete="current-password"
+          error={errors.password}
+          trailing={
+            <button
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+              className="rounded-md p-1 text-muted-foreground transition hover:text-foreground"
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          }
+          hint={
+            <button
+              type="button"
+              onClick={onForgot}
+              className="rounded-sm text-xs font-medium text-primary-glow transition hover:text-foreground"
             >
               Esqueci minha senha
-            </Link>
-          ) : null
-        }
-      />
+            </button>
+          }
+        />
 
+        <div aria-live="polite">
+          {status === "error" && (
+            <p className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/8 px-3 py-2.5 text-xs font-medium text-destructive">
+              <AlertCircle className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              Não foi possível entrar. Verifique seu e-mail e senha.
+            </p>
+          )}
+          {status === "success" && (
+            <p className="flex items-center gap-2 text-xs font-medium text-success">
+              <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
+              Tudo certo. Abrindo seu painel…
+            </p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={status === "loading" || status === "success"}
+          className="mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-elegant transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-glow active:translate-y-0 disabled:pointer-events-none disabled:opacity-70"
+        >
+          {status === "loading" ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Entrando…
+            </>
+          ) : (
+            <>
+              Entrar no Shippa One
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </>
+          )}
+        </button>
+      </form>
+
+      <p className="auth-enter mt-7 text-center text-xs text-muted-foreground" style={{ animationDelay: "420ms" }}>
+        Ainda não tem acesso?{" "}
+        <a
+          href="mailto:contato@shippa.com.br"
+          className="font-medium text-foreground underline-offset-4 transition hover:underline"
+        >
+          Fale com a Shippa
+        </a>
+      </p>
+    </>
+  );
+}
+
+function ForgotView({ onBack }: { onBack: () => void }) {
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = String(new FormData(e.currentTarget).get("email") ?? "");
+    const parsed = z.string().trim().email().safeParse(email);
+    if (!parsed.success) {
+      setError("Digite um e-mail válido");
+      setStatus("error");
+      return;
+    }
+    setError(null);
+    setStatus("loading");
+    await new Promise((r) => setTimeout(r, 700));
+    setStatus("sent");
+  };
+
+  return (
+    <>
       <button
-        type="submit"
-        disabled={submitting}
-        className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-elegant transition hover:opacity-90 disabled:opacity-70"
+        type="button"
+        onClick={onBack}
+        className="mb-6 inline-flex items-center gap-1.5 rounded-sm text-xs font-medium text-muted-foreground transition hover:text-foreground"
       >
-        {submitting ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" /> Entrando…
-          </>
-        ) : (
-          <>
-            {mode === "signin" ? "Entrar" : "Criar minha conta"}
-            <ArrowRight className="h-4 w-4" />
-          </>
-        )}
+        <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Voltar para o login
       </button>
 
-      <p className="text-center text-xs text-muted-foreground">
-        Ao continuar você concorda com os{" "}
-        <a href="#" className="text-foreground/80 underline-offset-2 hover:underline">
-          Termos
-        </a>{" "}
-        e a{" "}
-        <a href="#" className="text-foreground/80 underline-offset-2 hover:underline">
-          Política de Privacidade
-        </a>
-        .
-      </p>
-    </form>
+      <header>
+        <h2 className="text-[28px] font-semibold tracking-tight text-foreground">
+          Recuperar acesso
+        </h2>
+        <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+          Informe seu e-mail e enviaremos um link para você criar uma nova senha.
+        </p>
+      </header>
+
+      {status === "sent" ? (
+        <div className="mt-8 flex items-start gap-2.5 rounded-xl border border-border bg-surface px-4 py-3.5 text-sm text-foreground">
+          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden="true" />
+          Se houver uma conta com esse e-mail, o link de recuperação chegará em instantes.
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4" noValidate>
+          <Field
+            id="recovery-email"
+            name="email"
+            type="email"
+            label="E-mail"
+            placeholder="seu@email.com"
+            autoComplete="email"
+            error={error ?? undefined}
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-elegant transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-glow active:translate-y-0 disabled:pointer-events-none disabled:opacity-70"
+          >
+            {status === "loading" ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Enviando…
+              </>
+            ) : (
+              "Enviar link de recuperação"
+            )}
+          </button>
+        </form>
+      )}
+    </>
   );
 }
 
@@ -325,7 +378,6 @@ function Field({
   type = "text",
   placeholder,
   autoComplete,
-  icon: Icon,
   trailing,
   hint,
   error,
@@ -336,28 +388,24 @@ function Field({
   type?: string;
   placeholder?: string;
   autoComplete?: string;
-  icon?: React.ComponentType<{ className?: string }>;
   trailing?: React.ReactNode;
   hint?: React.ReactNode;
   error?: string;
 }) {
   return (
     <div>
-      <div className="mb-1.5 flex items-center justify-between">
-        <label htmlFor={id} className="text-xs font-medium text-muted-foreground">
+      <div className="mb-1.5 flex items-center justify-between gap-3">
+        <label htmlFor={id} className="text-xs font-medium text-foreground/80">
           {label}
         </label>
         {hint}
       </div>
       <div
         className={
-          "relative flex items-center rounded-lg border bg-surface transition focus-within:border-primary/60 focus-within:ring-2 focus-within:ring-ring/40 " +
-          (error ? "border-destructive/60" : "border-border/70")
+          "relative flex items-center rounded-xl border bg-surface transition focus-within:border-primary/50 focus-within:ring-4 focus-within:ring-primary/10 " +
+          (error ? "border-destructive/60" : "border-border")
         }
       >
-        {Icon && (
-          <Icon className="pointer-events-none ml-3 h-4 w-4 shrink-0 text-muted-foreground" />
-        )}
         <input
           id={id}
           name={name}
@@ -366,7 +414,7 @@ function Field({
           autoComplete={autoComplete}
           aria-invalid={!!error}
           aria-describedby={error ? `${id}-error` : undefined}
-          className="h-11 w-full bg-transparent px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+          className="h-12 w-full rounded-xl bg-transparent px-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
         />
         {trailing && <div className="pr-2">{trailing}</div>}
       </div>
@@ -381,7 +429,7 @@ function Field({
 
 function Divider({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+    <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
       <span className="h-px flex-1 bg-border" />
       {children}
       <span className="h-px flex-1 bg-border" />
@@ -393,7 +441,7 @@ function SocialButton() {
   return (
     <button
       type="button"
-      className="inline-flex items-center justify-center gap-2.5 rounded-lg border border-border/70 bg-surface px-4 py-2.5 text-sm font-medium text-foreground transition hover:bg-accent"
+      className="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl border border-border bg-surface px-4 text-sm font-medium text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent"
     >
       <GoogleIcon />
       Continuar com Google
@@ -404,14 +452,10 @@ function SocialButton() {
 function GoogleIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.44-1.7 4.2-5.5 4.2-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.15.8 3.87 1.5l2.64-2.55C16.9 3.6 14.7 2.7 12 2.7 6.9 2.7 2.8 6.8 2.8 12s4.1 9.3 9.2 9.3c5.3 0 8.8-3.7 8.8-9 0-.6-.06-1.1-.15-1.6H12z"/>
+      <path
+        fill="#EA4335"
+        d="M12 10.2v3.9h5.5c-.24 1.44-1.7 4.2-5.5 4.2-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.15.8 3.87 1.5l2.64-2.55C16.9 3.6 14.7 2.7 12 2.7 6.9 2.7 2.8 6.8 2.8 12s4.1 9.3 9.2 9.3c5.3 0 8.8-3.7 8.8-9 0-.6-.06-1.1-.15-1.6H12z"
+      />
     </svg>
   );
 }
-
-const gridPattern: React.CSSProperties = {
-  backgroundImage:
-    "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-  backgroundSize: "48px 48px",
-  color: "white",
-};
