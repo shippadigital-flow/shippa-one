@@ -67,9 +67,9 @@ function ExperiencePanel() {
         style={{
           backgroundImage:
             "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
+          backgroundSize: "72px 72px",
           color: "var(--color-foreground)",
-          maskImage: "radial-gradient(75% 55% at 50% 32%, black, transparent)",
+          maskImage: "radial-gradient(60% 45% at 50% 30%, black, transparent)",
         }}
       />
 
@@ -88,12 +88,12 @@ function ExperiencePanel() {
       </div>
 
       {/* ZONE 3 — protected editorial content zone */}
-      <div className="relative z-10 w-[min(55%,620px)] min-w-[440px] pb-12 pl-11 pr-[60px]">
+      <div className="relative z-10 w-[min(78%,760px)] pb-12 pl-11 pr-[60px]">
         <h1
           className="auth-enter font-bold text-sidebar-foreground"
           style={{
             animationDelay: "900ms",
-            fontSize: "clamp(42px, 4vw, 68px)",
+            fontSize: "clamp(38px, 3.4vw, 60px)",
             lineHeight: 1.0,
             letterSpacing: "-0.04em",
           }}
