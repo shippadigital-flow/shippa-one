@@ -9,41 +9,29 @@ const NODES = [
   { label: "IA", icon: Sparkles, angle: 210 },
 ];
 
+/** Metric fragments live only in the upper/middle graphic zone. */
 const CARDS = [
-  { label: "Visitantes hoje", value: "1.248", top: "8%", left: "4%", delay: 700, fx: "8px", fy: "-12px" },
-  { label: "Shippa Index", value: "SEO 92", top: "22%", right: "2%", delay: 850, fx: "-10px", fy: "10px" },
-  { label: "Novos contatos", value: "18", bottom: "26%", left: "0%", delay: 1000, fx: "6px", fy: "12px" },
-  { label: "Search Console", value: "Google", top: "48%", right: "6%", delay: 1150, fx: "-8px", fy: "-8px" },
-  { label: "Conteúdo", value: "3 novos artigos", bottom: "8%", right: "12%", delay: 1300, fx: "10px", fy: "-6px" },
-];
+  { label: "Visitantes hoje", value: "1.248", top: "4%", left: "2%", delay: 700, fx: "8px", fy: "-12px", tier: "always" },
+  { label: "Shippa Index", value: "SEO 92", top: "14%", right: "1%", delay: 850, fx: "-10px", fy: "10px", tier: "always" },
+  { label: "Novos contatos", value: "18", bottom: "12%", left: "0%", delay: 1000, fx: "6px", fy: "12px", tier: "wide" },
+  { label: "Search Console", value: "Google", bottom: "18%", right: "2%", delay: 1150, fx: "-8px", fy: "-8px", tier: "wide" },
+] as const;
 
 const STATUS = [
-  { label: "Site online", top: "62%", left: "2%", delay: 1200 },
-  { label: "Domínio ativo", top: "4%", left: "46%", delay: 900 },
-];
+  { label: "Site online", bottom: "2%", left: "16%", delay: 1200 },
+  { label: "Domínio ativo", top: "1%", left: "44%", delay: 900 },
+] as const;
 
 /** Abstract, animated representation of the Shippa One ecosystem. Pure CSS + SVG. */
 export function EcosystemStage() {
   return (
     <div className="relative h-full w-full" aria-hidden="true">
-      {/* layer 1–2: background + subtle grid */}
-      <div className="auth-veil pointer-events-none absolute inset-0 bg-gradient-glow" />
-      <div
-        className="auth-veil pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          color: "var(--color-foreground)",
-          maskImage: "radial-gradient(70% 60% at 50% 45%, black, transparent)",
-        }}
-      />
-      <div className="auth-veil pointer-events-none absolute -top-32 -left-24 h-[460px] w-[460px] rounded-full bg-primary/20 blur-[130px]" />
-      <div className="auth-veil pointer-events-none absolute -bottom-40 right-0 h-[420px] w-[420px] rounded-full bg-primary/10 blur-[130px]" />
+      {/* layer 1: soft light behind the core only */}
+      <div className="auth-veil pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[130px]" />
 
       {/* layers 3–6: core + orbit */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="auth-enter relative aspect-square w-[min(78%,520px)]" style={{ animationDelay: "300ms" }}>
+        <div className="auth-enter relative aspect-square w-[min(74%,440px)]" style={{ animationDelay: "300ms" }}>
           <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full">
             <defs>
               <radialGradient id="shippa-core" cx="50%" cy="50%">
@@ -127,8 +115,16 @@ export function EcosystemStage() {
       {CARDS.map((c) => (
         <div
           key={c.label}
-          className="auth-enter absolute hidden xl:block"
-          style={{ top: c.top, left: c.left, right: c.right, bottom: c.bottom, animationDelay: `${c.delay}ms` }}
+          className={
+            "auth-enter absolute " + (c.tier === "always" ? "hidden lg:block" : "hidden xl:block")
+          }
+          style={{
+            top: "top" in c ? c.top : undefined,
+            left: "left" in c ? c.left : undefined,
+            right: "right" in c ? c.right : undefined,
+            bottom: "bottom" in c ? c.bottom : undefined,
+            animationDelay: `${c.delay}ms`,
+          }}
         >
           <div
             className="auth-float rounded-xl border border-border bg-surface/55 px-3.5 py-2.5 shadow-elegant backdrop-blur-md"
@@ -146,7 +142,12 @@ export function EcosystemStage() {
         <div
           key={s.label}
           className="auth-enter absolute hidden xl:block"
-          style={{ top: s.top, left: s.left, animationDelay: `${s.delay}ms` }}
+          style={{
+            top: "top" in s ? s.top : undefined,
+            bottom: "bottom" in s ? s.bottom : undefined,
+            left: s.left,
+            animationDelay: `${s.delay}ms`,
+          }}
         >
           <div className="auth-float inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1.5 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-success shippa-anim-pulse" />

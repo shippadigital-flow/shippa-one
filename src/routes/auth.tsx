@@ -59,12 +59,22 @@ function AuthPage() {
 
 function ExperiencePanel() {
   return (
-    <aside className="relative hidden overflow-hidden bg-sidebar lg:flex lg:flex-col lg:justify-between lg:p-12">
-      <div className="absolute inset-0">
-        <EcosystemStage />
-      </div>
+    <aside className="relative hidden overflow-hidden bg-sidebar lg:flex lg:flex-col">
+      {/* background: discreet grid + ambience, never competing with the content zone */}
+      <div
+        className="auth-veil pointer-events-none absolute inset-0 opacity-[0.03]"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
+          color: "var(--color-foreground)",
+          maskImage: "radial-gradient(55% 42% at 50% 30%, black, transparent 85%)",
+        }}
+      />
 
-      <header className="auth-enter relative flex items-center gap-2.5">
+      {/* ZONE 1 — top: logo */}
+      <header className="auth-enter relative z-10 flex items-center gap-2.5 px-11 pt-11">
         <ShippaMark className="h-9 w-9" />
         <div className="flex flex-col leading-tight">
           <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">Shippa</span>
@@ -72,24 +82,37 @@ function ExperiencePanel() {
         </div>
       </header>
 
-      <div className="relative max-w-xl">
+      {/* ZONE 2 — graphic stage, ends before the content zone */}
+      <div className="relative min-h-0 flex-1">
+        <EcosystemStage />
+      </div>
+
+      {/* ZONE 3 — protected editorial content zone */}
+      <div className="relative z-10 w-[min(78%,760px)] pb-12 pl-11 pr-[60px]">
         <h1
-          className="auth-enter text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-sidebar-foreground xl:text-5xl"
-          style={{ animationDelay: "900ms" }}
+          className="auth-enter font-bold text-sidebar-foreground"
+          style={{
+            animationDelay: "900ms",
+            fontSize: "clamp(38px, 3.4vw, 60px)",
+            lineHeight: 1.0,
+            letterSpacing: "-0.04em",
+          }}
         >
-          Tudo o que acontece com seu site.
+          Tudo o que acontece
           <br />
-          <span className="text-gradient">Em um só lugar.</span>
+          com seu site.
+          <br />
+          <span className="text-primary-glow">Em um só lugar.</span>
         </h1>
         <p
-          className="auth-enter mt-6 max-w-lg text-[15px] leading-relaxed text-muted-foreground"
-          style={{ animationDelay: "1050ms" }}
+          className="auth-enter mt-6 max-w-[510px] text-muted-foreground"
+          style={{ animationDelay: "1050ms", fontSize: "16px", lineHeight: 1.6 }}
         >
           O Shippa One reúne site, conteúdo, SEO, métricas e presença digital em uma
           experiência simples, inteligente e feita para você entender o que realmente importa.
         </p>
         <p
-          className="auth-enter mt-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-glow"
+          className="auth-enter mt-7 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-glow"
           style={{ animationDelay: "1200ms" }}
         >
           <span className="h-px w-10 bg-primary/50" aria-hidden="true" />

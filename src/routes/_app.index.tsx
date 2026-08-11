@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   FileText,
   Sparkles,
@@ -77,7 +78,9 @@ const days = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
 
 function DashboardPage() {
   const { user } = useAuth();
-  const greeting = `${greetingFor()}, ${user ? firstName(user.name) : "por aqui"}`;
+  const [timeGreeting, setTimeGreeting] = useState<string | null>(null);
+  useEffect(() => setTimeGreeting(greetingFor()), []);
+  const greeting = `${timeGreeting ?? "Olá"}, ${user ? firstName(user.name) : "por aqui"}`;
 
   const summary = [
     "Seu site está no ar e cresceu 18% esta semana.",
