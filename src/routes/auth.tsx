@@ -62,14 +62,14 @@ function ExperiencePanel() {
     <aside className="relative hidden overflow-hidden bg-sidebar lg:flex lg:flex-col">
       {/* background: discreet grid + ambience, never competing with the content zone */}
       <div
-        className="auth-veil pointer-events-none absolute inset-0 opacity-[0.045]"
+        className="auth-veil pointer-events-none absolute inset-0 opacity-[0.03]"
         aria-hidden="true"
         style={{
           backgroundImage:
             "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
           backgroundSize: "72px 72px",
           color: "var(--color-foreground)",
-          maskImage: "radial-gradient(60% 45% at 50% 30%, black, transparent)",
+          maskImage: "radial-gradient(55% 42% at 50% 30%, black, transparent 85%)",
         }}
       />
 
