@@ -14,7 +14,13 @@ const plans = [
     subtitle: "Para pequenos negócios começarem online.",
     active: true,
     customers: 612,
-    features: ["Site institucional", "Blog", "Leads básicos", "Analytics essencial", "Biblioteca de mídia"],
+    features: [
+      "Site institucional",
+      "Blog",
+      "Leads básicos",
+      "Analytics essencial",
+      "Biblioteca de mídia",
+    ],
   },
   {
     id: "pro",
@@ -24,7 +30,14 @@ const plans = [
     active: true,
     featured: true,
     customers: 490,
-    features: ["Tudo do Start", "SEO avançado", "Integrações Google", "Suporte prioritário", "Domínio próprio", "Múltiplos usuários"],
+    features: [
+      "Tudo do Start",
+      "SEO avançado",
+      "Integrações Google",
+      "Suporte prioritário",
+      "Domínio próprio",
+      "Múltiplos usuários",
+    ],
   },
   {
     id: "flow",
@@ -33,7 +46,13 @@ const plans = [
     subtitle: "Automação e IA para atendimento e vendas.",
     active: false,
     customers: 0,
-    features: ["WhatsApp automatizado", "IA de qualificação", "Agendamento", "CRM integrado", "Beta interno"],
+    features: [
+      "WhatsApp automatizado",
+      "IA de qualificação",
+      "Agendamento",
+      "CRM integrado",
+      "Beta interno",
+    ],
   },
 ];
 
@@ -86,9 +105,7 @@ function PlansPage() {
               <span className="text-3xl font-semibold text-foreground">{p.price}</span>
               <span className="text-xs text-muted-foreground">/mês</span>
             </div>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {p.customers} clientes usando
-            </p>
+            <p className="mt-1 text-xs text-muted-foreground">{p.customers} clientes usando</p>
 
             <ul className="mt-5 space-y-2 text-sm">
               {p.features.map((f) => (

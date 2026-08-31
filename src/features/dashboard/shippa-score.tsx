@@ -20,9 +20,7 @@ export function ShippaScore({ factors }: { factors: ScoreFactor[] }) {
   return (
     <section>
       <div className="mb-5">
-        <p className="eyebrow">
-          Índice Shippa
-        </p>
+        <p className="eyebrow">Índice Shippa</p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
           Sua maturidade digital hoje
         </h2>
@@ -42,20 +40,17 @@ export function ShippaScore({ factors }: { factors: ScoreFactor[] }) {
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
-                  className={
-                    "h-4 w-4 " +
-                    (i < stars ? "fill-current" : "text-muted-foreground/40")
-                  }
+                  className={"h-4 w-4 " + (i < stars ? "fill-current" : "text-muted-foreground/40")}
                 />
               ))}
               <span className="ml-2 text-xs font-medium text-muted-foreground">
                 {stars === 5
                   ? "Elite digital"
                   : stars >= 4
-                  ? "Muito bem posicionado"
-                  : stars === 3
-                  ? "No caminho certo"
-                  : "Começando a construir"}
+                    ? "Muito bem posicionado"
+                    : stars === 3
+                      ? "No caminho certo"
+                      : "Começando a construir"}
               </span>
             </div>
           </div>
@@ -63,8 +58,7 @@ export function ShippaScore({ factors }: { factors: ScoreFactor[] }) {
           {/* Factors */}
           <div>
             <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-              <Sparkles className="h-4 w-4 text-primary-glow" />
-              O que compõe seu índice
+              <Sparkles className="h-4 w-4 text-primary-glow" />O que compõe seu índice
             </div>
             <ul className="grid gap-2 sm:grid-cols-2">
               {factors.map((f) => (
@@ -82,9 +76,7 @@ export function ShippaScore({ factors }: { factors: ScoreFactor[] }) {
                             : "border-border/60 bg-transparent")
                         }
                       >
-                        {f.done && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                        )}
+                        {f.done && <span className="h-1.5 w-1.5 rounded-full bg-success" />}
                       </span>
                       <span
                         className={

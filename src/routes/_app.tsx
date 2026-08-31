@@ -54,9 +54,7 @@ const primaryNav: NavItem[] = [
   { label: "Biblioteca", to: "/biblioteca", icon: Images },
 ];
 
-const proNav: NavItem[] = [
-  { label: "Central de Crescimento", to: "/crescimento", icon: Rocket },
-];
+const proNav: NavItem[] = [{ label: "Central de Crescimento", to: "/crescimento", icon: Rocket }];
 
 const secondaryNav: NavItem[] = [
   { label: "Planos", to: "/planos", icon: Crown },
@@ -160,9 +158,7 @@ function Sidebar({
   onToggle: () => void;
 }) {
   return (
-    <aside
-      className="fixed inset-y-0 left-0 z-30 hidden h-dvh w-[var(--sidebar-w)] flex-col overflow-hidden border-r border-sidebar-border bg-sidebar/85 backdrop-blur-xl transition-[width] duration-300 ease-out md:flex"
-    >
+    <aside className="fixed inset-y-0 left-0 z-30 hidden h-dvh w-[var(--sidebar-w)] flex-col overflow-hidden border-r border-sidebar-border bg-sidebar/85 backdrop-blur-xl transition-[width] duration-300 ease-out md:flex">
       <div
         className={
           "flex shrink-0 items-center gap-2 " +
@@ -173,7 +169,9 @@ function Sidebar({
           <div className="flex min-w-0 items-center gap-2.5 pl-2">
             <ShippaMark className="h-8 w-8" />
             <div className="flex min-w-0 flex-col leading-tight">
-              <span className="truncate text-sm font-semibold tracking-tight text-sidebar-foreground">Shippa</span>
+              <span className="truncate text-sm font-semibold tracking-tight text-sidebar-foreground">
+                Shippa
+              </span>
               <span className="truncate text-[11px] font-medium text-muted-foreground">
                 One {plan === "pro" ? "Pro" : "Start"}
               </span>
@@ -187,7 +185,11 @@ function Sidebar({
           aria-label={collapsed ? "Expandir menu" : "Recolher menu"}
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-muted-foreground transition hover:bg-sidebar-accent hover:text-sidebar-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
-          {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+          {collapsed ? (
+            <PanelLeftOpen className="h-4 w-4" />
+          ) : (
+            <PanelLeftClose className="h-4 w-4" />
+          )}
         </button>
       </div>
 
@@ -239,16 +241,19 @@ function Sidebar({
               <p className="mt-2 text-[13px] font-medium leading-snug text-sidebar-foreground">
                 Evolua sua presença digital com Leads, Analytics e SEO.
               </p>
-              <p className="mt-2 text-[11px] font-medium text-primary-glow">
-                Ver planos →
-              </p>
+              <p className="mt-2 text-[11px] font-medium text-primary-glow">Ver planos →</p>
             </div>
           </Link>
         </div>
       )}
 
       <div className="border-t border-sidebar-border p-3">
-        <div className={"flex items-center gap-3 rounded-xl py-2 transition hover:bg-sidebar-accent " + (collapsed ? "px-0 justify-center" : "px-2")}>
+        <div
+          className={
+            "flex items-center gap-3 rounded-xl py-2 transition hover:bg-sidebar-accent " +
+            (collapsed ? "px-0 justify-center" : "px-2")
+          }
+        >
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-primary text-sm font-semibold text-primary-foreground">
             {user?.initials ?? "SO"}
           </div>
@@ -289,7 +294,10 @@ function TopBar({
   return (
     <header
       className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border/60 bg-background/80 px-4 backdrop-blur-xl sm:px-6 lg:px-8"
-      style={{ paddingTop: "env(safe-area-inset-top)", height: "calc(4rem + env(safe-area-inset-top))" }}
+      style={{
+        paddingTop: "env(safe-area-inset-top)",
+        height: "calc(4rem + env(safe-area-inset-top))",
+      }}
     >
       <button
         onClick={onOpenMobile}
@@ -395,8 +403,7 @@ function MobileDrawer({
   return (
     <div
       className={
-        "fixed inset-0 z-40 md:hidden " +
-        (open ? "pointer-events-auto" : "pointer-events-none")
+        "fixed inset-0 z-40 md:hidden " + (open ? "pointer-events-auto" : "pointer-events-none")
       }
       aria-hidden={!open}
     >
@@ -417,7 +424,9 @@ function MobileDrawer({
           <div className="flex items-center gap-2.5">
             <ShippaMark className="h-8 w-8" />
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">Shippa</span>
+              <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">
+                Shippa
+              </span>
               <span className="text-[11px] font-medium text-muted-foreground">
                 One {plan === "pro" ? "Pro" : "Start"}
               </span>

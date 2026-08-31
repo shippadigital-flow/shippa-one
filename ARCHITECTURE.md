@@ -29,7 +29,7 @@ Build system
 - Vite is used with a Lovable preset (@lovable.dev/vite-tanstack-config). The preset configures:
   - TanStack devtools and runtime plugins for React Start
   - Nitro target for server builds (edge/Cloudflare default)
-  - VITE_* env injection and @ path aliasing
+  - VITE\_\* env injection and @ path aliasing
 
 - Entry mapping: vite.config.ts redirects the TanStack Start server entry to `src/server.ts`.
 
@@ -59,4 +59,3 @@ Recommendations & best practices
 - Use feature folders at scale: when features grow, co-locate `pages`, `components`, `hooks`, and `services` for that feature to reduce navigation overhead.
 - Enforce unused-checks during CI: enable `noUnusedLocals` and `noUnusedParameters` in CI runs to catch dead code.
 - Route-level code-splitting: ensure heavy components are lazy-loaded at the route level to keep initial page bundles small.
-

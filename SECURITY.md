@@ -39,4 +39,3 @@ Static analysis & SCA
 Responsible disclosure
 
 Provide a contact method for reporting security issues privately. If none is available, use the organization's standard security contact channel.
-

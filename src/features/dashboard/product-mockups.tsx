@@ -73,7 +73,9 @@ function MockupShell({
             <Icon className="h-3 w-3" /> {title}
           </span>
         </div>
-        <span className="hidden text-[10px] font-medium text-muted-foreground sm:inline">shippa.one</span>
+        <span className="hidden text-[10px] font-medium text-muted-foreground sm:inline">
+          shippa.one
+        </span>
       </div>
       <div className="pt-5">{children}</div>
     </div>
@@ -89,12 +91,17 @@ export function AnalyticsMockup() {
         {[
           { k: "Visitantes", n: 12482, fmt: (n: number) => Math.round(n).toLocaleString("pt-BR") },
           { k: "Conversões", n: 184, fmt: (n: number) => Math.round(n).toString() },
-          { k: "Tempo médio", n: 161, fmt: (n: number) => `${Math.floor(n / 60)}m ${Math.round(n % 60).toString().padStart(2, "0")}s` },
+          {
+            k: "Tempo médio",
+            n: 161,
+            fmt: (n: number) =>
+              `${Math.floor(n / 60)}m ${Math.round(n % 60)
+                .toString()
+                .padStart(2, "0")}s`,
+          },
         ].map((m) => (
           <div key={m.k} className="rounded-xl border border-border/50 bg-surface/60 p-2.5 sm:p-3">
-            <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              {m.k}
-            </p>
+            <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.k}</p>
             <p className="mt-1.5 text-base font-semibold tracking-tight text-foreground sm:text-lg">
               <Counter value={m.n} format={m.fmt} />
             </p>
@@ -138,9 +145,19 @@ export function AnalyticsMockup() {
 /* --------------- LEADS --------------- */
 export function LeadsMockup() {
   const leads = [
-    { name: "Mariana Costa", src: "WhatsApp", tag: "Novo", tone: "bg-primary/20 text-primary-glow" },
+    {
+      name: "Mariana Costa",
+      src: "WhatsApp",
+      tag: "Novo",
+      tone: "bg-primary/20 text-primary-glow",
+    },
     { name: "Bruno Almeida", src: "Formulário", tag: "Quente", tone: "bg-warning/20 text-warning" },
-    { name: "Camila Ribeiro", src: "Instagram", tag: "Convertido", tone: "bg-success/20 text-success" },
+    {
+      name: "Camila Ribeiro",
+      src: "Instagram",
+      tag: "Convertido",
+      tone: "bg-success/20 text-success",
+    },
     { name: "Rafael Nunes", src: "WhatsApp", tag: "Novo", tone: "bg-primary/20 text-primary-glow" },
   ];
   return (
@@ -154,7 +171,11 @@ export function LeadsMockup() {
           >
             <div className="flex items-center gap-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-primary text-[11px] font-semibold text-primary-foreground">
-                {l.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                {l.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .slice(0, 2)
+                  .join("")}
               </div>
               <div className="min-w-0">
                 <p className="text-[13px] font-medium text-foreground">{l.name}</p>
@@ -191,12 +212,13 @@ export function SeoMockup() {
     <MockupShell title="SEO & Buscas" Icon={Search}>
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl border border-border/50 bg-surface/60 p-3">
-          <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
-            Saúde de SEO
-          </p>
+          <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Saúde de SEO</p>
           <p className="mt-1.5 text-lg font-semibold text-foreground">86 / 100</p>
           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
-            <div className="shippa-anim-bar h-full rounded-full bg-gradient-primary" style={{ ["--shippa-bar" as string]: "86%" }} />
+            <div
+              className="shippa-anim-bar h-full rounded-full bg-gradient-primary"
+              style={{ ["--shippa-bar" as string]: "86%" }}
+            />
           </div>
         </div>
         <div className="rounded-xl border border-border/50 bg-surface/60 p-3">
@@ -335,7 +357,9 @@ export function ConversionsMockup() {
         ].map((m) => (
           <div key={m.k} className="rounded-xl border border-border/50 bg-surface/60 p-2.5 sm:p-3">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.k}</p>
-            <p className={"mt-1.5 text-base font-semibold tracking-tight sm:text-lg " + m.tone}>{m.v}</p>
+            <p className={"mt-1.5 text-base font-semibold tracking-tight sm:text-lg " + m.tone}>
+              {m.v}
+            </p>
           </div>
         ))}
       </div>
@@ -362,8 +386,8 @@ export function ConversionsMockup() {
         ))}
       </div>
       <div className="mt-4 flex items-center gap-2 rounded-lg border border-border/50 bg-surface/60 px-3 py-2 text-[11px] text-muted-foreground">
-        <MousePointerClick className="h-3.5 w-3.5 text-primary-glow" />
-        3 novas conversões nos últimos 30 minutos
+        <MousePointerClick className="h-3.5 w-3.5 text-primary-glow" />3 novas conversões nos
+        últimos 30 minutos
       </div>
     </MockupShell>
   );
@@ -426,10 +450,34 @@ export function ReportsMockup() {
 /* --------------- INSIGHTS TIMELINE --------------- */
 export function InsightsMockup() {
   const items = [
-    { time: "há 12 min", tone: "text-primary-glow", Icon: Lightbulb, title: "Tendência detectada", body: "\"planejamento sucessório\" cresce 34% no seu nicho." },
-    { time: "há 2 h", tone: "text-success", Icon: TrendingUp, title: "Página em alta", body: "/artigos/inventario-digital ganhou +42 leituras." },
-    { time: "ontem", tone: "text-primary-glow", Icon: Sparkles, title: "Sugestão semanal", body: "Publique sobre \"audiência trabalhista\" — pico de buscas." },
-    { time: "há 3 dias", tone: "text-warning", Icon: ArrowUpRight, title: "Oportunidade", body: "12 novos termos relevantes não cobertos pelo seu blog." },
+    {
+      time: "há 12 min",
+      tone: "text-primary-glow",
+      Icon: Lightbulb,
+      title: "Tendência detectada",
+      body: '"planejamento sucessório" cresce 34% no seu nicho.',
+    },
+    {
+      time: "há 2 h",
+      tone: "text-success",
+      Icon: TrendingUp,
+      title: "Página em alta",
+      body: "/artigos/inventario-digital ganhou +42 leituras.",
+    },
+    {
+      time: "ontem",
+      tone: "text-primary-glow",
+      Icon: Sparkles,
+      title: "Sugestão semanal",
+      body: 'Publique sobre "audiência trabalhista" — pico de buscas.',
+    },
+    {
+      time: "há 3 dias",
+      tone: "text-warning",
+      Icon: ArrowUpRight,
+      title: "Oportunidade",
+      body: "12 novos termos relevantes não cobertos pelo seu blog.",
+    },
   ];
   return (
     <MockupShell title="Insights semanais" Icon={Lightbulb}>
@@ -450,7 +498,9 @@ export function InsightsMockup() {
                   <it.Icon className={"mr-1 inline h-3.5 w-3.5 " + it.tone} />
                   {it.title}
                 </p>
-                <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">{it.body}</p>
+                <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">
+                  {it.body}
+                </p>
               </div>
               <span className="shrink-0 text-[10px] uppercase tracking-wider text-muted-foreground">
                 {it.time}

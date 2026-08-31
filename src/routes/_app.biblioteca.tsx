@@ -44,14 +44,54 @@ type Category = {
 };
 
 const categories: Category[] = [
-  { id: "seo", label: "SEO", icon: Search, cover: "from-primary/40 via-primary/20 to-primary-glow/30" },
-  { id: "google", label: "Google", icon: Chrome, cover: "from-warning/40 via-warning/15 to-primary/20" },
-  { id: "blog", label: "Blog", icon: FileText, cover: "from-primary-glow/40 via-primary/15 to-transparent" },
-  { id: "marketing", label: "Marketing", icon: Megaphone, cover: "from-destructive/35 via-primary/15 to-transparent" },
-  { id: "website", label: "Website", icon: Globe, cover: "from-success/35 via-primary/15 to-transparent" },
-  { id: "performance", label: "Performance", icon: Gauge, cover: "from-primary/40 via-success/15 to-transparent" },
-  { id: "tutorials", label: "Tutoriais", icon: Play, cover: "from-primary-glow/45 via-primary/20 to-transparent" },
-  { id: "downloads", label: "Downloads", icon: Download, cover: "from-primary/40 via-muted/10 to-transparent" },
+  {
+    id: "seo",
+    label: "SEO",
+    icon: Search,
+    cover: "from-primary/40 via-primary/20 to-primary-glow/30",
+  },
+  {
+    id: "google",
+    label: "Google",
+    icon: Chrome,
+    cover: "from-warning/40 via-warning/15 to-primary/20",
+  },
+  {
+    id: "blog",
+    label: "Blog",
+    icon: FileText,
+    cover: "from-primary-glow/40 via-primary/15 to-transparent",
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    icon: Megaphone,
+    cover: "from-destructive/35 via-primary/15 to-transparent",
+  },
+  {
+    id: "website",
+    label: "Website",
+    icon: Globe,
+    cover: "from-success/35 via-primary/15 to-transparent",
+  },
+  {
+    id: "performance",
+    label: "Performance",
+    icon: Gauge,
+    cover: "from-primary/40 via-success/15 to-transparent",
+  },
+  {
+    id: "tutorials",
+    label: "Tutoriais",
+    icon: Play,
+    cover: "from-primary-glow/45 via-primary/20 to-transparent",
+  },
+  {
+    id: "downloads",
+    label: "Downloads",
+    icon: Download,
+    cover: "from-primary/40 via-muted/10 to-transparent",
+  },
 ];
 
 type Article = {
@@ -65,22 +105,150 @@ type Article = {
 };
 
 const articles: Article[] = [
-  { id: "a1", title: "O que é SEO e por que ele importa para o seu site", excerpt: "Entenda o básico do SEO e como aparecer no Google sem depender de anúncios.", category: "seo", readingTime: 6, difficulty: "Iniciante", type: "Artigo" },
-  { id: "a2", title: "Palavras-chave: como escolher as certas para o seu nicho", excerpt: "Um método simples para descobrir o que seu público realmente busca.", category: "seo", readingTime: 9, difficulty: "Intermediário", type: "Guia" },
-  { id: "a3", title: "Configure o Google Search Console em 5 minutos", excerpt: "Passo a passo com prints para conectar seu site e ver suas primeiras métricas.", category: "google", readingTime: 5, difficulty: "Iniciante", type: "Guia" },
-  { id: "a4", title: "Google Meu Negócio: o guia completo para prestadores de serviço", excerpt: "Otimize sua ficha e conquiste os primeiros clientes locais.", category: "google", readingTime: 12, difficulty: "Intermediário", type: "Guia" },
-  { id: "a5", title: "Como escrever um artigo de blog que gera leads", excerpt: "Estrutura testada em mais de 200 artigos publicados no Shippa One.", category: "blog", readingTime: 8, difficulty: "Intermediário", type: "Artigo" },
-  { id: "a6", title: "Checklist do artigo perfeito (SEO + leitura)", excerpt: "20 itens para revisar antes de publicar qualquer texto no seu blog.", category: "blog", readingTime: 4, difficulty: "Iniciante", type: "Download" },
-  { id: "a7", title: "Funil de marketing digital para pequenos negócios", excerpt: "Do primeiro clique ao cliente fiel — como pensar cada etapa.", category: "marketing", readingTime: 11, difficulty: "Avançado", type: "Guia" },
-  { id: "a8", title: "E-mail marketing: por onde começar hoje", excerpt: "Ferramentas, listas, réguas e boas práticas para não cair no spam.", category: "marketing", readingTime: 7, difficulty: "Iniciante", type: "Artigo" },
-  { id: "a9", title: "Anatomia de um site que converte", excerpt: "Os blocos essenciais de uma página de captura de alto desempenho.", category: "website", readingTime: 10, difficulty: "Intermediário", type: "Artigo" },
-  { id: "a10", title: "Domínio próprio: como registrar e apontar corretamente", excerpt: "Guia visual para configurar DNS sem quebrar seu site.", category: "website", readingTime: 6, difficulty: "Iniciante", type: "Guia" },
-  { id: "a11", title: "Core Web Vitals na prática", excerpt: "Entenda LCP, INP e CLS e o que fazer quando eles caem.", category: "performance", readingTime: 9, difficulty: "Avançado", type: "Artigo" },
-  { id: "a12", title: "Como reduzir o tempo de carregamento do seu site", excerpt: "Truques de imagem, cache e fontes que funcionam de verdade.", category: "performance", readingTime: 7, difficulty: "Intermediário", type: "Artigo" },
-  { id: "a13", title: "Tour completo pelo Shippa One", excerpt: "Vídeo em 8 minutos mostrando tudo que você pode fazer no painel.", category: "tutorials", readingTime: 8, difficulty: "Iniciante", type: "Vídeo" },
-  { id: "a14", title: "Publicando seu primeiro artigo no editor Shippa", excerpt: "Do rascunho ao publicado — passo a passo em vídeo.", category: "tutorials", readingTime: 5, difficulty: "Iniciante", type: "Vídeo" },
-  { id: "a15", title: "Kit de templates para redes sociais (PDF)", excerpt: "12 layouts prontos para adaptar à identidade do seu negócio.", category: "downloads", readingTime: 2, difficulty: "Iniciante", type: "Download" },
-  { id: "a16", title: "Planilha: metas de crescimento trimestral", excerpt: "Modelo pronto para acompanhar tráfego, leads e conversões.", category: "downloads", readingTime: 3, difficulty: "Intermediário", type: "Download" },
+  {
+    id: "a1",
+    title: "O que é SEO e por que ele importa para o seu site",
+    excerpt: "Entenda o básico do SEO e como aparecer no Google sem depender de anúncios.",
+    category: "seo",
+    readingTime: 6,
+    difficulty: "Iniciante",
+    type: "Artigo",
+  },
+  {
+    id: "a2",
+    title: "Palavras-chave: como escolher as certas para o seu nicho",
+    excerpt: "Um método simples para descobrir o que seu público realmente busca.",
+    category: "seo",
+    readingTime: 9,
+    difficulty: "Intermediário",
+    type: "Guia",
+  },
+  {
+    id: "a3",
+    title: "Configure o Google Search Console em 5 minutos",
+    excerpt: "Passo a passo com prints para conectar seu site e ver suas primeiras métricas.",
+    category: "google",
+    readingTime: 5,
+    difficulty: "Iniciante",
+    type: "Guia",
+  },
+  {
+    id: "a4",
+    title: "Google Meu Negócio: o guia completo para prestadores de serviço",
+    excerpt: "Otimize sua ficha e conquiste os primeiros clientes locais.",
+    category: "google",
+    readingTime: 12,
+    difficulty: "Intermediário",
+    type: "Guia",
+  },
+  {
+    id: "a5",
+    title: "Como escrever um artigo de blog que gera leads",
+    excerpt: "Estrutura testada em mais de 200 artigos publicados no Shippa One.",
+    category: "blog",
+    readingTime: 8,
+    difficulty: "Intermediário",
+    type: "Artigo",
+  },
+  {
+    id: "a6",
+    title: "Checklist do artigo perfeito (SEO + leitura)",
+    excerpt: "20 itens para revisar antes de publicar qualquer texto no seu blog.",
+    category: "blog",
+    readingTime: 4,
+    difficulty: "Iniciante",
+    type: "Download",
+  },
+  {
+    id: "a7",
+    title: "Funil de marketing digital para pequenos negócios",
+    excerpt: "Do primeiro clique ao cliente fiel — como pensar cada etapa.",
+    category: "marketing",
+    readingTime: 11,
+    difficulty: "Avançado",
+    type: "Guia",
+  },
+  {
+    id: "a8",
+    title: "E-mail marketing: por onde começar hoje",
+    excerpt: "Ferramentas, listas, réguas e boas práticas para não cair no spam.",
+    category: "marketing",
+    readingTime: 7,
+    difficulty: "Iniciante",
+    type: "Artigo",
+  },
+  {
+    id: "a9",
+    title: "Anatomia de um site que converte",
+    excerpt: "Os blocos essenciais de uma página de captura de alto desempenho.",
+    category: "website",
+    readingTime: 10,
+    difficulty: "Intermediário",
+    type: "Artigo",
+  },
+  {
+    id: "a10",
+    title: "Domínio próprio: como registrar e apontar corretamente",
+    excerpt: "Guia visual para configurar DNS sem quebrar seu site.",
+    category: "website",
+    readingTime: 6,
+    difficulty: "Iniciante",
+    type: "Guia",
+  },
+  {
+    id: "a11",
+    title: "Core Web Vitals na prática",
+    excerpt: "Entenda LCP, INP e CLS e o que fazer quando eles caem.",
+    category: "performance",
+    readingTime: 9,
+    difficulty: "Avançado",
+    type: "Artigo",
+  },
+  {
+    id: "a12",
+    title: "Como reduzir o tempo de carregamento do seu site",
+    excerpt: "Truques de imagem, cache e fontes que funcionam de verdade.",
+    category: "performance",
+    readingTime: 7,
+    difficulty: "Intermediário",
+    type: "Artigo",
+  },
+  {
+    id: "a13",
+    title: "Tour completo pelo Shippa One",
+    excerpt: "Vídeo em 8 minutos mostrando tudo que você pode fazer no painel.",
+    category: "tutorials",
+    readingTime: 8,
+    difficulty: "Iniciante",
+    type: "Vídeo",
+  },
+  {
+    id: "a14",
+    title: "Publicando seu primeiro artigo no editor Shippa",
+    excerpt: "Do rascunho ao publicado — passo a passo em vídeo.",
+    category: "tutorials",
+    readingTime: 5,
+    difficulty: "Iniciante",
+    type: "Vídeo",
+  },
+  {
+    id: "a15",
+    title: "Kit de templates para redes sociais (PDF)",
+    excerpt: "12 layouts prontos para adaptar à identidade do seu negócio.",
+    category: "downloads",
+    readingTime: 2,
+    difficulty: "Iniciante",
+    type: "Download",
+  },
+  {
+    id: "a16",
+    title: "Planilha: metas de crescimento trimestral",
+    excerpt: "Modelo pronto para acompanhar tráfego, leads e conversões.",
+    category: "downloads",
+    readingTime: 3,
+    difficulty: "Intermediário",
+    type: "Download",
+  },
 ];
 
 function KnowledgeCenter() {
@@ -92,10 +260,7 @@ function KnowledgeCenter() {
     return articles.filter((a) => {
       if (active !== "all" && a.category !== active) return false;
       if (!q) return true;
-      return (
-        a.title.toLowerCase().includes(q) ||
-        a.excerpt.toLowerCase().includes(q)
-      );
+      return a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q);
     });
   }, [query, active]);
 
@@ -133,7 +298,12 @@ function KnowledgeCenter() {
       <CategoryFilter active={active} onChange={setActive} />
 
       {filtered.length === 0 ? (
-        <EmptyState onClear={() => { setQuery(""); setActive("all"); }} />
+        <EmptyState
+          onClear={() => {
+            setQuery("");
+            setActive("all");
+          }}
+        />
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((a) => (
@@ -215,9 +385,7 @@ function FeaturedCard({ article }: { article: Article }) {
             <h2 className="mt-3 text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
               {article.title}
             </h2>
-            <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-              {article.excerpt}
-            </p>
+            <p className="mt-2 max-w-lg text-sm text-muted-foreground">{article.excerpt}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <MetaChip icon={BookOpen} label={cat.label} />
@@ -299,7 +467,13 @@ function Cover({
       />
       {typeBadge && (
         <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground backdrop-blur">
-          {typeBadge === "Vídeo" ? <Play className="h-3 w-3" /> : typeBadge === "Download" ? <Download className="h-3 w-3" /> : <BookOpen className="h-3 w-3" />}
+          {typeBadge === "Vídeo" ? (
+            <Play className="h-3 w-3" />
+          ) : typeBadge === "Download" ? (
+            <Download className="h-3 w-3" />
+          ) : (
+            <BookOpen className="h-3 w-3" />
+          )}
           {typeBadge}
         </span>
       )}
@@ -339,9 +513,7 @@ function DifficultyBadge({ level }: { level: Difficulty }) {
     >
       <Signal className="h-3 w-3" aria-hidden strokeWidth={2.5} />
       {level}
-      <span className="sr-only">
-        ({cfg.bars} de 3)
-      </span>
+      <span className="sr-only">({cfg.bars} de 3)</span>
     </span>
   );
 }

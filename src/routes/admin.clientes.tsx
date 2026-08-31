@@ -30,13 +30,83 @@ const clients: Array<{
   createdAt: string;
   lastLogin: string;
 }> = [
-  { id: "c1", company: "Clínica Bem-Estar", owner: "Dra. Ana Paula", email: "ana@bemestar.com", phone: "(11) 99999-1234", plan: "Pro", status: "Ativo", createdAt: "12/02/2025", lastLogin: "há 2 h" },
-  { id: "c2", company: "Estúdio Norte", owner: "Marcos Lima", email: "marcos@estudionorte.com", phone: "(21) 98888-2211", plan: "Start", status: "Ativo", createdAt: "03/03/2025", lastLogin: "há 30 min" },
-  { id: "c3", company: "Consultório Aurora", owner: "Dra. Marina", email: "marina@aurora.com", phone: "(11) 97777-1010", plan: "Pro", status: "Ativo", createdAt: "22/01/2025", lastLogin: "há 1 dia" },
-  { id: "c4", company: "Studio Pilates SP", owner: "Camila Ferraz", email: "camila@pilatessp.com", phone: "(11) 96666-3322", plan: "Start", status: "Trial", createdAt: "01/07/2026", lastLogin: "há 15 min" },
-  { id: "c5", company: "Odonto Vida", owner: "Dr. Ricardo", email: "ricardo@odontovida.com", phone: "(31) 95555-4433", plan: "Pro", status: "Suspenso", createdAt: "18/11/2024", lastLogin: "há 12 dias" },
-  { id: "c6", company: "Nutre Bem", owner: "Larissa Souza", email: "larissa@nutrebem.com", phone: "(41) 94444-9988", plan: "Start", status: "Cancelado", createdAt: "05/09/2024", lastLogin: "há 30 dias" },
-  { id: "c7", company: "Espaço Zen", owner: "Beatriz Camargo", email: "bia@espacozen.com", phone: "(11) 93333-5566", plan: "Pro", status: "Ativo", createdAt: "10/05/2025", lastLogin: "há 5 min" },
+  {
+    id: "c1",
+    company: "Clínica Bem-Estar",
+    owner: "Dra. Ana Paula",
+    email: "ana@bemestar.com",
+    phone: "(11) 99999-1234",
+    plan: "Pro",
+    status: "Ativo",
+    createdAt: "12/02/2025",
+    lastLogin: "há 2 h",
+  },
+  {
+    id: "c2",
+    company: "Estúdio Norte",
+    owner: "Marcos Lima",
+    email: "marcos@estudionorte.com",
+    phone: "(21) 98888-2211",
+    plan: "Start",
+    status: "Ativo",
+    createdAt: "03/03/2025",
+    lastLogin: "há 30 min",
+  },
+  {
+    id: "c3",
+    company: "Consultório Aurora",
+    owner: "Dra. Marina",
+    email: "marina@aurora.com",
+    phone: "(11) 97777-1010",
+    plan: "Pro",
+    status: "Ativo",
+    createdAt: "22/01/2025",
+    lastLogin: "há 1 dia",
+  },
+  {
+    id: "c4",
+    company: "Studio Pilates SP",
+    owner: "Camila Ferraz",
+    email: "camila@pilatessp.com",
+    phone: "(11) 96666-3322",
+    plan: "Start",
+    status: "Trial",
+    createdAt: "01/07/2026",
+    lastLogin: "há 15 min",
+  },
+  {
+    id: "c5",
+    company: "Odonto Vida",
+    owner: "Dr. Ricardo",
+    email: "ricardo@odontovida.com",
+    phone: "(31) 95555-4433",
+    plan: "Pro",
+    status: "Suspenso",
+    createdAt: "18/11/2024",
+    lastLogin: "há 12 dias",
+  },
+  {
+    id: "c6",
+    company: "Nutre Bem",
+    owner: "Larissa Souza",
+    email: "larissa@nutrebem.com",
+    phone: "(41) 94444-9988",
+    plan: "Start",
+    status: "Cancelado",
+    createdAt: "05/09/2024",
+    lastLogin: "há 30 dias",
+  },
+  {
+    id: "c7",
+    company: "Espaço Zen",
+    owner: "Beatriz Camargo",
+    email: "bia@espacozen.com",
+    phone: "(11) 93333-5566",
+    plan: "Pro",
+    status: "Ativo",
+    createdAt: "10/05/2025",
+    lastLogin: "há 5 min",
+  },
 ];
 
 const statusStyles: Record<Status, string> = {
@@ -55,7 +125,7 @@ function ClientsPage() {
       (statusFilter === "Todos" || c.status === statusFilter) &&
       (c.company.toLowerCase().includes(query.toLowerCase()) ||
         c.owner.toLowerCase().includes(query.toLowerCase()) ||
-        c.email.toLowerCase().includes(query.toLowerCase()))
+        c.email.toLowerCase().includes(query.toLowerCase())),
   );
 
   return (

@@ -10,16 +10,66 @@ export const Route = createFileRoute("/admin/logs")({
 type Level = "info" | "warn" | "error";
 
 const logs: Array<{ time: string; level: Level; service: string; message: string }> = [
-  { time: "23:42:11", level: "info", service: "auth", message: "Login bem sucedido para ana@bemestar.com" },
-  { time: "23:41:58", level: "info", service: "billing", message: "Renovação processada · Consultório Aurora · R$ 349" },
-  { time: "23:40:22", level: "warn", service: "storage", message: "Capacidade do bucket 'media' em 78%" },
-  { time: "23:38:04", level: "error", service: "api", message: "POST /articles → 500 (timeout de 8s)" },
-  { time: "23:37:11", level: "info", service: "flags", message: "Flag 'ai_seo' ativada para plano Pro" },
-  { time: "23:35:47", level: "info", service: "webhook", message: "Stripe webhook processado (invoice.paid)" },
-  { time: "23:32:03", level: "warn", service: "api", message: "Rate limit próximo do teto para tenant c3" },
-  { time: "23:30:15", level: "info", service: "auth", message: "Redefinição de senha enviada para larissa@nutrebem.com" },
-  { time: "23:28:41", level: "error", service: "email", message: "Falha ao enviar campanha (SES throttle)" },
-  { time: "23:22:18", level: "info", service: "deploy", message: "Deploy production concluído · sha 8c2f1a" },
+  {
+    time: "23:42:11",
+    level: "info",
+    service: "auth",
+    message: "Login bem sucedido para ana@bemestar.com",
+  },
+  {
+    time: "23:41:58",
+    level: "info",
+    service: "billing",
+    message: "Renovação processada · Consultório Aurora · R$ 349",
+  },
+  {
+    time: "23:40:22",
+    level: "warn",
+    service: "storage",
+    message: "Capacidade do bucket 'media' em 78%",
+  },
+  {
+    time: "23:38:04",
+    level: "error",
+    service: "api",
+    message: "POST /articles → 500 (timeout de 8s)",
+  },
+  {
+    time: "23:37:11",
+    level: "info",
+    service: "flags",
+    message: "Flag 'ai_seo' ativada para plano Pro",
+  },
+  {
+    time: "23:35:47",
+    level: "info",
+    service: "webhook",
+    message: "Stripe webhook processado (invoice.paid)",
+  },
+  {
+    time: "23:32:03",
+    level: "warn",
+    service: "api",
+    message: "Rate limit próximo do teto para tenant c3",
+  },
+  {
+    time: "23:30:15",
+    level: "info",
+    service: "auth",
+    message: "Redefinição de senha enviada para larissa@nutrebem.com",
+  },
+  {
+    time: "23:28:41",
+    level: "error",
+    service: "email",
+    message: "Falha ao enviar campanha (SES throttle)",
+  },
+  {
+    time: "23:22:18",
+    level: "info",
+    service: "deploy",
+    message: "Deploy production concluído · sha 8c2f1a",
+  },
 ];
 
 const levelStyles: Record<Level, string> = {
@@ -36,7 +86,7 @@ function LogsPage() {
     (l) =>
       (level === "all" || l.level === level) &&
       (l.message.toLowerCase().includes(query.toLowerCase()) ||
-        l.service.toLowerCase().includes(query.toLowerCase()))
+        l.service.toLowerCase().includes(query.toLowerCase())),
   );
 
   return (

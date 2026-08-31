@@ -7,12 +7,60 @@ export const Route = createFileRoute("/admin/assinaturas")({
 });
 
 const subs = [
-  { id: "s1", company: "Clínica Bem-Estar", plan: "Pro", value: "R$ 349", status: "Ativa", next: "15/08/2026", method: "Cartão · 4242" },
-  { id: "s2", company: "Estúdio Norte", plan: "Start", value: "R$ 149", status: "Ativa", next: "22/07/2026", method: "Pix recorrente" },
-  { id: "s3", company: "Consultório Aurora", plan: "Pro", value: "R$ 349", status: "Ativa", next: "01/08/2026", method: "Cartão · 1122" },
-  { id: "s4", company: "Studio Pilates SP", plan: "Start", value: "R$ 0", status: "Trial", next: "18/07/2026", method: "—" },
-  { id: "s5", company: "Odonto Vida", plan: "Pro", value: "R$ 349", status: "Inadimplente", next: "05/07/2026", method: "Cartão · 9900" },
-  { id: "s6", company: "Nutre Bem", plan: "Start", value: "R$ 149", status: "Cancelada", next: "—", method: "—" },
+  {
+    id: "s1",
+    company: "Clínica Bem-Estar",
+    plan: "Pro",
+    value: "R$ 349",
+    status: "Ativa",
+    next: "15/08/2026",
+    method: "Cartão · 4242",
+  },
+  {
+    id: "s2",
+    company: "Estúdio Norte",
+    plan: "Start",
+    value: "R$ 149",
+    status: "Ativa",
+    next: "22/07/2026",
+    method: "Pix recorrente",
+  },
+  {
+    id: "s3",
+    company: "Consultório Aurora",
+    plan: "Pro",
+    value: "R$ 349",
+    status: "Ativa",
+    next: "01/08/2026",
+    method: "Cartão · 1122",
+  },
+  {
+    id: "s4",
+    company: "Studio Pilates SP",
+    plan: "Start",
+    value: "R$ 0",
+    status: "Trial",
+    next: "18/07/2026",
+    method: "—",
+  },
+  {
+    id: "s5",
+    company: "Odonto Vida",
+    plan: "Pro",
+    value: "R$ 349",
+    status: "Inadimplente",
+    next: "05/07/2026",
+    method: "Cartão · 9900",
+  },
+  {
+    id: "s6",
+    company: "Nutre Bem",
+    plan: "Start",
+    value: "R$ 149",
+    status: "Cancelada",
+    next: "—",
+    method: "—",
+  },
 ];
 
 const kpis = [

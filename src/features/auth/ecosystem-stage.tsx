@@ -11,10 +11,46 @@ const NODES = [
 
 /** Metric fragments live only in the upper/middle graphic zone. */
 const CARDS = [
-  { label: "Visitantes hoje", value: "1.248", top: "4%", left: "2%", delay: 700, fx: "8px", fy: "-12px", tier: "always" },
-  { label: "Shippa Index", value: "SEO 92", top: "14%", right: "1%", delay: 850, fx: "-10px", fy: "10px", tier: "always" },
-  { label: "Novos contatos", value: "18", bottom: "12%", left: "0%", delay: 1000, fx: "6px", fy: "12px", tier: "wide" },
-  { label: "Search Console", value: "Google", bottom: "18%", right: "2%", delay: 1150, fx: "-8px", fy: "-8px", tier: "wide" },
+  {
+    label: "Visitantes hoje",
+    value: "1.248",
+    top: "4%",
+    left: "2%",
+    delay: 700,
+    fx: "8px",
+    fy: "-12px",
+    tier: "always",
+  },
+  {
+    label: "Shippa Index",
+    value: "SEO 92",
+    top: "14%",
+    right: "1%",
+    delay: 850,
+    fx: "-10px",
+    fy: "10px",
+    tier: "always",
+  },
+  {
+    label: "Novos contatos",
+    value: "18",
+    bottom: "12%",
+    left: "0%",
+    delay: 1000,
+    fx: "6px",
+    fy: "12px",
+    tier: "wide",
+  },
+  {
+    label: "Search Console",
+    value: "Google",
+    bottom: "18%",
+    right: "2%",
+    delay: 1150,
+    fx: "-8px",
+    fy: "-8px",
+    tier: "wide",
+  },
 ] as const;
 
 const STATUS = [
@@ -31,7 +67,10 @@ export function EcosystemStage() {
 
       {/* layers 3–6: core + orbit */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="auth-enter relative aspect-square w-[min(74%,440px)]" style={{ animationDelay: "300ms" }}>
+        <div
+          className="auth-enter relative aspect-square w-[min(74%,440px)]"
+          style={{ animationDelay: "300ms" }}
+        >
           <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full">
             <defs>
               <radialGradient id="shippa-core" cx="50%" cy="50%">
@@ -76,7 +115,13 @@ export function EcosystemStage() {
             })}
             <circle cx="200" cy="200" r="96" fill="url(#shippa-core)" className="auth-breathe" />
             <circle cx="200" cy="200" r="26" fill="var(--color-primary)" fillOpacity="0.25" />
-            <circle cx="200" cy="200" r="9" fill="var(--color-primary-glow)" className="auth-breathe" />
+            <circle
+              cx="200"
+              cy="200"
+              r="9"
+              fill="var(--color-primary-glow)"
+              className="auth-breathe"
+            />
           </svg>
 
           {/* orbiting module nodes */}
@@ -128,7 +173,11 @@ export function EcosystemStage() {
         >
           <div
             className="auth-float rounded-xl border border-border bg-surface/55 px-3.5 py-2.5 shadow-elegant backdrop-blur-md"
-            style={{ ["--auth-fx" as string]: c.fx, ["--auth-fy" as string]: c.fy, animationDelay: `${c.delay}ms` }}
+            style={{
+              ["--auth-fx" as string]: c.fx,
+              ["--auth-fy" as string]: c.fy,
+              animationDelay: `${c.delay}ms`,
+            }}
           >
             <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
               {c.label}

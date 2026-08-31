@@ -128,16 +128,14 @@ export const articles: Article[] = [
     id: "art_05",
     title: "Reforma trabalhista 5 anos depois: o que mudou",
     slug: "reforma-trabalhista-5-anos",
-    excerpt:
-      "Uma análise dos principais impactos da reforma sobre empregadores e empregados.",
+    excerpt: "Uma análise dos principais impactos da reforma sobre empregadores e empregados.",
     content: "<p>Conteúdo em desenvolvimento…</p>",
     category: "Trabalhista",
     tags: ["CLT", "trabalho"],
     status: "scheduled",
     cover: covers[4],
     metaTitle: "Reforma trabalhista 5 anos depois",
-    metaDescription:
-      "Balanço dos efeitos da reforma trabalhista sobre empresas e trabalhadores.",
+    metaDescription: "Balanço dos efeitos da reforma trabalhista sobre empresas e trabalhadores.",
     seoScore: 88,
     views: 0,
     publishedAt: "—",

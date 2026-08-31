@@ -96,6 +96,7 @@ function BlogListPage() {
         actions={
           <Link
             to="/blog/editor"
+            search={{ id: "" }}
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-elegant transition hover:opacity-90"
           >
             <Plus className="h-4 w-4" aria-hidden /> Novo artigo
@@ -185,9 +186,7 @@ function BlogListPage() {
               key={a.id}
               article={a}
               menuOpen={menuOpen === a.id}
-              onToggleMenu={() =>
-                setMenuOpen((cur) => (cur === a.id ? null : a.id))
-              }
+              onToggleMenu={() => setMenuOpen((cur) => (cur === a.id ? null : a.id))}
               onDuplicate={() => duplicate(a.id)}
               onDelete={() => remove(a.id)}
             />
@@ -220,7 +219,9 @@ function StatCard({
         <Icon className="h-4 w-4" aria-hidden />
       </div>
       <div className="min-w-0">
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
+        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          {label}
+        </p>
         <p className="text-xl font-semibold tabular-nums text-foreground">{value}</p>
       </div>
     </div>
@@ -246,23 +247,23 @@ function ArticleCard({
     st.tone === "success"
       ? "bg-success/15 text-success"
       : st.tone === "warning"
-      ? "bg-warning/15 text-warning"
-      : "bg-accent text-muted-foreground";
+        ? "bg-warning/15 text-warning"
+        : "bg-accent text-muted-foreground";
   const seoClass =
     seo === "success"
       ? "bg-success/15 text-success"
       : seo === "warning"
-      ? "bg-warning/15 text-warning"
-      : "bg-destructive/15 text-destructive";
+        ? "bg-warning/15 text-warning"
+        : "bg-destructive/15 text-destructive";
 
   return (
     <article className="card-elevated group flex flex-col overflow-hidden transition hover:-translate-y-0.5 hover:border-primary/30">
       <div className="relative h-40 overflow-hidden" style={{ background: a.cover }}>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" aria-hidden />
-        <ImageIcon
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"
           aria-hidden
-          className="absolute right-4 top-4 h-4 w-4 text-white/70"
         />
+        <ImageIcon aria-hidden className="absolute right-4 top-4 h-4 w-4 text-white/70" />
         <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur">
           {a.category}
         </span>
@@ -275,7 +276,11 @@ function ArticleCard({
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
           <span className={"rounded-full px-2 py-0.5 font-medium " + statusClass}>{st.label}</span>
-          <span className={"inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-medium " + seoClass}>
+          <span
+            className={
+              "inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-medium " + seoClass
+            }
+          >
             <Sparkles className="h-3 w-3" aria-hidden /> SEO {a.seoScore}
           </span>
           <span className="ml-auto inline-flex items-center gap-1 text-muted-foreground">
@@ -292,8 +297,8 @@ function ArticleCard({
             {a.status === "scheduled" && a.scheduledFor
               ? `Agendado · ${formatDate(a.scheduledFor)}`
               : a.status === "published"
-              ? `Publicado · ${formatDate(a.publishedAt)}`
-              : `Editado · ${formatDate(a.updatedAt)}`}
+                ? `Publicado · ${formatDate(a.publishedAt)}`
+                : `Editado · ${formatDate(a.updatedAt)}`}
           </span>
           <div className="relative flex items-center gap-1">
             <Link
@@ -355,6 +360,7 @@ function EmptyState() {
       </div>
       <Link
         to="/blog/editor"
+        search={{ id: "" }}
         className="mt-2 inline-flex items-center gap-2 rounded-lg bg-gradient-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-elegant"
       >
         <Plus className="h-3.5 w-3.5" aria-hidden /> Novo artigo

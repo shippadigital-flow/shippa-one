@@ -7,14 +7,53 @@ export const Route = createFileRoute("/admin/modulos")({
   component: ModulesPage,
 });
 
-const modules = ["Blog", "Leads", "Analytics", "SEO", "Google", "Integrações", "Flow", "Biblioteca"];
+const modules = [
+  "Blog",
+  "Leads",
+  "Analytics",
+  "SEO",
+  "Google",
+  "Integrações",
+  "Flow",
+  "Biblioteca",
+];
 const clients = [
-  { id: "c1", name: "Clínica Bem-Estar", plan: "Pro", enabled: [true, true, true, true, true, false, false, true] },
-  { id: "c2", name: "Estúdio Norte", plan: "Start", enabled: [true, true, true, false, false, false, false, true] },
-  { id: "c3", name: "Consultório Aurora", plan: "Pro", enabled: [true, true, true, true, true, true, false, true] },
-  { id: "c4", name: "Studio Pilates SP", plan: "Start", enabled: [true, true, false, false, false, false, false, true] },
-  { id: "c5", name: "Espaço Zen", plan: "Pro", enabled: [true, true, true, true, false, false, true, true] },
-  { id: "c6", name: "Odonto Vida", plan: "Pro", enabled: [true, true, true, true, true, true, false, true] },
+  {
+    id: "c1",
+    name: "Clínica Bem-Estar",
+    plan: "Pro",
+    enabled: [true, true, true, true, true, false, false, true],
+  },
+  {
+    id: "c2",
+    name: "Estúdio Norte",
+    plan: "Start",
+    enabled: [true, true, true, false, false, false, false, true],
+  },
+  {
+    id: "c3",
+    name: "Consultório Aurora",
+    plan: "Pro",
+    enabled: [true, true, true, true, true, true, false, true],
+  },
+  {
+    id: "c4",
+    name: "Studio Pilates SP",
+    plan: "Start",
+    enabled: [true, true, false, false, false, false, false, true],
+  },
+  {
+    id: "c5",
+    name: "Espaço Zen",
+    plan: "Pro",
+    enabled: [true, true, true, true, false, false, true, true],
+  },
+  {
+    id: "c6",
+    name: "Odonto Vida",
+    plan: "Pro",
+    enabled: [true, true, true, true, true, true, false, true],
+  },
 ];
 
 function ModulesPage() {

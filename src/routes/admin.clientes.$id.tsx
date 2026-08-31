@@ -45,9 +45,7 @@ function ClientProfile() {
               <p className="text-[11px] font-semibold uppercase tracking-widest text-primary-glow">
                 Cliente #{id}
               </p>
-              <h1 className="mt-1 text-2xl font-semibold text-foreground">
-                Clínica Bem-Estar
-              </h1>
+              <h1 className="mt-1 text-2xl font-semibold text-foreground">Clínica Bem-Estar</h1>
               <p className="mt-1 text-sm text-muted-foreground">
                 Cadastrada em 12/02/2025 · Último acesso há 2 horas
               </p>
