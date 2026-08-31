@@ -96,6 +96,7 @@ function BlogListPage() {
         actions={
           <Link
             to="/blog/editor"
+            search={{ id: "" }}
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-elegant transition hover:opacity-90"
           >
             <Plus className="h-4 w-4" aria-hidden /> Novo artigo
@@ -355,6 +356,7 @@ function EmptyState() {
       </div>
       <Link
         to="/blog/editor"
+        search={{ id: "" }}
         className="mt-2 inline-flex items-center gap-2 rounded-lg bg-gradient-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-elegant"
       >
         <Plus className="h-3.5 w-3.5" aria-hidden /> Novo artigo
