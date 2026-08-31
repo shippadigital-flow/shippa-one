@@ -716,7 +716,7 @@ function PreviewPane({ draft, html }: { draft: Draft; html: string }) {
       <div className="my-6 h-px bg-border/60" />
       <div
         className="tiptap prose-invert max-w-none text-[15px] leading-relaxed text-foreground"
-        // eslint-disable-next-line react/no-danger
+        
         dangerouslySetInnerHTML={{ __html: html || "<p></p>" }}
       />
       {draft.tags.length > 0 && (
