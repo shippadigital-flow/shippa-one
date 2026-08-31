@@ -77,7 +77,9 @@ function ExperiencePanel() {
       <header className="auth-enter relative z-10 flex items-center gap-2.5 px-11 pt-11">
         <ShippaMark className="h-9 w-9" />
         <div className="flex flex-col leading-tight">
-          <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">Shippa</span>
+          <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">
+            Shippa
+          </span>
           <span className="text-[11px] font-medium text-muted-foreground">One</span>
         </div>
       </header>
@@ -108,8 +110,8 @@ function ExperiencePanel() {
           className="auth-enter mt-6 max-w-[510px] text-muted-foreground"
           style={{ animationDelay: "1050ms", fontSize: "16px", lineHeight: 1.6 }}
         >
-          O Shippa One reúne site, conteúdo, SEO, métricas e presença digital em uma
-          experiência simples, inteligente e feita para você entender o que realmente importa.
+          O Shippa One reúne site, conteúdo, SEO, métricas e presença digital em uma experiência
+          simples, inteligente e feita para você entender o que realmente importa.
         </p>
         <p
           className="auth-enter mt-7 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-glow"
@@ -144,7 +146,10 @@ function LoginPanel() {
           <ForgotView onBack={() => setView("signin")} />
         )}
 
-        <p className="auth-enter mt-10 flex items-center justify-center gap-1.5 text-xs text-muted-foreground" style={{ animationDelay: "700ms" }}>
+        <p
+          className="auth-enter mt-10 flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
+          style={{ animationDelay: "700ms" }}
+        >
           <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
           Acesso seguro e protegido.
         </p>
@@ -156,7 +161,10 @@ function LoginPanel() {
 /** Compact abstract backdrop for mobile, where the full stage is hidden. */
 function MobileBackdrop() {
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 h-56 overflow-hidden lg:hidden" aria-hidden="true">
+    <div
+      className="pointer-events-none absolute inset-x-0 top-0 h-56 overflow-hidden lg:hidden"
+      aria-hidden="true"
+    >
       <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       <svg viewBox="0 0 400 200" className="h-full w-full opacity-40">
         {[70, 110, 150].map((r, i) => (
@@ -171,7 +179,15 @@ function MobileBackdrop() {
           />
         ))}
         <circle cx="200" cy="40" r="6" fill="var(--color-primary)" className="auth-breathe" />
-        <circle cx="200" cy="40" r="110" fill="none" stroke="var(--color-primary)" strokeOpacity="0.5" className="auth-dash" />
+        <circle
+          cx="200"
+          cy="40"
+          r="110"
+          fill="none"
+          stroke="var(--color-primary)"
+          strokeOpacity="0.5"
+          className="auth-dash"
+        />
       </svg>
     </div>
   );
@@ -306,7 +322,10 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
         </button>
       </form>
 
-      <p className="auth-enter mt-7 text-center text-xs text-muted-foreground" style={{ animationDelay: "420ms" }}>
+      <p
+        className="auth-enter mt-7 text-center text-xs text-muted-foreground"
+        style={{ animationDelay: "420ms" }}
+      >
         Ainda não tem acesso?{" "}
         <a
           href="mailto:contato@shippa.com.br"

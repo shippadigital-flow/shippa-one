@@ -29,7 +29,12 @@ type Status = "ok" | "warning" | "danger";
 const statusStyles: Record<Status, { dot: string; text: string; bg: string; label: string }> = {
   ok: { dot: "bg-success", text: "text-success", bg: "bg-success/10", label: "Ativo" },
   warning: { dot: "bg-warning", text: "text-warning", bg: "bg-warning/10", label: "Atenção" },
-  danger: { dot: "bg-destructive", text: "text-destructive", bg: "bg-destructive/10", label: "Crítico" },
+  danger: {
+    dot: "bg-destructive",
+    text: "text-destructive",
+    bg: "bg-destructive/10",
+    label: "Crítico",
+  },
 };
 
 function SitePage() {
@@ -71,10 +76,7 @@ function SitePage() {
 
 function OverviewBanner() {
   return (
-    <section
-      aria-label="Resumo do site"
-      className="card-elevated relative overflow-hidden p-6"
-    >
+    <section aria-label="Resumo do site" className="card-elevated relative overflow-hidden p-6">
       <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/15 blur-3xl" />
       <div className="relative flex flex-wrap items-center justify-between gap-6">
         <div className="flex items-center gap-4">
@@ -110,8 +112,12 @@ function OverviewBanner() {
 function MiniStat({ label, value, tone }: { label: string; value: string; tone: Status }) {
   return (
     <div className="min-w-0">
-      <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
-      <p className={"mt-1 text-lg font-semibold tabular-nums " + statusStyles[tone].text}>{value}</p>
+      <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+        {label}
+      </p>
+      <p className={"mt-1 text-lg font-semibold tabular-nums " + statusStyles[tone].text}>
+        {value}
+      </p>
     </div>
   );
 }
@@ -143,9 +149,7 @@ function InfoCard({
           </div>
           <div className="min-w-0">
             <h2 className="text-base font-semibold tracking-tight text-foreground">{title}</h2>
-            {description && (
-              <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
-            )}
+            {description && <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>}
           </div>
         </div>
         <span
@@ -200,13 +204,7 @@ function Row({
   );
 }
 
-function GhostButton({
-  children,
-  icon: Icon,
-}: {
-  children: React.ReactNode;
-  icon?: LucideIcon;
-}) {
+function GhostButton({ children, icon: Icon }: { children: React.ReactNode; icon?: LucideIcon }) {
   return (
     <button
       type="button"
@@ -339,7 +337,9 @@ function ProtectionRow({
   const s = statusStyles[tone];
   return (
     <div className="flex items-start gap-3 rounded-lg border border-border/50 bg-surface px-3 py-2.5">
-      <div className={"mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md " + s.bg}>
+      <div
+        className={"mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md " + s.bg}
+      >
         <Icon className={"h-3.5 w-3.5 " + s.text} aria-hidden />
       </div>
       <div className="min-w-0">
@@ -382,9 +382,20 @@ function ScoreDial({ label, value, tone }: { label: string; value: number; tone:
   const stroke = `${(value / 100) * 100}, 100`;
   return (
     <div className="flex items-center gap-3 rounded-lg border border-border/50 bg-surface p-3">
-      <div className="relative h-14 w-14 shrink-0" role="img" aria-label={`${label}: ${value} de 100`}>
+      <div
+        className="relative h-14 w-14 shrink-0"
+        role="img"
+        aria-label={`${label}: ${value} de 100`}
+      >
         <svg viewBox="0 0 36 36" className="h-14 w-14 -rotate-90">
-          <circle cx="18" cy="18" r="15.915" fill="none" className="stroke-border/60" strokeWidth="3" />
+          <circle
+            cx="18"
+            cy="18"
+            r="15.915"
+            fill="none"
+            className="stroke-border/60"
+            strokeWidth="3"
+          />
           <circle
             cx="18"
             cy="18"
@@ -397,12 +408,18 @@ function ScoreDial({ label, value, tone }: { label: string; value: number; tone:
             strokeDasharray={stroke}
           />
         </svg>
-        <span className={"absolute inset-0 flex items-center justify-center text-sm font-semibold " + s.text}>
+        <span
+          className={
+            "absolute inset-0 flex items-center justify-center text-sm font-semibold " + s.text
+          }
+        >
           {value}
         </span>
       </div>
       <div className="min-w-0">
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
+        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          {label}
+        </p>
         <p className="text-sm font-medium text-foreground">
           {value >= 90 ? "Excelente" : value >= 70 ? "Bom" : "A melhorar"}
         </p>

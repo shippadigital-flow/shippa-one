@@ -31,10 +31,16 @@ const kpis = [
 ];
 
 const growth = [
-  32, 41, 38, 52, 48, 61, 58, 72, 68, 84, 79, 96, 92, 108, 118, 124, 132, 141, 138, 152, 168, 172, 181, 194, 202, 218, 226, 241, 254, 268,
+  32, 41, 38, 52, 48, 61, 58, 72, 68, 84, 79, 96, 92, 108, 118, 124, 132, 141, 138, 152, 168, 172,
+  181, 194, 202, 218, 226, 241, 254, 268,
 ];
 
-const sources: { name: string; visitors: number; share: number; icon: ComponentType<SVGProps<SVGSVGElement>> }[] = [
+const sources: {
+  name: string;
+  visitors: number;
+  share: number;
+  icon: ComponentType<SVGProps<SVGSVGElement>>;
+}[] = [
   { name: "Google Search", visitors: 1842, share: 43, icon: Search },
   { name: "Direto", visitors: 986, share: 23, icon: Link2 },
   { name: "Instagram", visitors: 742, share: 17, icon: Instagram },
@@ -59,9 +65,19 @@ const countries = [
 const topPages = [
   { path: "/", label: "Página inicial", views: 2184, time: "1m 48s" },
   { path: "/servicos", label: "Serviços", views: 1247, time: "2m 12s" },
-  { path: "/blog/seo-para-pequenas-empresas", label: "Guia de SEO para PMEs", views: 892, time: "4m 06s" },
+  {
+    path: "/blog/seo-para-pequenas-empresas",
+    label: "Guia de SEO para PMEs",
+    views: 892,
+    time: "4m 06s",
+  },
   { path: "/contato", label: "Contato", views: 641, time: "1m 22s" },
-  { path: "/blog/checklist-site-2026", label: "Checklist de site 2026", views: 528, time: "3m 41s" },
+  {
+    path: "/blog/checklist-site-2026",
+    label: "Checklist de site 2026",
+    views: 528,
+    time: "3m 41s",
+  },
 ];
 
 function AnalyticsPreview() {
@@ -80,20 +96,13 @@ function AnalyticsPreview() {
         className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
       >
         {kpis.map((k) => (
-          <div
-            key={k.label}
-            className="rounded-2xl border border-border/60 bg-card p-4"
-          >
+          <div key={k.label} className="rounded-2xl border border-border/60 bg-card p-4">
             <div className="flex items-center justify-between">
               <span className="text-xs text-muted-foreground">{k.label}</span>
               <k.icon className="size-4 text-muted-foreground" aria-hidden />
             </div>
-            <div className="mt-2 text-2xl font-semibold tracking-tight">
-              {k.value}
-            </div>
-            <div className="mt-1 text-xs font-medium text-success">
-              {k.delta} vs. mês anterior
-            </div>
+            <div className="mt-2 text-2xl font-semibold tracking-tight">{k.value}</div>
+            <div className="mt-1 text-xs font-medium text-success">{k.delta} vs. mês anterior</div>
           </div>
         ))}
       </section>
@@ -170,14 +179,9 @@ function AnalyticsPreview() {
           <p className="text-xs text-muted-foreground">Como acessam seu site</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {devices.map((d) => (
-              <div
-                key={d.name}
-                className="rounded-xl border border-border/60 bg-surface p-4"
-              >
+              <div key={d.name} className="rounded-xl border border-border/60 bg-surface p-4">
                 <d.icon className="size-5 text-primary" aria-hidden />
-                <div className="mt-3 text-2xl font-semibold tabular-nums">
-                  {d.value}%
-                </div>
+                <div className="mt-3 text-2xl font-semibold tabular-nums">{d.value}%</div>
                 <div className="text-xs text-muted-foreground">{d.name}</div>
               </div>
             ))}
@@ -201,14 +205,14 @@ function AnalyticsPreview() {
           <ul className="mt-4 space-y-3">
             {countries.map((c) => (
               <li key={c.name} className="flex items-center gap-3 text-sm">
-                <span className="text-lg" aria-hidden>{c.flag}</span>
+                <span className="text-lg" aria-hidden>
+                  {c.flag}
+                </span>
                 <span className="flex-1 truncate">{c.name}</span>
                 <span className="tabular-nums text-muted-foreground">
                   {c.visitors.toLocaleString("pt-BR")}
                 </span>
-                <span className="w-10 text-right text-xs text-muted-foreground">
-                  {c.share}%
-                </span>
+                <span className="w-10 text-right text-xs text-muted-foreground">{c.share}%</span>
               </li>
             ))}
           </ul>
@@ -237,9 +241,7 @@ function AnalyticsPreview() {
                   <tr key={p.path} className="border-t border-border/60">
                     <td className="px-3 py-2.5">
                       <div className="font-medium">{p.label}</div>
-                      <div className="truncate text-xs text-muted-foreground">
-                        {p.path}
-                      </div>
+                      <div className="truncate text-xs text-muted-foreground">{p.path}</div>
                     </td>
                     <td className="px-3 py-2.5 text-right tabular-nums">
                       {p.views.toLocaleString("pt-BR")}
@@ -272,8 +274,8 @@ function AnalyticsPreview() {
             Desbloqueie todos os recursos de Analytics com Shippa One Pro.
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Dados reais do seu site em tempo real, relatórios semanais no e-mail,
-            metas de conversão e recomendações práticas geradas para você.
+            Dados reais do seu site em tempo real, relatórios semanais no e-mail, metas de conversão
+            e recomendações práticas geradas para você.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Button asChild size="lg">

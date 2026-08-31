@@ -80,13 +80,15 @@ function AdminDashboard() {
                   (k.up ? "text-success" : "text-destructive")
                 }
               >
-                {k.up ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
+                {k.up ? (
+                  <ArrowUpRight className="h-3 w-3" />
+                ) : (
+                  <ArrowDownRight className="h-3 w-3" />
+                )}
                 {k.delta}
               </span>
             </div>
-            <p className="mt-4 text-2xl font-semibold tracking-tight text-foreground">
-              {k.value}
-            </p>
+            <p className="mt-4 text-2xl font-semibold tracking-tight text-foreground">{k.value}</p>
             <p className="mt-1 text-xs text-muted-foreground">{k.label}</p>
           </div>
         ))}
@@ -96,9 +98,7 @@ function AdminDashboard() {
         <div className="card-elevated p-6 lg:col-span-2">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold text-foreground">
-                Crescimento de clientes
-              </h3>
+              <h3 className="text-base font-semibold text-foreground">Crescimento de clientes</h3>
               <p className="text-xs text-muted-foreground">Últimos 12 meses</p>
             </div>
             <span className="text-xs font-medium text-success">+312 líquidos</span>

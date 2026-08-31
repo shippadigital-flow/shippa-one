@@ -8,12 +8,60 @@ export const Route = createFileRoute("/admin/flags")({
 });
 
 const initialFlags = [
-  { key: "flow_beta", name: "Flow Beta", desc: "Libera módulo Shippa Flow em beta fechado.", scope: "Segmentado", audience: "12 clientes", on: true, env: "prod" },
-  { key: "new_editor", name: "Editor de blog v2", desc: "Novo editor com blocos e IA.", scope: "Global", audience: "Todos", on: true, env: "prod" },
-  { key: "ai_seo", name: "SEO com IA", desc: "Sugestões de meta e conteúdo automáticas.", scope: "Segmentado", audience: "Pro", on: false, env: "prod" },
-  { key: "leads_kanban", name: "Kanban de leads", desc: "Visualização em kanban.", scope: "Global", audience: "Todos", on: true, env: "prod" },
-  { key: "billing_v2", name: "Cobrança v2", desc: "Novo motor de billing.", scope: "Interno", audience: "Shippa staff", on: true, env: "staging" },
-  { key: "dark_mode_v3", name: "Tema v3", desc: "Nova paleta com contraste refinado.", scope: "Interno", audience: "5 usuários", on: false, env: "dev" },
+  {
+    key: "flow_beta",
+    name: "Flow Beta",
+    desc: "Libera módulo Shippa Flow em beta fechado.",
+    scope: "Segmentado",
+    audience: "12 clientes",
+    on: true,
+    env: "prod",
+  },
+  {
+    key: "new_editor",
+    name: "Editor de blog v2",
+    desc: "Novo editor com blocos e IA.",
+    scope: "Global",
+    audience: "Todos",
+    on: true,
+    env: "prod",
+  },
+  {
+    key: "ai_seo",
+    name: "SEO com IA",
+    desc: "Sugestões de meta e conteúdo automáticas.",
+    scope: "Segmentado",
+    audience: "Pro",
+    on: false,
+    env: "prod",
+  },
+  {
+    key: "leads_kanban",
+    name: "Kanban de leads",
+    desc: "Visualização em kanban.",
+    scope: "Global",
+    audience: "Todos",
+    on: true,
+    env: "prod",
+  },
+  {
+    key: "billing_v2",
+    name: "Cobrança v2",
+    desc: "Novo motor de billing.",
+    scope: "Interno",
+    audience: "Shippa staff",
+    on: true,
+    env: "staging",
+  },
+  {
+    key: "dark_mode_v3",
+    name: "Tema v3",
+    desc: "Nova paleta com contraste refinado.",
+    scope: "Interno",
+    audience: "5 usuários",
+    on: false,
+    env: "dev",
+  },
 ];
 
 function FlagsPage() {

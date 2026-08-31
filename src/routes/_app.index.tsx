@@ -30,18 +30,59 @@ export const Route = createFileRoute("/_app/")({
 
 const scoreFactors: ScoreFactor[] = [
   { label: "Site publicado", done: true, weight: 20, to: "/site", hint: "Seu site está no ar." },
-  { label: "Blog ativo", done: true, weight: 15, to: "/blog", hint: "Você publica com frequência." },
-  { label: "Google conectado", done: false, weight: 15, to: "/integracoes", hint: "Search Console pendente." },
-  { label: "Analytics ativo", done: false, weight: 15, to: "/analytics", hint: "Meça sua audiência." },
-  { label: "SEO configurado", done: true, weight: 15, to: "/insights", hint: "Meta tags e sitemap ok." },
-  { label: "Segurança (HTTPS)", done: true, weight: 10, to: "/configuracoes", hint: "Certificado ativo." },
-  { label: "Performance otimizada", done: false, weight: 10, to: "/site", hint: "Comprimir imagens." },
+  {
+    label: "Blog ativo",
+    done: true,
+    weight: 15,
+    to: "/blog",
+    hint: "Você publica com frequência.",
+  },
+  {
+    label: "Google conectado",
+    done: false,
+    weight: 15,
+    to: "/integracoes",
+    hint: "Search Console pendente.",
+  },
+  {
+    label: "Analytics ativo",
+    done: false,
+    weight: 15,
+    to: "/analytics",
+    hint: "Meça sua audiência.",
+  },
+  {
+    label: "SEO configurado",
+    done: true,
+    weight: 15,
+    to: "/insights",
+    hint: "Meta tags e sitemap ok.",
+  },
+  {
+    label: "Segurança (HTTPS)",
+    done: true,
+    weight: 10,
+    to: "/configuracoes",
+    hint: "Certificado ativo.",
+  },
+  {
+    label: "Performance otimizada",
+    done: false,
+    weight: 10,
+    to: "/site",
+    hint: "Comprimir imagens.",
+  },
 ];
 
 const latestArticles = [
   { title: "Como escolher um advogado de família", date: "há 2 dias", reads: 184, trend: "+22%" },
   { title: "Passo a passo do inventário digital", date: "há 6 dias", reads: 122, trend: "+8%" },
-  { title: "5 direitos do consumidor que ninguém te contou", date: "há 12 dias", reads: 96, trend: "+3%" },
+  {
+    title: "5 direitos do consumidor que ninguém te contou",
+    date: "há 12 dias",
+    reads: 96,
+    trend: "+3%",
+  },
 ];
 
 const notifications: NotificationItem[] = [
@@ -340,10 +381,7 @@ function QuickActions() {
                 <div className="flex items-center gap-1.5">
                   <p className="truncate text-sm font-semibold text-foreground">{a.label}</p>
                   {a.locked && (
-                    <Lock
-                      className="h-3 w-3 text-muted-foreground/70"
-                      aria-label="Recurso PRO"
-                    />
+                    <Lock className="h-3 w-3 text-muted-foreground/70" aria-label="Recurso PRO" />
                   )}
                 </div>
                 <p className="mt-0.5 truncate text-xs text-muted-foreground">{a.hint}</p>
@@ -489,5 +527,3 @@ function LatestArticles() {
     </section>
   );
 }
-
-

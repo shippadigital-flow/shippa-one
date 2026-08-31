@@ -44,9 +44,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-medium tracking-tight text-foreground">
-          Algo deu errado
-        </h1>
+        <h1 className="text-xl font-medium tracking-tight text-foreground">Algo deu errado</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Tente atualizar a página ou voltar ao início.
         </p>
@@ -87,8 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Shippa One — Portal do Cliente" },
       {
         property: "og:description",
-        content:
-          "Gerencie seu site, blog, leads e resultados de marketing em um portal premium.",
+        content: "Gerencie seu site, blog, leads e resultados de marketing em um portal premium.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

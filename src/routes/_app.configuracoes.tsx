@@ -90,10 +90,18 @@ function ProfileSection() {
         </button>
       </div>
       <div className="mt-6 grid gap-5 md:grid-cols-2">
-        <Row label="Nome"><Input defaultValue="Ana Paula" /></Row>
-        <Row label="Sobrenome"><Input defaultValue="Silva" /></Row>
-        <Row label="E-mail"><Input defaultValue="ana@anapaula.adv.br" /></Row>
-        <Row label="Cargo"><Input defaultValue="Advogada Sócia" /></Row>
+        <Row label="Nome">
+          <Input defaultValue="Ana Paula" />
+        </Row>
+        <Row label="Sobrenome">
+          <Input defaultValue="Silva" />
+        </Row>
+        <Row label="E-mail">
+          <Input defaultValue="ana@anapaula.adv.br" />
+        </Row>
+        <Row label="Cargo">
+          <Input defaultValue="Advogada Sócia" />
+        </Row>
       </div>
     </div>
   );
@@ -105,10 +113,18 @@ function CompanySection() {
       <h3 className="text-base font-semibold text-foreground">Empresa</h3>
       <p className="mt-1 text-sm text-muted-foreground">Dados do seu negócio.</p>
       <div className="mt-6 grid gap-5 md:grid-cols-2">
-        <Row label="Razão social"><Input defaultValue="Ana Paula Advocacia" /></Row>
-        <Row label="CNPJ"><Input defaultValue="00.000.000/0001-00" /></Row>
-        <Row label="Segmento"><Input defaultValue="Direito" /></Row>
-        <Row label="Fuso horário"><Input defaultValue="America/Sao_Paulo" /></Row>
+        <Row label="Razão social">
+          <Input defaultValue="Ana Paula Advocacia" />
+        </Row>
+        <Row label="CNPJ">
+          <Input defaultValue="00.000.000/0001-00" />
+        </Row>
+        <Row label="Segmento">
+          <Input defaultValue="Direito" />
+        </Row>
+        <Row label="Fuso horário">
+          <Input defaultValue="America/Sao_Paulo" />
+        </Row>
       </div>
     </div>
   );
@@ -120,8 +136,12 @@ function SecuritySection() {
       <h3 className="text-base font-semibold text-foreground">Segurança</h3>
       <p className="mt-1 text-sm text-muted-foreground">Proteja sua conta.</p>
       <div className="mt-6 space-y-4">
-        <Row label="Senha atual"><Input /></Row>
-        <Row label="Nova senha"><Input /></Row>
+        <Row label="Senha atual">
+          <Input />
+        </Row>
+        <Row label="Nova senha">
+          <Input />
+        </Row>
         <div className="flex items-center justify-between rounded-lg border border-border/60 bg-surface p-4">
           <div>
             <p className="text-sm font-medium text-foreground">Autenticação em dois fatores</p>
@@ -148,7 +168,10 @@ function NotificationsSection() {
       <p className="mt-1 text-sm text-muted-foreground">Escolha o que faz sentido para você.</p>
       <div className="mt-6 space-y-2">
         {items.map((i) => (
-          <div key={i.label} className="flex items-center justify-between rounded-lg border border-border/60 bg-surface p-4">
+          <div
+            key={i.label}
+            className="flex items-center justify-between rounded-lg border border-border/60 bg-surface p-4"
+          >
             <div>
               <p className="text-sm font-medium text-foreground">{i.label}</p>
               <p className="text-xs text-muted-foreground">{i.desc}</p>
@@ -176,17 +199,26 @@ function NotificationsSection() {
 function IntegrationsSection() {
   const ints = [
     { name: "Google Analytics", desc: "Envie dados de tráfego para o GA4.", connected: true },
-    { name: "WhatsApp Business", desc: "Receba mensagens direto no Shippa Flow.", connected: false },
+    {
+      name: "WhatsApp Business",
+      desc: "Receba mensagens direto no Shippa Flow.",
+      connected: false,
+    },
     { name: "Meta Pixel", desc: "Rastreie conversões em campanhas.", connected: true },
     { name: "Zapier", desc: "Conecte a milhares de outros apps.", connected: false },
   ];
   return (
     <div>
       <h3 className="text-base font-semibold text-foreground">Integrações</h3>
-      <p className="mt-1 text-sm text-muted-foreground">Conecte o Shippa One às ferramentas que você já usa.</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Conecte o Shippa One às ferramentas que você já usa.
+      </p>
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         {ints.map((i) => (
-          <div key={i.name} className="flex items-start justify-between gap-3 rounded-xl border border-border/60 bg-surface p-4">
+          <div
+            key={i.name}
+            className="flex items-start justify-between gap-3 rounded-xl border border-border/60 bg-surface p-4"
+          >
             <div>
               <p className="text-sm font-medium text-foreground">{i.name}</p>
               <p className="mt-1 text-xs text-muted-foreground">{i.desc}</p>

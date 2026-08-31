@@ -124,7 +124,7 @@ Tipos suportados
 - landing_page
 - blog
 - portal
-- ecommerce  # future
+- ecommerce # future
 - custom
 
 Campos obrigatórios por projeto
@@ -132,12 +132,12 @@ Campos obrigatórios por projeto
 - id
 - company_id
 - name
-- type           # enum: website | landing_page | blog | portal | ecommerce | custom
+- type # enum: website | landing_page | blog | portal | ecommerce | custom
 - domain
 - subdomain
 - status
 - language
-- visibility     # enum: public | private | unlisted
+- visibility # enum: public | private | unlisted
 - created_at
 - updated_at
 
@@ -349,7 +349,7 @@ Notas: o modelo abaixo é para agregados/relatórios. Se o produto ingerir event
 
 - id
 - user_id
-- company_id   # recommended for simpler RLS enforcement
+- company_id # recommended for simpler RLS enforcement
 - ip
 - device
 - browser
@@ -455,7 +455,7 @@ Eventos obrigatórios:
 
 - Criar índices nas colunas mais consultadas.
 - Utilizar paginação em todas as consultas.
-- Evitar SELECT *.
+- Evitar SELECT \*.
 - Preparar tabelas para milhões de registros.
 
 ---

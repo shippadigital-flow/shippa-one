@@ -138,9 +138,7 @@ const checks: Check[] = [
   },
 ];
 
-const score = Math.round(
-  checks.reduce((acc, c) => acc + c.weight, 0) / checks.length,
-);
+const score = Math.round(checks.reduce((acc, c) => acc + c.weight, 0) / checks.length);
 
 const counts = {
   ok: checks.filter((c) => c.status === "ok").length,
@@ -173,22 +171,11 @@ function ScoreDial({ value }: { value: number }) {
   const radius = 56;
   const circumference = 2 * Math.PI * radius;
   const dash = (value / 100) * circumference;
-  const color =
-    value >= 85
-      ? "text-success"
-      : value >= 65
-        ? "text-warning"
-        : "text-destructive";
+  const color = value >= 85 ? "text-success" : value >= 65 ? "text-warning" : "text-destructive";
   return (
     <div className="relative grid size-36 place-items-center">
       <svg viewBox="0 0 140 140" className="size-36 -rotate-90" aria-hidden>
-        <circle
-          cx="70"
-          cy="70"
-          r={radius}
-          className="fill-none stroke-muted"
-          strokeWidth={10}
-        />
+        <circle cx="70" cy="70" r={radius} className="fill-none stroke-muted" strokeWidth={10} />
         <circle
           cx="70"
           cy="70"
@@ -202,12 +189,8 @@ function ScoreDial({ value }: { value: number }) {
       </svg>
       <div className="absolute inset-0 grid place-items-center">
         <div className="text-center">
-          <div className={`text-4xl font-semibold tabular-nums ${color}`}>
-            {value}
-          </div>
-          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
-            de 100
-          </div>
+          <div className={`text-4xl font-semibold tabular-nums ${color}`}>{value}</div>
+          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">de 100</div>
         </div>
       </div>
     </div>
@@ -247,8 +230,8 @@ function SeoHealth() {
                 : "Alguns pontos importantes precisam de atenção."}
           </h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Analisamos 8 aspectos essenciais do seu site. Resolva os itens em
-            atenção e crítico para subir posições no Google.
+            Analisamos 8 aspectos essenciais do seu site. Resolva os itens em atenção e crítico para
+            subir posições no Google.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-xs font-medium text-success">
@@ -320,8 +303,8 @@ function SeoHealth() {
             Vá além do diagnóstico com SEO avançado.
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Acompanhe posições no Google, palavras-chave em alta, backlinks e
-            receba recomendações semanais personalizadas para cada página.
+            Acompanhe posições no Google, palavras-chave em alta, backlinks e receba recomendações
+            semanais personalizadas para cada página.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Button asChild size="lg">

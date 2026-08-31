@@ -5,6 +5,7 @@ A modern, TypeScript-first React application built with TanStack Start (SSR-capa
 This repository powers the Shippa One web UI and is structured for server-side rendering and edge deployment.
 
 Quick links
+
 - Source: src/
 - Server entry (SSR wrapper): src/server.ts
 - Start instance and middleware: src/start.ts
@@ -12,16 +13,17 @@ Quick links
 - UI primitives: src/components/ui/
 
 Features
+
 - SSR via @tanstack/react-start
 - Routing with @tanstack/react-router (generated route tree)
 - Data fetching and caching with @tanstack/react-query
 - Local design system (Radix + Tailwind wrappers)
 - TypeScript strict mode
 
-
 ## Getting started
 
 Prerequisites
+
 - Node.js 18+ (or Bun depending on your environment)
 - npm, yarn, or pnpm
 
@@ -66,7 +68,6 @@ Type-check
 npx tsc --noEmit
 ```
 
-
 ## Project layout (top-level)
 
 ```
@@ -88,15 +89,14 @@ tsconfig.json
 
 ```
 
-
 ## Notes
+
 - routeTree.gen.ts is a generated file. Do not hand-edit it — see ARCHITECTURE.md for details on generation and where to run generators.
 - This repository is configured with a Lovable Vite preset (`@lovable.dev/vite-tanstack-config`). That preset injects multiple plugins (see vite.config.ts comment) and controls build targets for SSR/edge.
 
-
 ## Support
-For security issues or sensitive problems, see SECURITY.md.
 
+For security issues or sensitive problems, see SECURITY.md.
 
 ---
 

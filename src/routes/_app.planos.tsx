@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  Check,
-  Sparkles,
-  Crown,
-  ArrowRight,
-  MessageCircle,
-} from "lucide-react";
+import { Check, Sparkles, Crown, ArrowRight, MessageCircle } from "lucide-react";
 import { usePlan } from "@/hooks/use-plan";
 
 export const Route = createFileRoute("/_app/planos")({
@@ -74,8 +68,8 @@ function PlanosPage() {
           Escolha o próximo passo do seu negócio.
         </h1>
         <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-          Comece publicando seu site com o Start. Cresça com Pro quando estiver
-          pronto para transformar cada visitante em uma oportunidade real.
+          Comece publicando seu site com o Start. Cresça com Pro quando estiver pronto para
+          transformar cada visitante em uma oportunidade real.
         </p>
       </header>
 
@@ -87,9 +81,7 @@ function PlanosPage() {
               key={p.id}
               className={
                 "card-elevated relative flex flex-col overflow-hidden p-8 transition " +
-                (p.highlight
-                  ? "border-primary/40 ring-1 ring-primary/20"
-                  : "")
+                (p.highlight ? "border-primary/40 ring-1 ring-primary/20" : "")
               }
             >
               {p.highlight && (
@@ -112,9 +104,7 @@ function PlanosPage() {
                     )}
                   </div>
                   <div>
-                    <h2 className="text-lg font-semibold text-foreground">
-                      {p.name}
-                    </h2>
+                    <h2 className="text-lg font-semibold text-foreground">{p.name}</h2>
                     <p className="text-xs text-muted-foreground">{p.tagline}</p>
                   </div>
                 </div>
@@ -129,9 +119,7 @@ function PlanosPage() {
                 <span className="text-4xl font-semibold tracking-tight text-foreground">
                   {p.price}
                 </span>
-                <span className="pb-1.5 text-sm text-muted-foreground">
-                  {p.priceHint}
-                </span>
+                <span className="pb-1.5 text-sm text-muted-foreground">{p.priceHint}</span>
               </div>
 
               <ul className="relative mt-8 flex flex-col gap-3">
@@ -140,7 +128,9 @@ function PlanosPage() {
                     <div
                       className={
                         "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full " +
-                        (p.highlight ? "bg-primary/20 text-primary-glow" : "bg-success/20 text-success")
+                        (p.highlight
+                          ? "bg-primary/20 text-primary-glow"
+                          : "bg-success/20 text-success")
                       }
                     >
                       <Check className="h-3 w-3" strokeWidth={3} />
@@ -184,8 +174,8 @@ function PlanosPage() {
               Ainda com dúvidas sobre qual plano combina com você?
             </h3>
             <p className="mt-3 max-w-lg text-sm text-muted-foreground">
-              Fale com um especialista Shippa. Em 15 minutos ajudamos você a
-              entender o melhor caminho para o momento do seu negócio.
+              Fale com um especialista Shippa. Em 15 minutos ajudamos você a entender o melhor
+              caminho para o momento do seu negócio.
             </p>
           </div>
           <div className="flex flex-col gap-3 lg:items-end">

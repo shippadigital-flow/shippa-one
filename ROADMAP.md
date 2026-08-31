@@ -38,9 +38,7 @@ Longer-term (9–18 months)
 - SDK & typed APIs
   - Introduce typed clients for backend APIs (OpenAPI / generated TypeScript clients) to reduce contract drift.
 
-
 How to contribute to the roadmap
 
 - File issues for proposed roadmap changes and tag them with `roadmap`.
 - Prioritize items iteratively: small, reversible changes first (CI, linting, type checks), followed by larger refactors (code-splitting, modularization).
-

@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Activity, Database, HardDrive, Cpu, AlertTriangle, CheckCircle2, GitCommit } from "lucide-react";
+import {
+  Activity,
+  Database,
+  HardDrive,
+  Cpu,
+  AlertTriangle,
+  CheckCircle2,
+  GitCommit,
+} from "lucide-react";
 import { PageHeader } from "@/shared/page-header";
 
 export const Route = createFileRoute("/admin/monitoramento")({
@@ -14,15 +22,36 @@ const services = [
 ];
 
 const incidents = [
-  { time: "há 4h", type: "error", title: "Timeout intermitente em /articles", detail: "Resolvido após reinício da instância." },
-  { time: "há 2d", type: "warn", title: "Uso de storage acima de 75%", detail: "Alerta preventivo — expansão agendada." },
-  { time: "há 5d", type: "error", title: "Falha no webhook Stripe", detail: "Reprocessamento manual executado." },
+  {
+    time: "há 4h",
+    type: "error",
+    title: "Timeout intermitente em /articles",
+    detail: "Resolvido após reinício da instância.",
+  },
+  {
+    time: "há 2d",
+    type: "warn",
+    title: "Uso de storage acima de 75%",
+    detail: "Alerta preventivo — expansão agendada.",
+  },
+  {
+    time: "há 5d",
+    type: "error",
+    title: "Falha no webhook Stripe",
+    detail: "Reprocessamento manual executado.",
+  },
 ];
 
 const deploys = [
   { sha: "8c2f1a", branch: "main", author: "Rafael Mota", when: "há 2 h", status: "success" },
   { sha: "b1e3f0", branch: "main", author: "Beatriz Alves", when: "há 1 dia", status: "success" },
-  { sha: "5a4c22", branch: "hotfix/billing", author: "Rafael Mota", when: "há 2 dias", status: "success" },
+  {
+    sha: "5a4c22",
+    branch: "hotfix/billing",
+    author: "Rafael Mota",
+    when: "há 2 dias",
+    status: "success",
+  },
   { sha: "d90ff2", branch: "main", author: "Marcelo T.", when: "há 4 dias", status: "failed" },
 ];
 
@@ -63,9 +92,7 @@ function MonitoringPage() {
                   key={i}
                   className={
                     "flex-1 rounded-sm " +
-                    (s.status === "warn" && (i === 12 || i === 20)
-                      ? "bg-warning"
-                      : "bg-success/70")
+                    (s.status === "warn" && (i === 12 || i === 20) ? "bg-warning" : "bg-success/70")
                   }
                 />
               ))}
@@ -118,7 +145,8 @@ function MonitoringPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground">
-                      <code className="font-mono text-xs text-muted-foreground">{d.sha}</code> · {d.branch}
+                      <code className="font-mono text-xs text-muted-foreground">{d.sha}</code> ·{" "}
+                      {d.branch}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {d.author} · {d.when}

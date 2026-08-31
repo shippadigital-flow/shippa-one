@@ -28,16 +28,41 @@ function ConversoesPreview() {
         "Compare campanhas e páginas lado a lado",
       ]}
       features={[
-        { icon: MousePointerClick, title: "Metas personalizadas", description: "Marque qualquer ação como conversão: clique, formulário, agendamento." },
-        { icon: RouteIcon, title: "Jornada do cliente", description: "Veja o caminho percorrido antes de cada conversão." },
-        { icon: TrendingUp, title: "Taxa de conversão", description: "Acompanhe a evolução mês a mês em uma visão simples." },
-        { icon: Filter, title: "Funil visual", description: "Enxergue onde as pessoas param e por quê." },
-        { icon: ShoppingBag, title: "Valor por lead", description: "Estime quanto vale cada oportunidade que chega." },
-        { icon: Target, title: "Metas assistidas", description: "Receba sugestões de otimização baseadas nos seus resultados." },
+        {
+          icon: MousePointerClick,
+          title: "Metas personalizadas",
+          description: "Marque qualquer ação como conversão: clique, formulário, agendamento.",
+        },
+        {
+          icon: RouteIcon,
+          title: "Jornada do cliente",
+          description: "Veja o caminho percorrido antes de cada conversão.",
+        },
+        {
+          icon: TrendingUp,
+          title: "Taxa de conversão",
+          description: "Acompanhe a evolução mês a mês em uma visão simples.",
+        },
+        {
+          icon: Filter,
+          title: "Funil visual",
+          description: "Enxergue onde as pessoas param e por quê.",
+        },
+        {
+          icon: ShoppingBag,
+          title: "Valor por lead",
+          description: "Estime quanto vale cada oportunidade que chega.",
+        },
+        {
+          icon: Target,
+          title: "Metas assistidas",
+          description: "Receba sugestões de otimização baseadas nos seus resultados.",
+        },
       ]}
       insight={{
         title: "246 visitantes este mês. Quantos você acha que se tornaram clientes?",
-        description: "Ative Conversões e pare de adivinhar. Descubra exatamente quais páginas geram negócio.",
+        description:
+          "Ative Conversões e pare de adivinhar. Descubra exatamente quais páginas geram negócio.",
       }}
     />
   );

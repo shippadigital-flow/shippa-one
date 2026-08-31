@@ -32,12 +32,7 @@ import {
   Tag as TagIcon,
   ChevronDown,
 } from "lucide-react";
-import {
-  CATEGORIES,
-  findArticle,
-  type Article,
-  seoTone,
-} from "@/features/blog/mock-data";
+import { CATEGORIES, findArticle, type Article, seoTone } from "@/features/blog/mock-data";
 
 export const Route = createFileRoute("/_app/blog/editor")({
   validateSearch: (s: Record<string, unknown>) => ({
@@ -100,9 +95,7 @@ function BlogEditorPage() {
   const navigate = useNavigate();
   const existing = findArticle(id || null);
 
-  const [draft, setDraft] = useState<Draft>(
-    existing ? fromArticle(existing) : emptyDraft,
-  );
+  const [draft, setDraft] = useState<Draft>(existing ? fromArticle(existing) : emptyDraft);
   const [preview, setPreview] = useState(false);
   const [tagInput, setTagInput] = useState("");
   const [savedAt, setSavedAt] = useState<Date | null>(null);
@@ -123,8 +116,7 @@ function BlogEditorPage() {
         HTMLAttributes: { class: "rounded-xl border border-border/60 my-4" },
       }),
       Placeholder.configure({
-        placeholder:
-          "Comece a escrever… Use / para inserir títulos, listas, imagens…",
+        placeholder: "Comece a escrever… Use / para inserir títulos, listas, imagens…",
       }),
     ],
     content: existing?.content ?? "<p></p>",
@@ -266,9 +258,7 @@ function BlogEditorPage() {
                     {t}
                     <button
                       type="button"
-                      onClick={() =>
-                        update({ tags: draft.tags.filter((x) => x !== t) })
-                      }
+                      onClick={() => update({ tags: draft.tags.filter((x) => x !== t) })}
                       aria-label={`Remover tag ${t}`}
                       className="rounded-full p-0.5 text-muted-foreground transition hover:text-foreground"
                     >
@@ -301,8 +291,8 @@ function BlogEditorPage() {
                   (seo === "success"
                     ? "bg-success/15 text-success"
                     : seo === "warning"
-                    ? "bg-warning/15 text-warning"
-                    : "bg-destructive/15 text-destructive")
+                      ? "bg-warning/15 text-warning"
+                      : "bg-destructive/15 text-destructive")
                 }
               >
                 <Sparkles className="h-3 w-3" aria-hidden /> {seoScore}
@@ -318,10 +308,7 @@ function BlogEditorPage() {
                 className="h-9 w-full rounded-lg border border-border/70 bg-surface px-3 text-sm text-foreground focus:border-primary/60 focus:outline-none focus:ring-2 focus:ring-ring/40"
               />
             </FieldRow>
-            <FieldRow
-              label="Meta Description"
-              hint={`${draft.metaDescription.length}/160`}
-            >
+            <FieldRow label="Meta Description" hint={`${draft.metaDescription.length}/160`}>
               <textarea
                 value={draft.metaDescription}
                 onChange={(e) => update({ metaDescription: e.target.value })}
@@ -463,43 +450,87 @@ function EditorToolbar({ editor }: { editor: Editor }) {
   return (
     <div className="sticky top-16 z-10 -mx-6 flex flex-wrap items-center gap-1 rounded-lg border border-border/60 bg-surface/95 px-2 py-1.5 backdrop-blur sm:mx-0">
       <TBGroup>
-        <button aria-label="Título 1" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={btn(editor.isActive("heading", { level: 1 }))}>
+        <button
+          aria-label="Título 1"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+          className={btn(editor.isActive("heading", { level: 1 }))}
+        >
           <Heading1 className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Título 2" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={btn(editor.isActive("heading", { level: 2 }))}>
+        <button
+          aria-label="Título 2"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+          className={btn(editor.isActive("heading", { level: 2 }))}
+        >
           <Heading2 className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Título 3" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={btn(editor.isActive("heading", { level: 3 }))}>
+        <button
+          aria-label="Título 3"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+          className={btn(editor.isActive("heading", { level: 3 }))}
+        >
           <Heading3 className="h-4 w-4" aria-hidden />
         </button>
       </TBGroup>
       <Divider />
       <TBGroup>
-        <button aria-label="Negrito" onClick={() => editor.chain().focus().toggleBold().run()} className={btn(editor.isActive("bold"))}>
+        <button
+          aria-label="Negrito"
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          className={btn(editor.isActive("bold"))}
+        >
           <Bold className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Itálico" onClick={() => editor.chain().focus().toggleItalic().run()} className={btn(editor.isActive("italic"))}>
+        <button
+          aria-label="Itálico"
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          className={btn(editor.isActive("italic"))}
+        >
           <Italic className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Sublinhado" onClick={() => editor.chain().focus().toggleUnderline().run()} className={btn(editor.isActive("underline"))}>
+        <button
+          aria-label="Sublinhado"
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          className={btn(editor.isActive("underline"))}
+        >
           <UnderlineIcon className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Riscado" onClick={() => editor.chain().focus().toggleStrike().run()} className={btn(editor.isActive("strike"))}>
+        <button
+          aria-label="Riscado"
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+          className={btn(editor.isActive("strike"))}
+        >
           <Strikethrough className="h-4 w-4" aria-hidden />
         </button>
       </TBGroup>
       <Divider />
       <TBGroup>
-        <button aria-label="Lista" onClick={() => editor.chain().focus().toggleBulletList().run()} className={btn(editor.isActive("bulletList"))}>
+        <button
+          aria-label="Lista"
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={btn(editor.isActive("bulletList"))}
+        >
           <List className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Lista numerada" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={btn(editor.isActive("orderedList"))}>
+        <button
+          aria-label="Lista numerada"
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={btn(editor.isActive("orderedList"))}
+        >
           <ListOrdered className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Citação" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={btn(editor.isActive("blockquote"))}>
+        <button
+          aria-label="Citação"
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          className={btn(editor.isActive("blockquote"))}
+        >
           <Quote className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Código" onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={btn(editor.isActive("codeBlock"))}>
+        <button
+          aria-label="Código"
+          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+          className={btn(editor.isActive("codeBlock"))}
+        >
           <Code className="h-4 w-4" aria-hidden />
         </button>
       </TBGroup>
@@ -537,10 +568,18 @@ function EditorToolbar({ editor }: { editor: Editor }) {
       </TBGroup>
       <Divider />
       <TBGroup>
-        <button aria-label="Desfazer" onClick={() => editor.chain().focus().undo().run()} className={btn(false)}>
+        <button
+          aria-label="Desfazer"
+          onClick={() => editor.chain().focus().undo().run()}
+          className={btn(false)}
+        >
           <Undo2 className="h-4 w-4" aria-hidden />
         </button>
-        <button aria-label="Refazer" onClick={() => editor.chain().focus().redo().run()} className={btn(false)}>
+        <button
+          aria-label="Refazer"
+          onClick={() => editor.chain().focus().redo().run()}
+          className={btn(false)}
+        >
           <Redo2 className="h-4 w-4" aria-hidden />
         </button>
       </TBGroup>
@@ -587,9 +626,7 @@ function Panel({
           />
         </span>
       </button>
-      {open && (
-        <div className="flex flex-col gap-3 border-t border-border/60 p-5">{children}</div>
-      )}
+      {open && <div className="flex flex-col gap-3 border-t border-border/60 p-5">{children}</div>}
     </section>
   );
 }
@@ -625,21 +662,15 @@ const COVER_PRESETS = [
   "linear-gradient(135deg,#0ea5e9 0%,#6366f1 60%,#a855f7 100%)",
 ];
 
-function CoverField({
-  cover,
-  onChange,
-}: {
-  cover: string;
-  onChange: (v: string) => void;
-}) {
+function CoverField({ cover, onChange }: { cover: string; onChange: (v: string) => void }) {
   const [pick, setPick] = useState(false);
   return (
     <div className="card-elevated overflow-hidden">
-      <div
-        className="relative h-40 sm:h-52"
-        style={{ background: cover }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" aria-hidden />
+      <div className="relative h-40 sm:h-52" style={{ background: cover }}>
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
+          aria-hidden
+        />
         <button
           type="button"
           onClick={() => setPick((v) => !v)}
@@ -681,9 +712,7 @@ function PreviewPane({ draft, html }: { draft: Draft; html: string }) {
       <h1 className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
         {draft.title || "Título do artigo"}
       </h1>
-      {draft.excerpt && (
-        <p className="mt-3 text-base text-muted-foreground">{draft.excerpt}</p>
-      )}
+      {draft.excerpt && <p className="mt-3 text-base text-muted-foreground">{draft.excerpt}</p>}
       <div className="my-6 h-px bg-border/60" />
       <div
         className="tiptap prose-invert max-w-none text-[15px] leading-relaxed text-foreground"

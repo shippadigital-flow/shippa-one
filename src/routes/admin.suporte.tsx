@@ -19,11 +19,56 @@ const tickets: Array<{
   updated: string;
   preview: string;
 }> = [
-  { id: "T-1042", subject: "Erro ao publicar artigo", client: "Clínica Bem-Estar", owner: "Rafael", status: "Aberto", priority: "Alta", updated: "há 12 min", preview: "Ao clicar em publicar, aparece um erro 500. Já tentei novamente..." },
-  { id: "T-1041", subject: "Integração com Google Analytics", client: "Consultório Aurora", owner: "Mariana", status: "Aguardando", priority: "Média", updated: "há 1 h", preview: "Preciso conectar minha conta do GA4, mas o botão não abre..." },
-  { id: "T-1040", subject: "Alteração de plano", client: "Estúdio Norte", owner: "Rafael", status: "Resolvido", priority: "Baixa", updated: "há 3 h", preview: "Como faço para migrar do Start para o Pro sem perder o site?" },
-  { id: "T-1039", subject: "Domínio próprio", client: "Espaço Zen", owner: "Beatriz", status: "Fechado", priority: "Média", updated: "ontem", preview: "Já configurei o DNS mas ainda não propagou aqui..." },
-  { id: "T-1038", subject: "Cobrança duplicada", client: "Odonto Vida", owner: "Rafael", status: "Aberto", priority: "Alta", updated: "há 4 h", preview: "Fui cobrado duas vezes no cartão no mesmo dia..." },
+  {
+    id: "T-1042",
+    subject: "Erro ao publicar artigo",
+    client: "Clínica Bem-Estar",
+    owner: "Rafael",
+    status: "Aberto",
+    priority: "Alta",
+    updated: "há 12 min",
+    preview: "Ao clicar em publicar, aparece um erro 500. Já tentei novamente...",
+  },
+  {
+    id: "T-1041",
+    subject: "Integração com Google Analytics",
+    client: "Consultório Aurora",
+    owner: "Mariana",
+    status: "Aguardando",
+    priority: "Média",
+    updated: "há 1 h",
+    preview: "Preciso conectar minha conta do GA4, mas o botão não abre...",
+  },
+  {
+    id: "T-1040",
+    subject: "Alteração de plano",
+    client: "Estúdio Norte",
+    owner: "Rafael",
+    status: "Resolvido",
+    priority: "Baixa",
+    updated: "há 3 h",
+    preview: "Como faço para migrar do Start para o Pro sem perder o site?",
+  },
+  {
+    id: "T-1039",
+    subject: "Domínio próprio",
+    client: "Espaço Zen",
+    owner: "Beatriz",
+    status: "Fechado",
+    priority: "Média",
+    updated: "ontem",
+    preview: "Já configurei o DNS mas ainda não propagou aqui...",
+  },
+  {
+    id: "T-1038",
+    subject: "Cobrança duplicada",
+    client: "Odonto Vida",
+    owner: "Rafael",
+    status: "Aberto",
+    priority: "Alta",
+    updated: "há 4 h",
+    preview: "Fui cobrado duas vezes no cartão no mesmo dia...",
+  },
 ];
 
 const statusStyles: Record<TicketStatus, string> = {

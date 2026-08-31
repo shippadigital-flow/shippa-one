@@ -1,12 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Sparkles,
-  CheckCircle2,
-  MessageCircle,
-  Plus,
-  Minus,
-} from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, MessageCircle, Plus, Minus } from "lucide-react";
 import { useState } from "react";
 import type { ComponentType, SVGProps, ReactNode } from "react";
 
@@ -20,15 +13,35 @@ export type HowItWorksStep = { title: string; description: string };
 export type FaqItem = { question: string; answer: string };
 
 const defaultSteps: HowItWorksStep[] = [
-  { title: "Ative com um clique", description: "Faça o upgrade para o Shippa One Pro em menos de 1 minuto." },
-  { title: "Personalize com seu time", description: "Nosso time de crescimento configura tudo do seu jeito." },
-  { title: "Acompanhe sua evolução", description: "Veja o impacto direto na sua presença digital, semana após semana." },
+  {
+    title: "Ative com um clique",
+    description: "Faça o upgrade para o Shippa One Pro em menos de 1 minuto.",
+  },
+  {
+    title: "Personalize com seu time",
+    description: "Nosso time de crescimento configura tudo do seu jeito.",
+  },
+  {
+    title: "Acompanhe sua evolução",
+    description: "Veja o impacto direto na sua presença digital, semana após semana.",
+  },
 ];
 
 const defaultFaqs: FaqItem[] = [
-  { question: "Preciso instalar algo no meu site?", answer: "Não. Tudo funciona nativamente dentro do Shippa One, sem configurações técnicas." },
-  { question: "Posso testar antes de contratar?", answer: "Sim. Nosso time faz uma demonstração personalizada mostrando o resultado no seu negócio." },
-  { question: "Como funciona o suporte?", answer: "Você conta com um especialista Shippa dedicado, do onboarding ao acompanhamento contínuo." },
+  {
+    question: "Preciso instalar algo no meu site?",
+    answer: "Não. Tudo funciona nativamente dentro do Shippa One, sem configurações técnicas.",
+  },
+  {
+    question: "Posso testar antes de contratar?",
+    answer:
+      "Sim. Nosso time faz uma demonstração personalizada mostrando o resultado no seu negócio.",
+  },
+  {
+    question: "Como funciona o suporte?",
+    answer:
+      "Você conta com um especialista Shippa dedicado, do onboarding ao acompanhamento contínuo.",
+  },
 ];
 
 export function LockedModulePreview({
@@ -110,9 +123,7 @@ export function LockedModulePreview({
 
           <div className="relative">
             <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-primary/30 via-primary/5 to-transparent blur-3xl" />
-            <div className="relative">
-              {visual ?? <DefaultVisual Icon={HeroIcon} />}
-            </div>
+            <div className="relative">{visual ?? <DefaultVisual Icon={HeroIcon} />}</div>
           </div>
         </div>
       </section>
@@ -121,9 +132,7 @@ export function LockedModulePreview({
       {visual && (
         <section>
           <div className="mb-6 text-center">
-            <p className="eyebrow">
-              Veja como funciona
-            </p>
+            <p className="eyebrow">Veja como funciona</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               Uma prévia do produto rodando de verdade
             </h2>
@@ -133,9 +142,7 @@ export function LockedModulePreview({
           </div>
           <div className="relative">
             <div className="pointer-events-none absolute -inset-10 rounded-[36px] bg-gradient-to-br from-primary/20 via-primary/5 to-transparent blur-3xl" />
-            <div className="relative mx-auto w-full max-w-5xl">
-              {visual}
-            </div>
+            <div className="relative mx-auto w-full max-w-5xl">{visual}</div>
           </div>
         </section>
       )}
@@ -144,9 +151,7 @@ export function LockedModulePreview({
       <section>
         <div className="mb-5 flex items-end justify-between">
           <div>
-            <p className="eyebrow">
-              O que você desbloqueia
-            </p>
+            <p className="eyebrow">O que você desbloqueia</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
               Tudo o que você precisa para crescer
             </h2>
@@ -162,9 +167,7 @@ export function LockedModulePreview({
                 <f.icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <h3 className="text-[15px] font-semibold text-foreground">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {f.description}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.description}</p>
               <div className="pointer-events-none absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-primary/10 opacity-0 blur-2xl transition group-hover:opacity-100" />
             </article>
           ))}
@@ -174,9 +177,7 @@ export function LockedModulePreview({
       {/* HOW IT WORKS */}
       <section>
         <div className="mb-6">
-          <p className="eyebrow">
-            Como funciona
-          </p>
+          <p className="eyebrow">Como funciona</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
             Simples do começo ao fim
           </h2>
@@ -199,9 +200,7 @@ export function LockedModulePreview({
       {/* FAQ */}
       <section>
         <div className="mb-6">
-          <p className="eyebrow">
-            Perguntas frequentes
-          </p>
+          <p className="eyebrow">Perguntas frequentes</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground">
             Ainda tem dúvidas?
           </h2>
@@ -274,11 +273,7 @@ function FaqRow({ faq, defaultOpen = false }: { faq: FaqItem; defaultOpen?: bool
   );
 }
 
-function DefaultVisual({
-  Icon,
-}: {
-  Icon: ComponentType<SVGProps<SVGSVGElement>>;
-}) {
+function DefaultVisual({ Icon }: { Icon: ComponentType<SVGProps<SVGSVGElement>> }) {
   return (
     <div className="relative rounded-2xl border border-border/60 bg-surface-elevated p-8 shadow-elegant">
       <div className="flex items-center justify-between border-b border-border/60 pb-4">
@@ -287,9 +282,7 @@ function DefaultVisual({
           <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
         </div>
-        <span className="text-[10px] font-medium text-muted-foreground">
-          shippa.one / pro
-        </span>
+        <span className="text-[10px] font-medium text-muted-foreground">shippa.one / pro</span>
       </div>
       <div className="mt-6 flex flex-col items-center justify-center gap-4 py-6">
         <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-primary shadow-glow">
@@ -301,8 +294,7 @@ function DefaultVisual({
               key={i}
               className="h-16 rounded-xl border border-border/60 bg-surface"
               style={{
-                background:
-                  "linear-gradient(180deg, oklch(0.62 0.22 258 / 0.12), transparent)",
+                background: "linear-gradient(180deg, oklch(0.62 0.22 258 / 0.12), transparent)",
               }}
             />
           ))}

@@ -60,7 +60,11 @@ function AdminLayout() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-gradient-glow" />
       <div className="relative flex min-h-dvh">
         <AdminSidebar pathname={pathname} />
-        <AdminMobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} />
+        <AdminMobileDrawer
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          pathname={pathname}
+        />
         <div className="flex min-w-0 flex-1 flex-col">
           <AdminTopBar onOpenMobile={() => setMobileOpen(true)} />
           <main
@@ -83,15 +87,17 @@ function AdminSidebar({ pathname }: { pathname: string }) {
       <div className="flex h-16 items-center justify-between px-5">
         <div className="flex items-center gap-2.5">
           <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
-            <ShieldAlert className="h-4 w-4 text-primary-foreground" strokeWidth={2.25} aria-hidden />
+            <ShieldAlert
+              className="h-4 w-4 text-primary-foreground"
+              strokeWidth={2.25}
+              aria-hidden
+            />
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">
               Shippa Admin
             </span>
-            <span className="text-[11px] font-medium text-muted-foreground">
-              Painel interno
-            </span>
+            <span className="text-[11px] font-medium text-muted-foreground">Painel interno</span>
           </div>
         </div>
         <span className="rounded-md border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-primary-glow">
@@ -102,7 +108,12 @@ function AdminSidebar({ pathname }: { pathname: string }) {
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <SidebarSection items={opsNav} pathname={pathname} label="Operações" rootPath="/admin" />
         <div className="my-4 h-px bg-sidebar-border" />
-        <SidebarSection items={insightsNav} pathname={pathname} label="Inteligência" rootPath="/admin" />
+        <SidebarSection
+          items={insightsNav}
+          pathname={pathname}
+          label="Inteligência"
+          rootPath="/admin"
+        />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection items={systemNav} pathname={pathname} label="Sistema" rootPath="/admin" />
       </nav>
@@ -149,7 +160,10 @@ function AdminTopBar({ onOpenMobile }: { onOpenMobile: () => void }) {
   return (
     <header
       className="sticky top-0 z-10 flex h-16 items-center gap-3 border-b border-border/60 bg-background/70 px-4 backdrop-blur-xl sm:gap-4 sm:px-6 lg:px-8"
-      style={{ paddingTop: "env(safe-area-inset-top)", height: "calc(4rem + env(safe-area-inset-top))" }}
+      style={{
+        paddingTop: "env(safe-area-inset-top)",
+        height: "calc(4rem + env(safe-area-inset-top))",
+      }}
     >
       <button
         type="button"
@@ -190,7 +204,10 @@ function AdminTopBar({ onOpenMobile }: { onOpenMobile: () => void }) {
           className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-surface text-muted-foreground transition-colors hover:text-foreground"
         >
           <Bell className="h-4 w-4" aria-hidden />
-          <span aria-hidden className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary" />
+          <span
+            aria-hidden
+            className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary"
+          />
         </button>
       </div>
     </header>
@@ -218,8 +235,7 @@ function AdminMobileDrawer({
   return (
     <div
       className={
-        "fixed inset-0 z-40 md:hidden " +
-        (open ? "pointer-events-auto" : "pointer-events-none")
+        "fixed inset-0 z-40 md:hidden " + (open ? "pointer-events-auto" : "pointer-events-none")
       }
       aria-hidden={!open}
     >
@@ -239,7 +255,11 @@ function AdminMobileDrawer({
         <div className="flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2.5">
             <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
-              <ShieldAlert className="h-4 w-4 text-primary-foreground" strokeWidth={2.25} aria-hidden />
+              <ShieldAlert
+                className="h-4 w-4 text-primary-foreground"
+                strokeWidth={2.25}
+                aria-hidden
+              />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-sm font-semibold tracking-tight text-sidebar-foreground">
@@ -260,7 +280,12 @@ function AdminMobileDrawer({
         <nav className="flex-1 overflow-y-auto px-3 py-3">
           <SidebarSection items={opsNav} pathname={pathname} label="Operações" rootPath="/admin" />
           <div className="my-4 h-px bg-sidebar-border" />
-          <SidebarSection items={insightsNav} pathname={pathname} label="Inteligência" rootPath="/admin" />
+          <SidebarSection
+            items={insightsNav}
+            pathname={pathname}
+            label="Inteligência"
+            rootPath="/admin"
+          />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection items={systemNav} pathname={pathname} label="Sistema" rootPath="/admin" />
         </nav>
