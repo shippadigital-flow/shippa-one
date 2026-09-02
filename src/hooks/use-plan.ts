@@ -1,51 +1,16 @@
-import { useEffect, useState } from "react";
+import { useSubscription } from "@/features/plan/plan-provider";
+import { canAccessPath, type Plan, type Subscription } from "@/lib/permissions";
 
-export type Plan = "start" | "pro";
+export type { Plan };
+export { canAccess, canAccessPath, hasProAccess } from "@/lib/permissions";
 
-const KEY = "shippa-plan";
-const EVENT = "shippa-plan-change";
-
-const startModules = new Set([
-  "/",
-  "/site",
-  "/blog",
-  "/biblioteca",
-  "/crescimento",
-  "/seo",
-  "/configuracoes",
-  "/suporte",
-  "/planos",
-]);
-
-export function isLocked(path: string, plan: Plan) {
-  if (plan === "pro") return false;
-  return !startModules.has(path);
-}
-
-function read(): Plan {
-  if (typeof window === "undefined") return "start";
-  return (window.localStorage.getItem(KEY) as Plan) || "start";
-}
-
+/** Plano real do usuário autenticado (fonte de verdade: banco de dados). */
 export function usePlan() {
-  const [plan, setPlanState] = useState<Plan>("start");
+  const { plan, status, isPro, loading, updateSubscription } = useSubscription();
+  return { plan, status, isPro, loading, updateSubscription };
+}
 
-  useEffect(() => {
-    setPlanState(read());
-    const onChange = () => setPlanState(read());
-    window.addEventListener(EVENT, onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener(EVENT, onChange);
-      window.removeEventListener("storage", onChange);
-    };
-  }, []);
-
-  const setPlan = (p: Plan) => {
-    window.localStorage.setItem(KEY, p);
-    window.dispatchEvent(new Event(EVENT));
-    setPlanState(p);
-  };
-
-  return { plan, setPlan };
+/** Item de navegação bloqueado para o plano atual. */
+export function isLocked(path: string, subscription: Subscription | null): boolean {
+  return !canAccessPath(path, subscription);
 }
