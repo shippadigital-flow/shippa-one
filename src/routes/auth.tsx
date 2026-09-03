@@ -302,7 +302,7 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
           {status === "error" && (
             <p className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/8 px-3 py-2.5 text-xs font-medium text-destructive">
               <AlertCircle className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              Não foi possível entrar. Verifique seu e-mail e senha.
+              {formError ?? "Não foi possível entrar. Verifique seu e-mail e senha."}
             </p>
           )}
           {status === "success" && (
@@ -348,6 +348,7 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
 }
 
 function ForgotView({ onBack }: { onBack: () => void }) {
+  const { resetPassword } = useAuth();
   const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -362,7 +363,11 @@ function ForgotView({ onBack }: { onBack: () => void }) {
     }
     setError(null);
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 700));
+    try {
+      await resetPassword(parsed.data);
+    } catch {
+      // Não revelamos se o e-mail existe: a mensagem é sempre neutra.
+    }
     setStatus("sent");
   };
 
