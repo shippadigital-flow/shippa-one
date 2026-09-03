@@ -27,8 +27,10 @@ import {
 } from "lucide-react";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { usePlan, isLocked, type Plan } from "@/hooks/use-plan";
-import { useAuth, getStoredUser, type AuthUser } from "@/hooks/use-auth";
+import { isLocked } from "@/hooks/use-plan";
+import type { Plan, Subscription } from "@/lib/permissions";
+import { PlanProvider, useSubscription } from "@/features/plan/plan-provider";
+import { useAuth, hasActiveSession, type AuthUser } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
 import {
   SidebarSection,
@@ -38,13 +40,22 @@ import {
 } from "@/features/layout/sidebar-nav";
 
 export const Route = createFileRoute("/_app")({
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && !getStoredUser()) {
+  ssr: false,
+  beforeLoad: async () => {
+    if (typeof window !== "undefined" && !(await hasActiveSession())) {
       throw redirect({ to: "/auth" });
     }
   },
-  component: AppLayout,
+  component: AppRoute,
 });
+
+function AppRoute() {
+  return (
+    <PlanProvider>
+      <AppLayout />
+    </PlanProvider>
+  );
+}
 
 const primaryNav: NavItem[] = [
   { label: "Visão Geral", to: "/", icon: LayoutDashboard },
@@ -88,7 +99,8 @@ function useSidebarCollapsed() {
 
 function AppLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { plan, setPlan } = usePlan();
+  const { subscription } = useSubscription();
+  const plan: Plan = subscription?.plan ?? "start";
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { collapsed, toggle } = useSidebarCollapsed();
@@ -98,8 +110,8 @@ function AppLayout() {
     setMobileOpen(false);
   }, [pathname]);
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
     navigate({ to: "/auth", replace: true });
   };
 
@@ -113,6 +125,7 @@ function AppLayout() {
       <Sidebar
         pathname={pathname}
         plan={plan}
+        subscription={subscription}
         user={user}
         onSignOut={handleSignOut}
         collapsed={collapsed}
@@ -123,12 +136,13 @@ function AppLayout() {
         onClose={() => setMobileOpen(false)}
         pathname={pathname}
         plan={plan}
+        subscription={subscription}
         user={user}
         onSignOut={handleSignOut}
       />
       <div className="relative flex min-h-dvh flex-col transition-[padding] duration-300 ease-out md:pl-[var(--sidebar-w)]">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-glow" />
-        <TopBar plan={plan} setPlan={setPlan} onOpenMobile={() => setMobileOpen(true)} />
+        <TopBar plan={plan} onOpenMobile={() => setMobileOpen(true)} />
         <main
           className="relative flex-1 px-4 pt-4 sm:px-6 lg:px-8"
           style={{ paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))" }}
@@ -145,6 +159,7 @@ function AppLayout() {
 function Sidebar({
   pathname,
   plan,
+  subscription,
   user,
   onSignOut,
   collapsed,
@@ -152,6 +167,7 @@ function Sidebar({
 }: {
   pathname: string;
   plan: Plan;
+  subscription: Subscription | null;
   user: AuthUser | null;
   onSignOut: () => void;
   collapsed: boolean;
@@ -199,7 +215,7 @@ function Sidebar({
           pathname={pathname}
           label="Geral"
           collapsed={collapsed}
-          isLocked={(p) => isLocked(p, plan)}
+          isLocked={(p) => isLocked(p, subscription)}
         />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection
@@ -207,7 +223,7 @@ function Sidebar({
           pathname={pathname}
           label="Crescimento"
           collapsed={collapsed}
-          isLocked={(p) => isLocked(p, plan)}
+          isLocked={(p) => isLocked(p, subscription)}
         />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection
@@ -223,7 +239,7 @@ function Sidebar({
           pathname={pathname}
           label="Conta"
           collapsed={collapsed}
-          isLocked={(p) => isLocked(p, plan)}
+          isLocked={(p) => isLocked(p, subscription)}
         />
       </nav>
 
@@ -282,15 +298,7 @@ function Sidebar({
   );
 }
 
-function TopBar({
-  plan,
-  setPlan,
-  onOpenMobile,
-}: {
-  plan: Plan;
-  setPlan: (p: Plan) => void;
-  onOpenMobile: () => void;
-}) {
+function TopBar({ plan, onOpenMobile }: { plan: Plan; onOpenMobile: () => void }) {
   return (
     <header
       className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border/60 bg-background/80 px-4 backdrop-blur-xl sm:px-6 lg:px-8"
@@ -327,39 +335,19 @@ function TopBar({
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {/* Demo plan toggle */}
-        <div
-          role="group"
-          aria-label="Alternar plano de demonstração"
-          className="hidden items-center rounded-lg border border-border/60 bg-surface p-0.5 sm:inline-flex"
+        {/* Plano atual (fonte de verdade: banco de dados) */}
+        <Link
+          to="/planos"
+          aria-label={`Plano atual: ${plan === "pro" ? "Pro" : "Start"}. Ver planos`}
+          className={
+            "hidden items-center gap-1 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition sm:inline-flex " +
+            (plan === "pro"
+              ? "border-primary/40 bg-gradient-primary text-primary-foreground"
+              : "border-border/60 bg-surface text-muted-foreground hover:text-foreground")
+          }
         >
-          <button
-            type="button"
-            onClick={() => setPlan("start")}
-            aria-pressed={plan === "start"}
-            className={
-              "rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
-              (plan === "start"
-                ? "bg-accent text-foreground"
-                : "text-muted-foreground hover:text-foreground")
-            }
-          >
-            Start
-          </button>
-          <button
-            type="button"
-            onClick={() => setPlan("pro")}
-            aria-pressed={plan === "pro"}
-            className={
-              "inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
-              (plan === "pro"
-                ? "bg-gradient-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground")
-            }
-          >
-            <Sparkles className="h-3 w-3" aria-hidden /> Pro
-          </button>
-        </div>
+          <Sparkles className="h-3 w-3" aria-hidden /> {plan === "pro" ? "Pro" : "Start"}
+        </Link>
         <button
           type="button"
           aria-label="Notificações"
@@ -381,6 +369,7 @@ function MobileDrawer({
   onClose,
   pathname,
   plan,
+  subscription,
   user,
   onSignOut,
 }: {
@@ -388,6 +377,7 @@ function MobileDrawer({
   onClose: () => void;
   pathname: string;
   plan: Plan;
+  subscription: Subscription | null;
   user: AuthUser | null;
   onSignOut: () => void;
 }) {
@@ -445,14 +435,14 @@ function MobileDrawer({
             items={primaryNav}
             pathname={pathname}
             label="Geral"
-            isLocked={(p) => isLocked(p, plan)}
+            isLocked={(p) => isLocked(p, subscription)}
           />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection
             items={proNav}
             pathname={pathname}
             label="Crescimento"
-            isLocked={(p) => isLocked(p, plan)}
+            isLocked={(p) => isLocked(p, subscription)}
           />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection
@@ -466,7 +456,7 @@ function MobileDrawer({
             items={secondaryNav}
             pathname={pathname}
             label="Conta"
-            isLocked={(p) => isLocked(p, plan)}
+            isLocked={(p) => isLocked(p, subscription)}
           />
         </nav>
         <div className="border-t border-sidebar-border p-3">

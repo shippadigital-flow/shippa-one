@@ -11,7 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
-import { useAuth, getStoredUser } from "@/hooks/use-auth";
+import { useAuth, hasActiveSession } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
 import { EcosystemStage } from "@/features/auth/ecosystem-stage";
 
@@ -33,8 +33,9 @@ export const Route = createFileRoute("/auth")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && getStoredUser()) {
+  ssr: false,
+  beforeLoad: async () => {
+    if (typeof window !== "undefined" && (await hasActiveSession())) {
       throw redirect({ to: "/" });
     }
   },
@@ -199,6 +200,7 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -223,11 +225,18 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
     }
 
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 650));
-    setStatus("success");
-    signIn(result.data.email);
-    await new Promise((r) => setTimeout(r, 350));
-    navigate({ to: "/" });
+    try {
+      await signIn(result.data.email, result.data.password);
+      setStatus("success");
+      await navigate({ to: "/" });
+    } catch (err) {
+      setFormError(
+        err instanceof Error && /confirm/i.test(err.message)
+          ? "Confirme seu e-mail antes de entrar."
+          : "Não foi possível entrar. Verifique seu e-mail e senha.",
+      );
+      setStatus("error");
+    }
   };
 
   return (
@@ -293,7 +302,7 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
           {status === "error" && (
             <p className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/8 px-3 py-2.5 text-xs font-medium text-destructive">
               <AlertCircle className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              Não foi possível entrar. Verifique seu e-mail e senha.
+              {formError ?? "Não foi possível entrar. Verifique seu e-mail e senha."}
             </p>
           )}
           {status === "success" && (
@@ -339,6 +348,7 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
 }
 
 function ForgotView({ onBack }: { onBack: () => void }) {
+  const { resetPassword } = useAuth();
   const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -353,7 +363,11 @@ function ForgotView({ onBack }: { onBack: () => void }) {
     }
     setError(null);
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 700));
+    try {
+      await resetPassword(parsed.data);
+    } catch {
+      // Não revelamos se o e-mail existe: a mensagem é sempre neutra.
+    }
     setStatus("sent");
   };
 
