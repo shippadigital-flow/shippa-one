@@ -99,7 +99,8 @@ function useSidebarCollapsed() {
 
 function AppLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { plan, setPlan } = usePlan();
+  const { subscription } = useSubscription();
+  const plan: Plan = subscription?.plan ?? "start";
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { collapsed, toggle } = useSidebarCollapsed();
@@ -109,8 +110,8 @@ function AppLayout() {
     setMobileOpen(false);
   }, [pathname]);
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    await signOut();
     navigate({ to: "/auth", replace: true });
   };
 
@@ -124,6 +125,7 @@ function AppLayout() {
       <Sidebar
         pathname={pathname}
         plan={plan}
+        subscription={subscription}
         user={user}
         onSignOut={handleSignOut}
         collapsed={collapsed}
@@ -134,12 +136,13 @@ function AppLayout() {
         onClose={() => setMobileOpen(false)}
         pathname={pathname}
         plan={plan}
+        subscription={subscription}
         user={user}
         onSignOut={handleSignOut}
       />
       <div className="relative flex min-h-dvh flex-col transition-[padding] duration-300 ease-out md:pl-[var(--sidebar-w)]">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-glow" />
-        <TopBar plan={plan} setPlan={setPlan} onOpenMobile={() => setMobileOpen(true)} />
+        <TopBar plan={plan} onOpenMobile={() => setMobileOpen(true)} />
         <main
           className="relative flex-1 px-4 pt-4 sm:px-6 lg:px-8"
           style={{ paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))" }}
@@ -156,6 +159,7 @@ function AppLayout() {
 function Sidebar({
   pathname,
   plan,
+  subscription,
   user,
   onSignOut,
   collapsed,
@@ -163,6 +167,7 @@ function Sidebar({
 }: {
   pathname: string;
   plan: Plan;
+  subscription: Subscription | null;
   user: AuthUser | null;
   onSignOut: () => void;
   collapsed: boolean;
