@@ -11,7 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
-import { useAuth, getStoredUser } from "@/hooks/use-auth";
+import { useAuth, hasActiveSession } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
 import { EcosystemStage } from "@/features/auth/ecosystem-stage";
 
@@ -33,8 +33,9 @@ export const Route = createFileRoute("/auth")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && getStoredUser()) {
+  ssr: false,
+  beforeLoad: async () => {
+    if (typeof window !== "undefined" && (await hasActiveSession())) {
       throw redirect({ to: "/" });
     }
   },
