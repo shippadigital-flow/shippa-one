@@ -298,15 +298,7 @@ function Sidebar({
   );
 }
 
-function TopBar({
-  plan,
-  setPlan,
-  onOpenMobile,
-}: {
-  plan: Plan;
-  setPlan: (p: Plan) => void;
-  onOpenMobile: () => void;
-}) {
+function TopBar({ plan, onOpenMobile }: { plan: Plan; onOpenMobile: () => void }) {
   return (
     <header
       className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border/60 bg-background/80 px-4 backdrop-blur-xl sm:px-6 lg:px-8"
