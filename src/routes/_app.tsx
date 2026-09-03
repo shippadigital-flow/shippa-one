@@ -335,39 +335,19 @@ function TopBar({ plan, onOpenMobile }: { plan: Plan; onOpenMobile: () => void }
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {/* Demo plan toggle */}
-        <div
-          role="group"
-          aria-label="Alternar plano de demonstração"
-          className="hidden items-center rounded-lg border border-border/60 bg-surface p-0.5 sm:inline-flex"
+        {/* Plano atual (fonte de verdade: banco de dados) */}
+        <Link
+          to="/planos"
+          aria-label={`Plano atual: ${plan === "pro" ? "Pro" : "Start"}. Ver planos`}
+          className={
+            "hidden items-center gap-1 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition sm:inline-flex " +
+            (plan === "pro"
+              ? "border-primary/40 bg-gradient-primary text-primary-foreground"
+              : "border-border/60 bg-surface text-muted-foreground hover:text-foreground")
+          }
         >
-          <button
-            type="button"
-            onClick={() => setPlan("start")}
-            aria-pressed={plan === "start"}
-            className={
-              "rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
-              (plan === "start"
-                ? "bg-accent text-foreground"
-                : "text-muted-foreground hover:text-foreground")
-            }
-          >
-            Start
-          </button>
-          <button
-            type="button"
-            onClick={() => setPlan("pro")}
-            aria-pressed={plan === "pro"}
-            className={
-              "inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-medium transition " +
-              (plan === "pro"
-                ? "bg-gradient-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground")
-            }
-          >
-            <Sparkles className="h-3 w-3" aria-hidden /> Pro
-          </button>
-        </div>
+          <Sparkles className="h-3 w-3" aria-hidden /> {plan === "pro" ? "Pro" : "Start"}
+        </Link>
         <button
           type="button"
           aria-label="Notificações"
