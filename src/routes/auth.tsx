@@ -200,6 +200,7 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -224,11 +225,18 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
     }
 
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 650));
-    setStatus("success");
-    signIn(result.data.email);
-    await new Promise((r) => setTimeout(r, 350));
-    navigate({ to: "/" });
+    try {
+      await signIn(result.data.email, result.data.password);
+      setStatus("success");
+      await navigate({ to: "/" });
+    } catch (err) {
+      setFormError(
+        err instanceof Error && /confirm/i.test(err.message)
+          ? "Confirme seu e-mail antes de entrar."
+          : "Não foi possível entrar. Verifique seu e-mail e senha.",
+      );
+      setStatus("error");
+    }
   };
 
   return (
