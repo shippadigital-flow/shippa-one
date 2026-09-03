@@ -27,8 +27,10 @@ import {
 } from "lucide-react";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { usePlan, isLocked, type Plan } from "@/hooks/use-plan";
-import { useAuth, getStoredUser, type AuthUser } from "@/hooks/use-auth";
+import { isLocked } from "@/hooks/use-plan";
+import type { Plan, Subscription } from "@/lib/permissions";
+import { PlanProvider, useSubscription } from "@/features/plan/plan-provider";
+import { useAuth, hasActiveSession, type AuthUser } from "@/hooks/use-auth";
 import { ShippaMark } from "@/features/branding/shippa-logo";
 import {
   SidebarSection,
@@ -38,13 +40,22 @@ import {
 } from "@/features/layout/sidebar-nav";
 
 export const Route = createFileRoute("/_app")({
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && !getStoredUser()) {
+  ssr: false,
+  beforeLoad: async () => {
+    if (typeof window !== "undefined" && !(await hasActiveSession())) {
       throw redirect({ to: "/auth" });
     }
   },
-  component: AppLayout,
+  component: AppRoute,
 });
+
+function AppRoute() {
+  return (
+    <PlanProvider>
+      <AppLayout />
+    </PlanProvider>
+  );
+}
 
 const primaryNav: NavItem[] = [
   { label: "Visão Geral", to: "/", icon: LayoutDashboard },
