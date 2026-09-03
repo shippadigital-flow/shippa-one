@@ -215,7 +215,7 @@ function Sidebar({
           pathname={pathname}
           label="Geral"
           collapsed={collapsed}
-          isLocked={(p) => isLocked(p, plan)}
+          isLocked={(p) => isLocked(p, subscription)}
         />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection
@@ -223,7 +223,7 @@ function Sidebar({
           pathname={pathname}
           label="Crescimento"
           collapsed={collapsed}
-          isLocked={(p) => isLocked(p, plan)}
+          isLocked={(p) => isLocked(p, subscription)}
         />
         <div className="my-4 h-px bg-sidebar-border" />
         <SidebarSection
@@ -239,7 +239,7 @@ function Sidebar({
           pathname={pathname}
           label="Conta"
           collapsed={collapsed}
-          isLocked={(p) => isLocked(p, plan)}
+          isLocked={(p) => isLocked(p, subscription)}
         />
       </nav>
 
@@ -461,14 +461,14 @@ function MobileDrawer({
             items={primaryNav}
             pathname={pathname}
             label="Geral"
-            isLocked={(p) => isLocked(p, plan)}
+            isLocked={(p) => isLocked(p, subscription)}
           />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection
             items={proNav}
             pathname={pathname}
             label="Crescimento"
-            isLocked={(p) => isLocked(p, plan)}
+            isLocked={(p) => isLocked(p, subscription)}
           />
           <div className="my-4 h-px bg-sidebar-border" />
           <SidebarSection
@@ -482,7 +482,7 @@ function MobileDrawer({
             items={secondaryNav}
             pathname={pathname}
             label="Conta"
-            isLocked={(p) => isLocked(p, plan)}
+            isLocked={(p) => isLocked(p, subscription)}
           />
         </nav>
         <div className="border-t border-sidebar-border p-3">
