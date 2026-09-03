@@ -369,6 +369,7 @@ function MobileDrawer({
   onClose,
   pathname,
   plan,
+  subscription,
   user,
   onSignOut,
 }: {
@@ -376,6 +377,7 @@ function MobileDrawer({
   onClose: () => void;
   pathname: string;
   plan: Plan;
+  subscription: Subscription | null;
   user: AuthUser | null;
   onSignOut: () => void;
 }) {
