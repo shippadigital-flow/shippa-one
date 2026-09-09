@@ -2,12 +2,61 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Users, MessageCircle, Star, Bell, Filter, Inbox } from "lucide-react";
 import { LockedModulePreview } from "@/features/dashboard/locked-module";
 import { LeadsMockup } from "@/features/dashboard/product-mockups";
+import { PlanGate } from "@/features/plan/plan-gate";
+import { ProModuleView, type ProFeature } from "@/features/plan/pro-module-view";
 
 export const Route = createFileRoute("/_app/leads")({
-  component: LeadsPreview,
+  component: LeadsRoute,
 });
 
-function LeadsPreview() {
+const features: ProFeature[] = [
+  {
+    icon: Inbox,
+    title: "Caixa unificada",
+    description: "Formulários, WhatsApp, e-mail e redes sociais em uma inbox só.",
+  },
+  {
+    icon: Filter,
+    title: "Qualificação automática",
+    description: "Cada lead chega com origem, página e contexto prontos.",
+  },
+  {
+    icon: Star,
+    title: "Marcadores e prioridades",
+    description: "Destaque os contatos mais promissores em um clique.",
+  },
+  {
+    icon: Bell,
+    title: "Notificações em tempo real",
+    description: "Receba um aviso assim que alguém quiser falar com você.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Respostas rápidas",
+    description: "Modelos prontos para responder sem digitar do zero.",
+  },
+  {
+    icon: Users,
+    title: "Time e atribuição",
+    description: "Distribua leads entre pessoas do seu escritório com um toque.",
+  },
+];
+
+function LeadsRoute() {
+  return (
+    <PlanGate feature="leads" locked={<LeadsLocked />}>
+      <ProModuleView
+        eyebrow="Leads"
+        title="Seus contatos, organizados"
+        description="Cada pedido que chega pelo seu site, WhatsApp, formulários e redes sociais em um só lugar."
+        visual={<LeadsMockup />}
+        features={features}
+      />
+    </PlanGate>
+  );
+}
+
+function LeadsLocked() {
   return (
     <LockedModulePreview
       eyebrow="Leads"
@@ -20,38 +69,7 @@ function LeadsPreview() {
         "Kanban visual: novo, em atendimento, convertido",
         "Histórico completo de cada conversa",
       ]}
-      features={[
-        {
-          icon: Inbox,
-          title: "Caixa unificada",
-          description: "Formulários, WhatsApp, e-mail e redes sociais em uma inbox só.",
-        },
-        {
-          icon: Filter,
-          title: "Qualificação automática",
-          description: "Cada lead chega com origem, página e contexto prontos.",
-        },
-        {
-          icon: Star,
-          title: "Marcadores e prioridades",
-          description: "Destaque os contatos mais promissores em um clique.",
-        },
-        {
-          icon: Bell,
-          title: "Notificações em tempo real",
-          description: "Receba um aviso assim que alguém quiser falar com você.",
-        },
-        {
-          icon: MessageCircle,
-          title: "Respostas rápidas",
-          description: "Modelos prontos para responder sem digitar do zero.",
-        },
-        {
-          icon: Users,
-          title: "Time e atribuição",
-          description: "Distribua leads entre pessoas do seu escritório com um toque.",
-        },
-      ]}
+      features={features}
       insight={{
         title:
           "Seu site recebeu 246 visitantes este mês. Descubra quantos deles poderiam se tornar clientes.",

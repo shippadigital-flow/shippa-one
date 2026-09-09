@@ -10,12 +10,61 @@ import {
 } from "lucide-react";
 import { LockedModulePreview } from "@/features/dashboard/locked-module";
 import { InsightsMockup } from "@/features/dashboard/product-mockups";
+import { PlanGate } from "@/features/plan/plan-gate";
+import { ProModuleView, type ProFeature } from "@/features/plan/pro-module-view";
 
 export const Route = createFileRoute("/_app/insights")({
-  component: InsightsPreview,
+  component: InsightsRoute,
 });
 
-function InsightsPreview() {
+const features: ProFeature[] = [
+  {
+    icon: TrendingUp,
+    title: "Tendências detectadas",
+    description: "Descubra assuntos ganhando tração no seu público antes de todos.",
+  },
+  {
+    icon: Search,
+    title: "Palavras-chave em alta",
+    description: "Veja o que as pessoas estão buscando e escreva sobre isso.",
+  },
+  {
+    icon: FileText,
+    title: "Sugestões de conteúdo",
+    description: "Ideias de artigos baseadas no que já funciona no seu site.",
+  },
+  {
+    icon: AlertCircle,
+    title: "Alertas inteligentes",
+    description: "Quedas de tráfego, páginas quebradas, oportunidades perdidas.",
+  },
+  {
+    icon: Target,
+    title: "Metas assistidas",
+    description: "Defina objetivos e receba um plano prático para alcançar.",
+  },
+  {
+    icon: Sparkles,
+    title: "Resumo semanal",
+    description: "Toda segunda, um panorama claro do que aconteceu e o que fazer.",
+  },
+];
+
+function InsightsRoute() {
+  return (
+    <PlanGate feature="insights" locked={<InsightsLocked />}>
+      <ProModuleView
+        eyebrow="Insights"
+        title="O que fazer amanhã"
+        description="Recomendações práticas geradas a partir do comportamento do seu site."
+        visual={<InsightsMockup />}
+        features={features}
+      />
+    </PlanGate>
+  );
+}
+
+function InsightsLocked() {
   return (
     <LockedModulePreview
       eyebrow="Insights"
@@ -28,38 +77,7 @@ function InsightsPreview() {
         "Detecta oportunidades antes da concorrência",
         "Sugere o próximo artigo, a próxima campanha, o próximo passo",
       ]}
-      features={[
-        {
-          icon: TrendingUp,
-          title: "Tendências detectadas",
-          description: "Descubra assuntos ganhando tração no seu público antes de todos.",
-        },
-        {
-          icon: Search,
-          title: "Palavras-chave em alta",
-          description: "Veja o que as pessoas estão buscando e escreva sobre isso.",
-        },
-        {
-          icon: FileText,
-          title: "Sugestões de conteúdo",
-          description: "Ideias de artigos baseadas no que já funciona no seu site.",
-        },
-        {
-          icon: AlertCircle,
-          title: "Alertas inteligentes",
-          description: "Quedas de tráfego, páginas quebradas, oportunidades perdidas.",
-        },
-        {
-          icon: Target,
-          title: "Metas assistidas",
-          description: "Defina objetivos e receba um plano prático para alcançar.",
-        },
-        {
-          icon: Sparkles,
-          title: "Resumo semanal",
-          description: "Toda segunda, um panorama claro do que aconteceu e o que fazer.",
-        },
-      ]}
+      features={features}
       insight={{
         title: "Existem 12 assuntos crescendo no seu nicho que seu site ainda não cobre.",
         description:

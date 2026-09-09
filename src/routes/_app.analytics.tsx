@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   Users,
   MousePointerClick,
@@ -11,17 +11,53 @@ import {
   Monitor,
   Smartphone,
   Tablet,
-  ArrowUpRight,
-  Sparkles,
-  Lock,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { PageHeader } from "@/shared/page-header";
-import { Button } from "@/components/ui/button";
+import { LockedModulePreview } from "@/features/dashboard/locked-module";
+import { AnalyticsMockup } from "@/features/dashboard/product-mockups";
+import { PlanGate } from "@/features/plan/plan-gate";
 
 export const Route = createFileRoute("/_app/analytics")({
-  component: AnalyticsPreview,
+  component: AnalyticsRoute,
 });
+
+function AnalyticsRoute() {
+  return (
+    <PlanGate feature="analytics" locked={<AnalyticsLocked />}>
+      <AnalyticsDashboard />
+    </PlanGate>
+  );
+}
+
+function AnalyticsLocked() {
+  return (
+    <LockedModulePreview
+      eyebrow="Analytics"
+      title="Entenda quem visita seu site e o que faz por lá."
+      subtitle="Visitantes, sessões, origens de tráfego, dispositivos, países e páginas mais vistas — em linguagem clara, sem jargão."
+      heroIcon={TrendingUp}
+      visual={<AnalyticsMockup />}
+      benefits={[
+        "Saiba de onde vem cada visita",
+        "Descubra as páginas que mais engajam",
+        "Acompanhe o crescimento mês a mês",
+      ]}
+      features={[
+        { icon: Users, title: "Visitantes e sessões", description: "Volume real de audiência, atualizado todos os dias." },
+        { icon: Search, title: "Fontes de tráfego", description: "Busca, direto, redes sociais e indicações separados." },
+        { icon: Smartphone, title: "Dispositivos", description: "Veja como as pessoas acessam: celular, desktop ou tablet." },
+        { icon: Globe2, title: "Países e regiões", description: "Entenda a origem geográfica da sua audiência." },
+        { icon: MousePointerClick, title: "Páginas mais vistas", description: "Onde a atenção do seu público está concentrada." },
+        { icon: TrendingUp, title: "Curva de crescimento", description: "A evolução de visitas nos últimos 30 dias." },
+      ]}
+      insight={{
+        title: "Seu site já recebe visitas. Falta saber o que elas fazem por lá.",
+        description: "Ative Analytics e transforme tráfego em decisões de conteúdo e campanha.",
+      }}
+    />
+  );
+}
 
 const kpis = [
   { label: "Visitantes", value: "4.286", delta: "+18,4%", icon: Users },
@@ -80,7 +116,7 @@ const topPages = [
   },
 ];
 
-function AnalyticsPreview() {
+function AnalyticsDashboard() {
   const max = Math.max(...growth);
   return (
     <div className="space-y-8 pb-16">
@@ -257,39 +293,6 @@ function AnalyticsPreview() {
         </section>
       </div>
 
-      {/* Upgrade CTA */}
-      <section
-        aria-label="Ativar Analytics completo"
-        className="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/20 via-primary/5 to-transparent p-8"
-      >
-        <div className="absolute right-8 top-8 hidden opacity-30 sm:block" aria-hidden>
-          <Sparkles className="size-24 text-primary" />
-        </div>
-        <div className="relative max-w-2xl">
-          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-            <Lock className="size-3" aria-hidden />
-            Preview com dados de exemplo
-          </div>
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            Desbloqueie todos os recursos de Analytics com Shippa One Pro.
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Dados reais do seu site em tempo real, relatórios semanais no e-mail, metas de conversão
-            e recomendações práticas geradas para você.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Button asChild size="lg">
-              <Link to="/planos">
-                Ativar Shippa One Pro
-                <ArrowUpRight className="ml-1 size-4" aria-hidden />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/crescimento">Ver todos os recursos Pro</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
