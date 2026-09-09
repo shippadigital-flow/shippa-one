@@ -104,19 +104,31 @@ const cards: GrowthCard[] = [
 ];
 
 function GrowthCenter() {
+  const { isPro } = useSubscription();
+
   return (
     <div className="space-y-8 pb-4">
       <PageHeader
         eyebrow="Central de Crescimento"
-        title="Recursos para levar seu site ao próximo nível"
-        description="Explore o que o Shippa One Pro oferece. Cada recurso foi desenhado para gerar resultado real, com ativação guiada pelo nosso time."
+        title={
+          isPro
+            ? "Seus recursos de crescimento estão ativos"
+            : "Recursos para levar seu site ao próximo nível"
+        }
+        description={
+          isPro
+            ? "Tudo do Shippa One Pro liberado. Abra cada módulo e acompanhe seus resultados."
+            : "Explore o que o Shippa One Pro oferece. Cada recurso foi desenhado para gerar resultado real, com ativação guiada pelo nosso time."
+        }
         actions={
-          <Link
-            to="/planos"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-primary px-3.5 py-2 text-sm font-medium text-primary-foreground shadow-elegant transition hover:opacity-90"
-          >
-            <Sparkles className="h-4 w-4" aria-hidden /> Ver planos
-          </Link>
+          !isPro ? (
+            <Link
+              to="/planos"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-primary px-3.5 py-2 text-sm font-medium text-primary-foreground shadow-elegant transition hover:opacity-90"
+            >
+              <Sparkles className="h-4 w-4" aria-hidden /> Ver planos
+            </Link>
+          ) : null
         }
       />
 
