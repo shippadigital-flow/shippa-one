@@ -304,13 +304,15 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
             </button>
           }
           hint={
-            <button
-              type="button"
-              onClick={onForgot}
-              className="rounded-sm text-xs font-medium text-primary-glow transition hover:text-foreground"
-            >
-              Esqueci minha senha
-            </button>
+            mode === "signin" ? (
+              <button
+                type="button"
+                onClick={onForgot}
+                className="rounded-sm text-xs font-medium text-primary-glow transition hover:text-foreground"
+              >
+                Esqueci minha senha
+              </button>
+            ) : undefined
           }
         />
 
