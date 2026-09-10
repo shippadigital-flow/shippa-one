@@ -196,7 +196,8 @@ function MobileBackdrop() {
 
 function SignInView({ onForgot }: { onForgot: () => void }) {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signIn, signUp } = useAuth();
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -225,15 +226,28 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
     }
 
     setStatus("loading");
+    setFormError(null);
     try {
-      await signIn(result.data.email, result.data.password);
+      if (mode === "signup") {
+        const { needsConfirmation } = await signUp(result.data.email, result.data.password);
+        if (needsConfirmation) {
+          await signIn(result.data.email, result.data.password);
+        }
+      } else {
+        await signIn(result.data.email, result.data.password);
+      }
       setStatus("success");
       await navigate({ to: "/" });
     } catch (err) {
+      const message = err instanceof Error ? err.message : "";
       setFormError(
-        err instanceof Error && /confirm/i.test(err.message)
-          ? "Confirme seu e-mail antes de entrar."
-          : "Não foi possível entrar. Verifique seu e-mail e senha.",
+        /already registered|already exists|User already/i.test(message)
+          ? "Esse e-mail já tem conta. Use “Entrar”."
+          : /confirm/i.test(message)
+            ? "Confirme seu e-mail antes de entrar."
+            : mode === "signup"
+              ? "Não foi possível criar a conta. Tente novamente."
+              : "Não foi possível entrar. Verifique seu e-mail e senha.",
       );
       setStatus("error");
     }
@@ -243,10 +257,12 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
     <>
       <header className="auth-enter" style={{ animationDelay: "120ms" }}>
         <h2 className="text-[28px] font-semibold tracking-tight text-foreground">
-          Bem-vinda ao Shippa One
+          {mode === "signup" ? "Criar sua conta" : "Bem-vinda ao Shippa One"}
         </h2>
         <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-          Entre para acompanhar e gerenciar a presença digital do seu negócio.
+          {mode === "signup"
+            ? "Crie seu acesso para começar a usar o Shippa One."
+            : "Entre para acompanhar e gerenciar a presença digital do seu negócio."}
         </p>
       </header>
 
@@ -274,8 +290,8 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
           name="password"
           type={showPassword ? "text" : "password"}
           label="Senha"
-          placeholder="Digite sua senha"
-          autoComplete="current-password"
+          placeholder={mode === "signup" ? "Crie uma senha (mín. 6 caracteres)" : "Digite sua senha"}
+          autoComplete={mode === "signup" ? "new-password" : "current-password"}
           error={errors.password}
           trailing={
             <button
@@ -288,13 +304,15 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
             </button>
           }
           hint={
-            <button
-              type="button"
-              onClick={onForgot}
-              className="rounded-sm text-xs font-medium text-primary-glow transition hover:text-foreground"
-            >
-              Esqueci minha senha
-            </button>
+            mode === "signin" ? (
+              <button
+                type="button"
+                onClick={onForgot}
+                className="rounded-sm text-xs font-medium text-primary-glow transition hover:text-foreground"
+              >
+                Esqueci minha senha
+              </button>
+            ) : undefined
           }
         />
 
@@ -320,11 +338,12 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
         >
           {status === "loading" ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Entrando…
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />{" "}
+              {mode === "signup" ? "Criando conta…" : "Entrando…"}
             </>
           ) : (
             <>
-              Entrar no Shippa One
+              {mode === "signup" ? "Criar conta" : "Entrar no Shippa One"}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </>
           )}
@@ -335,13 +354,19 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
         className="auth-enter mt-7 text-center text-xs text-muted-foreground"
         style={{ animationDelay: "420ms" }}
       >
-        Ainda não tem acesso?{" "}
-        <a
-          href="mailto:contato@shippa.com.br"
+        {mode === "signup" ? "Já tem uma conta? " : "Ainda não tem uma conta? "}
+        <button
+          type="button"
+          onClick={() => {
+            setMode((m) => (m === "signup" ? "signin" : "signup"));
+            setStatus("idle");
+            setErrors({});
+            setFormError(null);
+          }}
           className="font-medium text-foreground underline-offset-4 transition hover:underline"
         >
-          Fale com a Shippa
-        </a>
+          {mode === "signup" ? "Entrar" : "Criar conta"}
+        </button>
       </p>
     </>
   );
