@@ -257,10 +257,12 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
     <>
       <header className="auth-enter" style={{ animationDelay: "120ms" }}>
         <h2 className="text-[28px] font-semibold tracking-tight text-foreground">
-          Bem-vinda ao Shippa One
+          {mode === "signup" ? "Criar sua conta" : "Bem-vinda ao Shippa One"}
         </h2>
         <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-          Entre para acompanhar e gerenciar a presença digital do seu negócio.
+          {mode === "signup"
+            ? "Crie seu acesso para começar a usar o Shippa One."
+            : "Entre para acompanhar e gerenciar a presença digital do seu negócio."}
         </p>
       </header>
 
