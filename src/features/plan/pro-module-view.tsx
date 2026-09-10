@@ -28,12 +28,7 @@ export function ProModuleView({
 }) {
   return (
     <div className="space-y-8 pb-4">
-      <PageHeader
-        eyebrow={eyebrow}
-        title={title}
-        description={description}
-        actions={actions}
-      />
+      <PageHeader eyebrow={eyebrow} title={title} description={description} actions={actions} />
 
       {visual && (
         <section className="overflow-hidden rounded-2xl border border-border/60 bg-surface-elevated p-4 shadow-elegant sm:p-6">
