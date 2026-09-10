@@ -196,7 +196,8 @@ function MobileBackdrop() {
 
 function SignInView({ onForgot }: { onForgot: () => void }) {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const { signIn, signUp } = useAuth();
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
