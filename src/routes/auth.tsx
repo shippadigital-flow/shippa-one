@@ -226,15 +226,28 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
     }
 
     setStatus("loading");
+    setFormError(null);
     try {
-      await signIn(result.data.email, result.data.password);
+      if (mode === "signup") {
+        const { needsConfirmation } = await signUp(result.data.email, result.data.password);
+        if (needsConfirmation) {
+          await signIn(result.data.email, result.data.password);
+        }
+      } else {
+        await signIn(result.data.email, result.data.password);
+      }
       setStatus("success");
       await navigate({ to: "/" });
     } catch (err) {
+      const message = err instanceof Error ? err.message : "";
       setFormError(
-        err instanceof Error && /confirm/i.test(err.message)
-          ? "Confirme seu e-mail antes de entrar."
-          : "Não foi possível entrar. Verifique seu e-mail e senha.",
+        /already registered|already exists|User already/i.test(message)
+          ? "Esse e-mail já tem conta. Use “Entrar”."
+          : /confirm/i.test(message)
+            ? "Confirme seu e-mail antes de entrar."
+            : mode === "signup"
+              ? "Não foi possível criar a conta. Tente novamente."
+              : "Não foi possível entrar. Verifique seu e-mail e senha.",
       );
       setStatus("error");
     }
