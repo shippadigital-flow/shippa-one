@@ -338,11 +338,12 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
         >
           {status === "loading" ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Entrando…
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />{" "}
+              {mode === "signup" ? "Criando conta…" : "Entrando…"}
             </>
           ) : (
             <>
-              Entrar no Shippa One
+              {mode === "signup" ? "Criar conta" : "Entrar no Shippa One"}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </>
           )}
@@ -353,13 +354,19 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
         className="auth-enter mt-7 text-center text-xs text-muted-foreground"
         style={{ animationDelay: "420ms" }}
       >
-        Ainda não tem acesso?{" "}
-        <a
-          href="mailto:contato@shippa.com.br"
+        {mode === "signup" ? "Já tem uma conta? " : "Ainda não tem uma conta? "}
+        <button
+          type="button"
+          onClick={() => {
+            setMode((m) => (m === "signup" ? "signin" : "signup"));
+            setStatus("idle");
+            setErrors({});
+            setFormError(null);
+          }}
           className="font-medium text-foreground underline-offset-4 transition hover:underline"
         >
-          Fale com a Shippa
-        </a>
+          {mode === "signup" ? "Entrar" : "Criar conta"}
+        </button>
       </p>
     </>
   );
