@@ -56,7 +56,9 @@ const plans: PlanCard[] = [
 ];
 
 function PlanosPage() {
-  const { plan } = usePlan();
+  const { plan, status, isPro } = usePlan();
+  const statusLabel =
+    status === "active" ? "Ativa" : status === "canceled" ? "Cancelada" : "Pagamento pendente";
 
   return (
     <div className="flex flex-col gap-10 pt-8">
@@ -73,9 +75,16 @@ function PlanosPage() {
         </p>
       </header>
 
+      {isPro && (
+        <p className="mx-auto -mt-4 text-center text-sm text-muted-foreground">
+          Seu plano Pro está ativo. Todos os recursos de crescimento estão liberados.
+        </p>
+      )}
+
       <section className="grid gap-5 lg:grid-cols-2">
         {plans.map((p) => {
           const isCurrent = p.id === plan;
+          const isActiveCurrent = isCurrent && status === "active";
           return (
             <article
               key={p.id}
@@ -109,8 +118,15 @@ function PlanosPage() {
                   </div>
                 </div>
                 {isCurrent && (
-                  <span className="rounded-full bg-success/15 px-2.5 py-1 text-[11px] font-medium text-success">
-                    Plano atual
+                  <span
+                    className={
+                      "rounded-full px-2.5 py-1 text-[11px] font-medium " +
+                      (isActiveCurrent
+                        ? "bg-success/15 text-success"
+                        : "bg-warning/15 text-warning")
+                    }
+                  >
+                    Plano atual · {statusLabel}
                   </span>
                 )}
               </div>
@@ -141,7 +157,7 @@ function PlanosPage() {
               </ul>
 
               <div className="relative mt-10">
-                {isCurrent ? (
+                {isActiveCurrent ? (
                   <button
                     disabled
                     className="inline-flex w-full items-center justify-center rounded-lg border border-border/60 bg-surface px-5 py-3 text-sm font-medium text-muted-foreground"
