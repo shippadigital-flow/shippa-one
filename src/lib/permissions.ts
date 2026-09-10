@@ -67,7 +67,10 @@ export function hasProAccess(subscription: Subscription | null | undefined): boo
   return subscription?.plan === "pro" && subscription.status === "active";
 }
 
-export function canAccess(feature: Feature, subscription: Subscription | null | undefined): boolean {
+export function canAccess(
+  feature: Feature,
+  subscription: Subscription | null | undefined,
+): boolean {
   if (startSet.has(feature)) return true;
   if (proSet.has(feature)) return hasProAccess(subscription);
   return false;
@@ -98,7 +101,10 @@ export const FEATURE_BY_PATH: Record<string, Feature> = {
  */
 const ALWAYS_NAVIGABLE = new Set<string>(["/crescimento"]);
 
-export function canAccessPath(path: string, subscription: Subscription | null | undefined): boolean {
+export function canAccessPath(
+  path: string,
+  subscription: Subscription | null | undefined,
+): boolean {
   if (ALWAYS_NAVIGABLE.has(path)) return true;
   const feature = FEATURE_BY_PATH[path];
   if (!feature) return true;

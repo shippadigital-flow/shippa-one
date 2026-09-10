@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CreditCard, TrendingUp, RefreshCw, XCircle, Download } from "lucide-react";
 import { PageHeader } from "@/shared/page-header";
+import { TestModePanel } from "@/features/plan/test-mode-panel";
 
 export const Route = createFileRoute("/admin/assinaturas")({
   component: SubscriptionsPage,
@@ -90,6 +91,8 @@ function SubscriptionsPage() {
           </button>
         }
       />
+
+      <TestModePanel />
 
       <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {kpis.map((k) => (

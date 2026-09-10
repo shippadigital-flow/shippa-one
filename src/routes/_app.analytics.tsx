@@ -44,12 +44,36 @@ function AnalyticsLocked() {
         "Acompanhe o crescimento mês a mês",
       ]}
       features={[
-        { icon: Users, title: "Visitantes e sessões", description: "Volume real de audiência, atualizado todos os dias." },
-        { icon: Search, title: "Fontes de tráfego", description: "Busca, direto, redes sociais e indicações separados." },
-        { icon: Smartphone, title: "Dispositivos", description: "Veja como as pessoas acessam: celular, desktop ou tablet." },
-        { icon: Globe2, title: "Países e regiões", description: "Entenda a origem geográfica da sua audiência." },
-        { icon: MousePointerClick, title: "Páginas mais vistas", description: "Onde a atenção do seu público está concentrada." },
-        { icon: TrendingUp, title: "Curva de crescimento", description: "A evolução de visitas nos últimos 30 dias." },
+        {
+          icon: Users,
+          title: "Visitantes e sessões",
+          description: "Volume real de audiência, atualizado todos os dias.",
+        },
+        {
+          icon: Search,
+          title: "Fontes de tráfego",
+          description: "Busca, direto, redes sociais e indicações separados.",
+        },
+        {
+          icon: Smartphone,
+          title: "Dispositivos",
+          description: "Veja como as pessoas acessam: celular, desktop ou tablet.",
+        },
+        {
+          icon: Globe2,
+          title: "Países e regiões",
+          description: "Entenda a origem geográfica da sua audiência.",
+        },
+        {
+          icon: MousePointerClick,
+          title: "Páginas mais vistas",
+          description: "Onde a atenção do seu público está concentrada.",
+        },
+        {
+          icon: TrendingUp,
+          title: "Curva de crescimento",
+          description: "A evolução de visitas nos últimos 30 dias.",
+        },
       ]}
       insight={{
         title: "Seu site já recebe visitas. Falta saber o que elas fazem por lá.",
@@ -292,7 +316,6 @@ function AnalyticsDashboard() {
           </div>
         </section>
       </div>
-
     </div>
   );
 }
