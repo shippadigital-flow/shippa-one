@@ -290,8 +290,8 @@ function SignInView({ onForgot }: { onForgot: () => void }) {
           name="password"
           type={showPassword ? "text" : "password"}
           label="Senha"
-          placeholder="Digite sua senha"
-          autoComplete="current-password"
+          placeholder={mode === "signup" ? "Crie uma senha (mín. 6 caracteres)" : "Digite sua senha"}
+          autoComplete={mode === "signup" ? "new-password" : "current-password"}
           error={errors.password}
           trailing={
             <button
